@@ -1,3 +1,4 @@
+import { Link } from "@/lib/router";
 import { useMutation } from "@tanstack/react-query";
 import {
   AlertCircle,
@@ -8,7 +9,6 @@ import {
   Phone,
 } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useActor } from "../../hooks/useActor";
 
 const businessTypes = [

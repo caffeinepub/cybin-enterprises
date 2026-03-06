@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "@/lib/router";
 import Layout from "./components/Layout";
 import AboutPage from "./components/pages/AboutPage";
 import ContactPage from "./components/pages/ContactPage";
@@ -12,24 +12,97 @@ import {
   TermsOfServicePage,
 } from "./components/pages/LegalPage";
 import PaymentSolutionsPage from "./components/pages/PaymentSolutionsPage";
+import WizardPage from "./components/pages/WizardPage";
 
 export default function App() {
   return (
     <BrowserRouter>
-      <Layout>
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/payment-solutions" element={<PaymentSolutionsPage />} />
-          <Route path="/industries" element={<IndustriesPage />} />
-          <Route path="/fraud-deflect" element={<FraudDeflectPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/insights" element={<InsightsPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
-          <Route path="/terms-of-service" element={<TermsOfServicePage />} />
-          <Route path="/cookie-policy" element={<CookiePolicyPage />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Standalone wizard — no Layout wrapper */}
+        <Route path="/apply" element={<WizardPage />} />
+
+        {/* All other pages wrapped in Layout */}
+        <Route
+          path="/"
+          element={
+            <Layout>
+              <HomePage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/payment-solutions"
+          element={
+            <Layout>
+              <PaymentSolutionsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/industries"
+          element={
+            <Layout>
+              <IndustriesPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/fraud-deflect"
+          element={
+            <Layout>
+              <FraudDeflectPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <Layout>
+              <AboutPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/insights"
+          element={
+            <Layout>
+              <InsightsPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <Layout>
+              <ContactPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/privacy-policy"
+          element={
+            <Layout>
+              <PrivacyPolicyPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/terms-of-service"
+          element={
+            <Layout>
+              <TermsOfServicePage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/cookie-policy"
+          element={
+            <Layout>
+              <CookiePolicyPage />
+            </Layout>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }

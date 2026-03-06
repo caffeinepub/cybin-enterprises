@@ -19,13 +19,42 @@ export interface ContactSubmission {
   'timestamp' : bigint,
   'phone' : string,
 }
+export interface PartialLead {
+  'id' : PartialLeadId,
+  'regulatoryHurdle' : string,
+  'email' : string,
+  'timestamp' : bigint,
+  'industry' : string,
+}
+export type PartialLeadId = bigint;
 export type SubmissionId = bigint;
+export interface WizardApplication {
+  'id' : WizardApplicationId,
+  'hasFein' : boolean,
+  'fein' : string,
+  'name' : string,
+  'businessName' : string,
+  'regulatoryHurdle' : string,
+  'email' : string,
+  'timestamp' : bigint,
+  'phone' : string,
+  'industry' : string,
+}
+export type WizardApplicationId = bigint;
 export interface _SERVICE {
+  'getAllPartialLeads' : ActorMethod<[], Array<PartialLead>>,
   'getAllSubmissions' : ActorMethod<[], Array<ContactSubmission>>,
+  'getAllWizardApplications' : ActorMethod<[], Array<WizardApplication>>,
   'getTotalSubmissions' : ActorMethod<[], bigint>,
+  'getTotalWizardApplications' : ActorMethod<[], bigint>,
+  'savePartialLead' : ActorMethod<[string, string, string], PartialLeadId>,
   'submitContactForm' : ActorMethod<
     [string, string, string, string, string],
     SubmissionId
+  >,
+  'submitWizardApplication' : ActorMethod<
+    [string, string, string, string, string, string, string, boolean],
+    WizardApplicationId
   >,
 }
 export declare const idlService: IDL.ServiceClass;

@@ -1,3 +1,4 @@
+import { Link } from "@/lib/router";
 import {
   AlertTriangle,
   Cannabis,
@@ -14,7 +15,6 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const industries = [
   {

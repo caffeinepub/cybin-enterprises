@@ -1,3 +1,4 @@
+import { Link } from "@/lib/router";
 import {
   ArrowRight,
   Building2,
@@ -10,7 +11,6 @@ import {
   Smartphone,
 } from "lucide-react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const capabilities = [
   {

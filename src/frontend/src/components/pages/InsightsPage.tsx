@@ -1,7 +1,7 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Link } from "@/lib/router";
 import { ArrowRight, ChevronRight, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 type Category =
   | "All"

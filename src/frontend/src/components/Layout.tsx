@@ -1,6 +1,6 @@
+import { Link, useLocation } from "@/lib/router";
 import { ChevronRight, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
 
 const navLinks = [
   { label: "Home", href: "/", ocid: "nav.home.link" },
@@ -129,7 +129,7 @@ export default function Layout({ children }: LayoutProps) {
             {/* CTA + Mobile Toggle */}
             <div className="flex items-center gap-3">
               <Link
-                to="/contact"
+                to="/apply"
                 data-ocid="nav.cta.button"
                 className="hidden sm:inline-flex cybin-btn-primary text-sm"
                 style={{ padding: "0.6rem 1.25rem" }}
@@ -184,7 +184,7 @@ export default function Layout({ children }: LayoutProps) {
                 </Link>
               ))}
               <Link
-                to="/contact"
+                to="/apply"
                 data-ocid="nav.cta.button"
                 className="mt-3 cybin-btn-primary text-sm justify-center"
               >

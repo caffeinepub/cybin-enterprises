@@ -1,3 +1,4 @@
+import { Link } from "@/lib/router";
 import {
   AlertTriangle,
   CheckCircle,
@@ -10,7 +11,6 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 
 const trustBadges = [
   { icon: Shield, label: "High-risk merchant specialists" },
@@ -267,7 +267,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                to="/contact"
+                to="/apply"
                 data-ocid="hero.primary.button"
                 className="cybin-btn-primary text-base"
               >
@@ -923,7 +923,7 @@ export default function HomePage() {
             for your business.
           </p>
           <Link
-            to="/contact"
+            to="/apply"
             className="cybin-btn-primary text-base"
             style={{ padding: "1rem 2.5rem" }}
           >

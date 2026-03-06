@@ -1,3 +1,4 @@
+import { Link } from "@/lib/router";
 import {
   AlertTriangle,
   Bell,
@@ -9,7 +10,6 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const benefits = [
   {

@@ -8,6 +8,14 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const PartialLeadId = IDL.Nat;
+export const PartialLead = IDL.Record({
+  'id' : PartialLeadId,
+  'regulatoryHurdle' : IDL.Text,
+  'email' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'industry' : IDL.Text,
+});
 export const SubmissionId = IDL.Nat;
 export const ContactSubmission = IDL.Record({
   'id' : SubmissionId,
@@ -18,13 +26,52 @@ export const ContactSubmission = IDL.Record({
   'timestamp' : IDL.Int,
   'phone' : IDL.Text,
 });
+export const WizardApplicationId = IDL.Nat;
+export const WizardApplication = IDL.Record({
+  'id' : WizardApplicationId,
+  'hasFein' : IDL.Bool,
+  'fein' : IDL.Text,
+  'name' : IDL.Text,
+  'businessName' : IDL.Text,
+  'regulatoryHurdle' : IDL.Text,
+  'email' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'phone' : IDL.Text,
+  'industry' : IDL.Text,
+});
 
 export const idlService = IDL.Service({
+  'getAllPartialLeads' : IDL.Func([], [IDL.Vec(PartialLead)], ['query']),
   'getAllSubmissions' : IDL.Func([], [IDL.Vec(ContactSubmission)], ['query']),
+  'getAllWizardApplications' : IDL.Func(
+      [],
+      [IDL.Vec(WizardApplication)],
+      ['query'],
+    ),
   'getTotalSubmissions' : IDL.Func([], [IDL.Nat], ['query']),
+  'getTotalWizardApplications' : IDL.Func([], [IDL.Nat], ['query']),
+  'savePartialLead' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text],
+      [PartialLeadId],
+      [],
+    ),
   'submitContactForm' : IDL.Func(
       [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
       [SubmissionId],
+      [],
+    ),
+  'submitWizardApplication' : IDL.Func(
+      [
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Bool,
+      ],
+      [WizardApplicationId],
       [],
     ),
 });
@@ -32,6 +79,14 @@ export const idlService = IDL.Service({
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const PartialLeadId = IDL.Nat;
+  const PartialLead = IDL.Record({
+    'id' : PartialLeadId,
+    'regulatoryHurdle' : IDL.Text,
+    'email' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'industry' : IDL.Text,
+  });
   const SubmissionId = IDL.Nat;
   const ContactSubmission = IDL.Record({
     'id' : SubmissionId,
@@ -42,13 +97,52 @@ export const idlFactory = ({ IDL }) => {
     'timestamp' : IDL.Int,
     'phone' : IDL.Text,
   });
+  const WizardApplicationId = IDL.Nat;
+  const WizardApplication = IDL.Record({
+    'id' : WizardApplicationId,
+    'hasFein' : IDL.Bool,
+    'fein' : IDL.Text,
+    'name' : IDL.Text,
+    'businessName' : IDL.Text,
+    'regulatoryHurdle' : IDL.Text,
+    'email' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'phone' : IDL.Text,
+    'industry' : IDL.Text,
+  });
   
   return IDL.Service({
+    'getAllPartialLeads' : IDL.Func([], [IDL.Vec(PartialLead)], ['query']),
     'getAllSubmissions' : IDL.Func([], [IDL.Vec(ContactSubmission)], ['query']),
+    'getAllWizardApplications' : IDL.Func(
+        [],
+        [IDL.Vec(WizardApplication)],
+        ['query'],
+      ),
     'getTotalSubmissions' : IDL.Func([], [IDL.Nat], ['query']),
+    'getTotalWizardApplications' : IDL.Func([], [IDL.Nat], ['query']),
+    'savePartialLead' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text],
+        [PartialLeadId],
+        [],
+      ),
     'submitContactForm' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
         [SubmissionId],
+        [],
+      ),
+    'submitWizardApplication' : IDL.Func(
+        [
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Bool,
+        ],
+        [WizardApplicationId],
         [],
       ),
   });

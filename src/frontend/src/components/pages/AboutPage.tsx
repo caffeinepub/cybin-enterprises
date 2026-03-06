@@ -1,6 +1,6 @@
+import { Link } from "@/lib/router";
 import { Award, ChevronRight, Star } from "lucide-react";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
 
 const melAchievements = [
   "Most Influential Businesswomen recognition",
@@ -161,48 +161,74 @@ export default function AboutPage() {
             >
               <div
                 style={{
-                  height: "320px",
+                  height: "420px",
                   overflow: "hidden",
                   position: "relative",
                   background:
-                    "linear-gradient(180deg, #060d1f 0%, #080520 60%, #040810 100%)",
+                    "linear-gradient(160deg, #040810 0%, #07051a 40%, #030710 100%)",
                 }}
               >
-                {/* Radial glow behind the photo */}
+                {/* Deep radial glow atmosphere */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
                     background:
-                      "radial-gradient(ellipse 90% 70% at 50% 20%, rgba(0, 212, 184, 0.14) 0%, rgba(0, 212, 184, 0.04) 50%, transparent 70%)",
+                      "radial-gradient(ellipse 100% 80% at 50% 30%, rgba(0, 212, 184, 0.18) 0%, rgba(0, 212, 184, 0.06) 45%, transparent 70%)",
+                    zIndex: 1,
+                    pointerEvents: "none",
+                  }}
+                />
+                {/* Secondary ambient light from below */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "radial-gradient(ellipse 80% 50% at 50% 100%, rgba(124, 92, 191, 0.12) 0%, transparent 60%)",
                     zIndex: 1,
                     pointerEvents: "none",
                   }}
                 />
                 <img
-                  src="/assets/generated/mel-uniform-bg.dim_800x1000.jpeg"
+                  src="/assets/generated/mel-transparent.dim_800x1000.png"
                   alt="Mel Kotchey — Co-Founder & CEO"
                   style={{
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 15%",
-                    transform: "scale(0.9)",
-                    transformOrigin: "center 15%",
+                    objectFit: "contain",
+                    objectPosition: "center top",
+                    transform: "scale(0.88)",
+                    transformOrigin: "center top",
                     position: "relative",
                     zIndex: 2,
+                    mixBlendMode: "luminosity",
+                    filter:
+                      "drop-shadow(0 0 24px rgba(0, 212, 184, 0.25)) drop-shadow(0 0 48px rgba(0, 212, 184, 0.12))",
                   }}
                 />
+                {/* Bottom fade-to-background blend */}
                 <div
                   style={{
                     position: "absolute",
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    height: "140px",
+                    height: "180px",
                     background:
-                      "linear-gradient(to top, rgba(6, 11, 24, 0.98) 0%, rgba(8, 13, 28, 0.8) 50%, transparent 100%)",
+                      "linear-gradient(to top, rgba(4, 8, 16, 1) 0%, rgba(6, 9, 20, 0.92) 30%, rgba(7, 5, 26, 0.6) 60%, transparent 100%)",
                     zIndex: 3,
+                  }}
+                />
+                {/* Side vignettes for edge blending */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to right, rgba(4,8,16,0.6) 0%, transparent 20%, transparent 80%, rgba(4,8,16,0.6) 100%)",
+                    zIndex: 3,
+                    pointerEvents: "none",
                   }}
                 />
                 <div
@@ -313,48 +339,74 @@ export default function AboutPage() {
             >
               <div
                 style={{
-                  height: "320px",
+                  height: "420px",
                   overflow: "hidden",
                   position: "relative",
                   background:
-                    "linear-gradient(180deg, #060820 0%, #08051e 60%, #040810 100%)",
+                    "linear-gradient(160deg, #040810 0%, #0a0520 40%, #030710 100%)",
                 }}
               >
-                {/* Radial glow behind the photo */}
+                {/* Deep radial glow atmosphere */}
                 <div
                   style={{
                     position: "absolute",
                     inset: 0,
                     background:
-                      "radial-gradient(ellipse 90% 70% at 50% 20%, rgba(124, 92, 191, 0.18) 0%, rgba(124, 92, 191, 0.06) 50%, transparent 70%)",
+                      "radial-gradient(ellipse 100% 80% at 50% 30%, rgba(124, 92, 191, 0.22) 0%, rgba(124, 92, 191, 0.08) 45%, transparent 70%)",
+                    zIndex: 1,
+                    pointerEvents: "none",
+                  }}
+                />
+                {/* Secondary ambient light */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "radial-gradient(ellipse 80% 50% at 50% 100%, rgba(0, 212, 184, 0.1) 0%, transparent 60%)",
                     zIndex: 1,
                     pointerEvents: "none",
                   }}
                 />
                 <img
-                  src="/assets/shane.png"
+                  src="/assets/generated/shane-transparent.dim_800x1000.png"
                   alt="Shane Suehr — Co-Founder & COO"
                   style={{
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 15%",
-                    transform: "scale(0.9)",
-                    transformOrigin: "center 15%",
+                    objectFit: "contain",
+                    objectPosition: "center top",
+                    transform: "scale(0.88)",
+                    transformOrigin: "center top",
                     position: "relative",
                     zIndex: 2,
+                    mixBlendMode: "luminosity",
+                    filter:
+                      "drop-shadow(0 0 24px rgba(124, 92, 191, 0.28)) drop-shadow(0 0 48px rgba(124, 92, 191, 0.14))",
                   }}
                 />
+                {/* Bottom fade-to-background blend */}
                 <div
                   style={{
                     position: "absolute",
                     bottom: 0,
                     left: 0,
                     right: 0,
-                    height: "140px",
+                    height: "180px",
                     background:
-                      "linear-gradient(to top, rgba(6, 11, 24, 0.98) 0%, rgba(8, 13, 28, 0.8) 50%, transparent 100%)",
+                      "linear-gradient(to top, rgba(4, 8, 16, 1) 0%, rgba(6, 5, 26, 0.92) 30%, rgba(8, 5, 28, 0.6) 60%, transparent 100%)",
                     zIndex: 3,
+                  }}
+                />
+                {/* Side vignettes for edge blending */}
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background:
+                      "linear-gradient(to right, rgba(4,8,16,0.6) 0%, transparent 20%, transparent 80%, rgba(4,8,16,0.6) 100%)",
+                    zIndex: 3,
+                    pointerEvents: "none",
                   }}
                 />
                 <div
