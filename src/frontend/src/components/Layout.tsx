@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@/lib/router";
 import { ChevronRight, Cookie, Mail, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import logoImg from "/assets/cybin-logo.png";
 
 const navLinks = [
   { label: "Home", href: "/", ocid: "nav.home.link" },
@@ -96,7 +97,7 @@ export default function Layout({ children }: LayoutProps) {
               style={{ display: "flex", alignItems: "center" }}
             >
               <img
-                src="/assets/uploads/Untitled-design-1.png"
+                src={logoImg}
                 alt="Cybin Enterprises"
                 style={{
                   width: "64px",
@@ -237,7 +238,7 @@ export default function Layout({ children }: LayoutProps) {
             {/* Brand */}
             <div>
               <img
-                src="/assets/uploads/Untitled-design-1.png"
+                src={logoImg}
                 alt="Cybin Enterprises"
                 style={{
                   width: "64px",

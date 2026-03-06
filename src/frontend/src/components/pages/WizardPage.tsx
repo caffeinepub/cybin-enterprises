@@ -824,6 +824,13 @@ function Step4({
     ? "Initiate Underwriting Review"
     : "Request Preliminary Consultation";
 
+  const handleSkip = () => {
+    onChange("feinSkipped", true);
+    onChange("fein", "");
+    // Immediately submit as a preliminary consultation
+    onSubmit();
+  };
+
   return (
     <div>
       {/* High-Security Header */}
@@ -984,20 +991,22 @@ function Step4({
           <button
             type="button"
             data-ocid="wizard.step4.skip.button"
-            onClick={() => {
-              onChange("feinSkipped", true);
-              onChange("fein", "");
-            }}
+            onClick={handleSkip}
+            disabled={isSubmitting}
             className="mt-2 text-xs underline transition-colors"
-            style={{ color: "rgba(232,237,248,0.35)" }}
+            style={{
+              color: "rgba(232,237,248,0.35)",
+              cursor: isSubmitting ? "not-allowed" : "pointer",
+            }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = "rgba(232,237,248,0.6)";
+              if (!isSubmitting)
+                e.currentTarget.style.color = "rgba(232,237,248,0.6)";
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.color = "rgba(232,237,248,0.35)";
             }}
           >
-            Skip for now
+            Skip for now — proceed as consultation
           </button>
         </div>
       </div>
@@ -1251,7 +1260,7 @@ export default function WizardPage() {
       >
         <Link to="/" className="flex items-center">
           <img
-            src="/assets/uploads/Untitled-design-1.png"
+            src="/assets/cybin-logo.png"
             alt="Cybin Enterprises"
             style={{
               width: "48px",

@@ -3,6 +3,8 @@ import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import { Award, ChevronRight, Star } from "lucide-react";
 import { useEffect } from "react";
+import melPhoto from "/assets/mel-headshot.jpeg";
+import shanePhoto from "/assets/shane-headshot.jpeg";
 
 const melAchievements = [
   "Most Influential Businesswomen recognition",
@@ -301,68 +303,99 @@ export default function AboutPage() {
               data-ocid="about.founders.card.1"
               style={{ display: "flex", flexDirection: "column" }}
             >
-              {/* Portrait hero zone — transparent PNG floats on dark bg */}
+              {/* Portrait hero zone — real photo with CSS edge-blend */}
               <div
                 style={{
                   position: "relative",
-                  height: "420px",
-                  backgroundColor: "transparent",
-                  display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "center",
-                  overflow: "visible",
+                  height: "460px",
+                  overflow: "hidden",
+                  borderRadius: "20px 20px 0 0",
                 }}
               >
-                {/* Ambient radial glow — teal, behind portrait */}
+                {/* Actual photo */}
+                <img
+                  id="grubme"
+                  src={melPhoto}
+                  alt="Mel Kotchey, Co-Founder & CEO of Cybin Enterprises"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center 10%",
+                    display: "block",
+                  }}
+                />
+                {/* Teal rim-light — left + right edges */}
                 <div
                   aria-hidden="true"
                   style={{
                     position: "absolute",
-                    bottom: "-20px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "380px",
-                    height: "420px",
+                    inset: 0,
                     background:
-                      "radial-gradient(ellipse 75% 80% at 50% 75%, rgba(0,212,184,0.22) 0%, rgba(0,212,184,0.08) 45%, transparent 70%)",
+                      "linear-gradient(to right, rgba(0,212,184,0.18) 0%, transparent 18%, transparent 82%, rgba(0,212,184,0.14) 100%)",
                     pointerEvents: "none",
-                    zIndex: 0,
+                    zIndex: 2,
+                    mixBlendMode: "screen",
                   }}
                 />
-                {/* Portrait image — transparent PNG, no container background */}
-                <img
-                  src="/assets/generated/mel-hero-transparent.dim_900x1100.png"
-                  alt="Mel Kotchey, Co-Founder & CEO of Cybin Enterprises"
+                {/* Bottom fade to section background */}
+                <div
+                  aria-hidden="true"
                   style={{
-                    position: "relative",
-                    zIndex: 1,
-                    height: "100%",
-                    width: "auto",
-                    maxWidth: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center top",
-                    display: "block",
-                    margin: "0 auto",
-                    filter:
-                      "drop-shadow(0 0 18px rgba(0,212,184,0.45)) drop-shadow(0 0 60px rgba(0,212,184,0.2)) drop-shadow(0 30px 50px rgba(0,0,0,0.9))",
-                    WebkitMaskImage:
-                      "linear-gradient(to bottom, black 70%, transparent 100%)",
-                    maskImage:
-                      "linear-gradient(to bottom, black 70%, transparent 100%)",
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "55%",
+                    background:
+                      "linear-gradient(to bottom, transparent 0%, rgba(8,13,26,0.55) 60%, rgba(8,13,26,0.98) 100%)",
+                    pointerEvents: "none",
+                    zIndex: 3,
+                  }}
+                />
+                {/* Top subtle vignette */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: "25%",
+                    background:
+                      "linear-gradient(to bottom, rgba(8,13,26,0.5) 0%, transparent 100%)",
+                    pointerEvents: "none",
+                    zIndex: 3,
+                  }}
+                />
+                {/* Ambient teal glow — atmospheric, blended behind photo edges */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    inset: "-20px",
+                    background:
+                      "radial-gradient(ellipse 80% 60% at 50% 110%, rgba(0,212,184,0.28) 0%, transparent 60%)",
+                    pointerEvents: "none",
+                    zIndex: 4,
+                    mixBlendMode: "screen",
                   }}
                 />
               </div>
 
-              {/* Bio card — clean below the portrait */}
+              {/* Bio card — seamlessly attached below portrait */}
               <div
-                className="rounded-2xl"
+                className="rounded-b-2xl"
                 style={{
                   background:
-                    "linear-gradient(160deg, rgba(4,14,30,0.98) 0%, rgba(6,4,20,0.95) 100%)",
+                    "linear-gradient(160deg, rgba(8,13,26,0.99) 0%, rgba(4,6,18,0.97) 100%)",
                   border: "1px solid rgba(0,212,184,0.18)",
+                  borderTop: "none",
                   boxShadow:
-                    "0 0 60px rgba(0,212,184,0.08), 0 0 120px rgba(0,212,184,0.04), inset 0 1px 0 rgba(0,212,184,0.1)",
-                  padding: "36px 32px 32px",
+                    "0 0 60px rgba(0,212,184,0.08), 0 0 120px rgba(0,212,184,0.04), inset 0 1px 0 rgba(0,212,184,0.06)",
+                  padding: "28px 32px 32px",
                   flex: 1,
                 }}
               >
@@ -503,68 +536,99 @@ export default function AboutPage() {
                 transitionDelay: "120ms",
               }}
             >
-              {/* Portrait hero zone */}
+              {/* Portrait hero zone — real photo with CSS edge-blend */}
               <div
                 style={{
                   position: "relative",
-                  height: "420px",
-                  backgroundColor: "transparent",
-                  display: "flex",
-                  alignItems: "flex-end",
-                  justifyContent: "center",
-                  overflow: "visible",
+                  height: "460px",
+                  overflow: "hidden",
+                  borderRadius: "20px 20px 0 0",
                 }}
               >
-                {/* Ambient radial glow — purple, behind portrait */}
+                {/* Actual photo */}
+                <img
+                  id="1p1oo1h"
+                  src={shanePhoto}
+                  alt="Shane Suehr, Co-Founder & COO of Cybin Enterprises"
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center 12%",
+                    display: "block",
+                  }}
+                />
+                {/* Purple rim-light — left + right edges */}
                 <div
                   aria-hidden="true"
                   style={{
                     position: "absolute",
-                    bottom: "-20px",
-                    left: "50%",
-                    transform: "translateX(-50%)",
-                    width: "380px",
-                    height: "420px",
+                    inset: 0,
                     background:
-                      "radial-gradient(ellipse 75% 80% at 50% 75%, rgba(124,92,191,0.25) 0%, rgba(124,92,191,0.1) 45%, transparent 70%)",
+                      "linear-gradient(to right, rgba(124,92,191,0.2) 0%, transparent 18%, transparent 82%, rgba(124,92,191,0.16) 100%)",
                     pointerEvents: "none",
-                    zIndex: 0,
+                    zIndex: 2,
+                    mixBlendMode: "screen",
                   }}
                 />
-                {/* Portrait image */}
-                <img
-                  src="/assets/generated/shane-hero-transparent.dim_900x1100.png"
-                  alt="Shane Suehr, Co-Founder & COO of Cybin Enterprises"
+                {/* Bottom fade to section background */}
+                <div
+                  aria-hidden="true"
                   style={{
-                    position: "relative",
-                    zIndex: 1,
-                    height: "100%",
-                    width: "auto",
-                    maxWidth: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center top",
-                    display: "block",
-                    margin: "0 auto",
-                    filter:
-                      "drop-shadow(0 0 18px rgba(168,126,245,0.5)) drop-shadow(0 0 60px rgba(124,92,191,0.25)) drop-shadow(0 30px 50px rgba(0,0,0,0.9))",
-                    WebkitMaskImage:
-                      "linear-gradient(to bottom, black 70%, transparent 100%)",
-                    maskImage:
-                      "linear-gradient(to bottom, black 70%, transparent 100%)",
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "55%",
+                    background:
+                      "linear-gradient(to bottom, transparent 0%, rgba(8,13,26,0.55) 60%, rgba(8,13,26,0.98) 100%)",
+                    pointerEvents: "none",
+                    zIndex: 3,
+                  }}
+                />
+                {/* Top subtle vignette */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    height: "25%",
+                    background:
+                      "linear-gradient(to bottom, rgba(8,13,26,0.5) 0%, transparent 100%)",
+                    pointerEvents: "none",
+                    zIndex: 3,
+                  }}
+                />
+                {/* Ambient purple glow */}
+                <div
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    inset: "-20px",
+                    background:
+                      "radial-gradient(ellipse 80% 60% at 50% 110%, rgba(124,92,191,0.32) 0%, transparent 60%)",
+                    pointerEvents: "none",
+                    zIndex: 4,
+                    mixBlendMode: "screen",
                   }}
                 />
               </div>
 
               {/* Bio card */}
               <div
-                className="rounded-2xl"
+                className="rounded-b-2xl"
                 style={{
                   background:
-                    "linear-gradient(160deg, rgba(4,8,18,0.98) 0%, rgba(8,4,22,0.95) 100%)",
+                    "linear-gradient(160deg, rgba(8,13,26,0.99) 0%, rgba(5,3,18,0.97) 100%)",
                   border: "1px solid rgba(124,92,191,0.22)",
+                  borderTop: "none",
                   boxShadow:
-                    "0 0 60px rgba(124,92,191,0.1), 0 0 120px rgba(124,92,191,0.05), inset 0 1px 0 rgba(124,92,191,0.1)",
-                  padding: "36px 32px 32px",
+                    "0 0 60px rgba(124,92,191,0.1), 0 0 120px rgba(124,92,191,0.05), inset 0 1px 0 rgba(124,92,191,0.06)",
+                  padding: "28px 32px 32px",
                   flex: 1,
                 }}
               >

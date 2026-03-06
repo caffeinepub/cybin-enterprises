@@ -595,7 +595,8 @@ export default function ContactPage() {
                   options available for your business.
                 </p>
                 <Link
-                  to="/contact"
+                  to="/apply"
+                  data-ocid="contact.start_approval.button"
                   className="cybin-btn-primary text-sm w-full justify-center block text-center"
                 >
                   Start Your Approval Process

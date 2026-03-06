@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "@/lib/router";
 import Layout from "./components/Layout";
 import AboutPage from "./components/pages/AboutPage";
+import AdminPage from "./components/pages/AdminPage";
 import ContactPage from "./components/pages/ContactPage";
 import FraudDeflectPage from "./components/pages/FraudDeflectPage";
 import HomePage from "./components/pages/HomePage";
@@ -20,6 +21,9 @@ export default function App() {
       <Routes>
         {/* Standalone wizard — no Layout wrapper */}
         <Route path="/apply" element={<WizardPage />} />
+
+        {/* Standalone admin — no Layout wrapper */}
+        <Route path="/admin" element={<AdminPage />} />
 
         {/* All other pages wrapped in Layout */}
         <Route

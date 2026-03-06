@@ -303,7 +303,7 @@ export default function PaymentSolutionsPage() {
                 infrastructure for your situation.
               </p>
               <Link
-                to="/contact"
+                to="/apply"
                 className="cybin-btn-primary text-sm"
                 data-ocid="payment_solutions.cta.button"
               >
@@ -396,9 +396,9 @@ export default function PaymentSolutionsPage() {
 
           <div className="text-center mt-14">
             <Link
-              to="/contact"
+              to="/apply"
               className="cybin-btn-primary"
-              data-ocid="payment_solutions.cta.button"
+              data-ocid="payment_solutions.process.button"
             >
               Start Your Approval Process <ChevronRight size={16} />
             </Link>
