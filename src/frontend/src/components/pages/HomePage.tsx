@@ -1,3 +1,4 @@
+import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import {
   AlertTriangle,
@@ -164,6 +165,13 @@ function NetworkCanvas() {
 }
 
 export default function HomePage() {
+  useSeo({
+    title: "Cybin Enterprises | High-Risk Payment Solutions",
+    description:
+      "Trusted payment processing for high-risk businesses. MATCH list merchants, CBD, nutraceuticals, telemedicine, and more. Domestic & international options.",
+    canonical: "/",
+  });
+
   // Scroll reveal
   useEffect(() => {
     const observer = new IntersectionObserver(

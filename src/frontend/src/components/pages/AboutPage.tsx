@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/JsonLd";
+import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import { Award, ChevronRight, Star } from "lucide-react";
 import { useEffect } from "react";
@@ -11,7 +13,24 @@ const melAchievements = [
   "Featured on the cover of Dope Magazine",
 ];
 
+const shaneExpertise = [
+  "Logistics & Operations Management",
+  "Cybersecurity & Data Protection",
+  "Health-Technology Systems",
+  "Consumer Services & Growth",
+  "Payment Infrastructure Simplification",
+  "Cross-Industry Business Development",
+];
+
 export default function AboutPage() {
+  useSeo({
+    title:
+      "About Cybin Enterprises | Meet the Founders Mel Kotchey & Shane Suehr",
+    description:
+      "Cybin Enterprises was founded by Mel Kotchey and Shane Suehr to bring clarity and stability to businesses navigating complex payment environments.",
+    canonical: "/about",
+  });
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -34,6 +53,66 @@ export default function AboutPage() {
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://cybinenterprises.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "About",
+              item: "https://cybinenterprises.com/about",
+            },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Cybin Enterprises Founders",
+          itemListElement: [
+            {
+              "@type": "Person",
+              position: 1,
+              name: "Mel Kotchey",
+              jobTitle: "Co-Founder & CEO",
+              description:
+                "Award-winning entrepreneur with 28 years in medical and regulated sectors. Five degrees including a master's in healthcare administration.",
+              worksFor: {
+                "@type": "Organization",
+                name: "Cybin Enterprises",
+              },
+              award: [
+                "Most Influential Businesswomen",
+                "Top 30 CEOs of the Year",
+                "Commercial Cannabis Awards honoree",
+                "Best Place to Work Award (2021)",
+                "Featured on the cover of Dope Magazine",
+              ],
+            },
+            {
+              "@type": "Person",
+              position: 2,
+              name: "Shane Suehr",
+              jobTitle: "Co-Founder & COO",
+              description:
+                "Experienced leader across logistics, cybersecurity, health-technology, and consumer services.",
+              worksFor: {
+                "@type": "Organization",
+                name: "Cybin Enterprises",
+              },
+            },
+          ],
+        }}
+      />
       {/* Hero */}
       <section
         className="page-hero-bg"
@@ -123,155 +202,227 @@ export default function AboutPage() {
 
       <div className="cybin-section-divider" />
 
-      {/* Founders */}
+      {/* ══════════════════════════════════════════════
+          FOUNDERS — PRESTIGE MAGAZINE AUTHORITY LAYOUT
+          Portrait-first, side-by-side, commanding scale
+          ══════════════════════════════════════════════ */}
       <section
-        style={{ backgroundColor: "#0c1020", padding: "72px 0" }}
         data-ocid="about.founders.section"
+        style={{
+          backgroundColor: "#080d1a",
+          padding: "120px 0 100px",
+          position: "relative",
+          overflow: "hidden",
+        }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14 animate-fade-up">
+        {/* Subtle grid texture overlay for depth */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundImage:
+              "linear-gradient(rgba(0,212,184,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,184,0.025) 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        {/* Ambient atmospheric gradients */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "50%",
+            height: "100%",
+            background:
+              "radial-gradient(ellipse 70% 60% at 25% 45%, rgba(0,212,184,0.07) 0%, transparent 70%)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            right: 0,
+            width: "50%",
+            height: "100%",
+            background:
+              "radial-gradient(ellipse 70% 60% at 75% 45%, rgba(124,92,191,0.09) 0%, transparent 70%)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+        />
+
+        <div
+          className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+          style={{ position: "relative", zIndex: 1 }}
+        >
+          {/* Section heading */}
+          <div className="text-center mb-16 animate-fade-up">
             <span
               className="text-xs font-bold uppercase tracking-widest"
-              style={{ color: "#00d4b8" }}
+              style={{
+                color: "#00d4b8",
+                letterSpacing: "0.2em",
+              }}
             >
               Leadership
             </span>
             <h2
-              className="text-3xl font-bold mt-3"
+              className="text-4xl sm:text-5xl font-bold mt-4 mb-4"
               style={{
                 fontFamily: "Sora, system-ui, sans-serif",
                 color: "#e8edf8",
+                lineHeight: 1.12,
               }}
             >
               Meet the Founders
             </h2>
+            <p
+              className="text-base max-w-xl mx-auto"
+              style={{ color: "rgba(232,237,248,0.5)", lineHeight: 1.7 }}
+            >
+              Experienced leaders who built Cybin Enterprises to deliver clarity
+              and stability to businesses navigating complex payment
+              environments.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Mel */}
+          {/* Founders side-by-side grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-14">
+            {/* ══ MEL KOTCHEY ══ */}
             <div
-              className="animate-fade-up overflow-hidden rounded-2xl"
-              style={{
-                background:
-                  "linear-gradient(160deg, #040810 0%, #07051a 40%, #030710 100%)",
-                border: "1px solid rgba(0, 212, 184, 0.35)",
-                boxShadow:
-                  "0 0 40px rgba(0, 212, 184, 0.22), 0 0 80px rgba(0, 212, 184, 0.10), 0 0 120px rgba(124, 92, 191, 0.12), inset 0 1px 0 rgba(0, 212, 184, 0.15)",
-              }}
+              className="animate-fade-up"
+              data-ocid="about.founders.card.1"
+              style={{ display: "flex", flexDirection: "column" }}
             >
+              {/* Portrait hero zone — transparent PNG floats on dark bg */}
               <div
                 style={{
-                  height: "420px",
-                  overflow: "hidden",
                   position: "relative",
-                  background:
-                    "linear-gradient(160deg, #040810 0%, #07051a 40%, #030710 100%)",
+                  height: "420px",
+                  backgroundColor: "transparent",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                  overflow: "visible",
                 }}
               >
-                {/* Deep radial glow atmosphere */}
+                {/* Ambient radial glow — teal, behind portrait */}
                 <div
+                  aria-hidden="true"
                   style={{
                     position: "absolute",
-                    inset: 0,
+                    bottom: "-20px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "380px",
+                    height: "420px",
                     background:
-                      "radial-gradient(ellipse 100% 80% at 50% 30%, rgba(0, 212, 184, 0.18) 0%, rgba(0, 212, 184, 0.06) 45%, transparent 70%)",
-                    zIndex: 1,
+                      "radial-gradient(ellipse 75% 80% at 50% 75%, rgba(0,212,184,0.22) 0%, rgba(0,212,184,0.08) 45%, transparent 70%)",
                     pointerEvents: "none",
+                    zIndex: 0,
                   }}
                 />
-                {/* Secondary ambient light from below */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "radial-gradient(ellipse 80% 50% at 50% 100%, rgba(124, 92, 191, 0.12) 0%, transparent 60%)",
-                    zIndex: 1,
-                    pointerEvents: "none",
-                  }}
-                />
+                {/* Portrait image — transparent PNG, no container background */}
                 <img
-                  src="/assets/generated/mel-transparent.dim_800x1000.png"
-                  alt="Mel Kotchey — Co-Founder & CEO"
+                  src="/assets/generated/mel-hero-transparent.dim_900x1100.png"
+                  alt="Mel Kotchey, Co-Founder & CEO of Cybin Enterprises"
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    objectPosition: "center top",
-                    transform: "scale(0.88)",
-                    transformOrigin: "center top",
                     position: "relative",
-                    zIndex: 2,
-                    mixBlendMode: "luminosity",
+                    zIndex: 1,
+                    height: "100%",
+                    width: "auto",
+                    maxWidth: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    display: "block",
+                    margin: "0 auto",
                     filter:
-                      "drop-shadow(0 0 24px rgba(0, 212, 184, 0.25)) drop-shadow(0 0 48px rgba(0, 212, 184, 0.12))",
+                      "drop-shadow(0 0 18px rgba(0,212,184,0.45)) drop-shadow(0 0 60px rgba(0,212,184,0.2)) drop-shadow(0 30px 50px rgba(0,0,0,0.9))",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, black 70%, transparent 100%)",
+                    maskImage:
+                      "linear-gradient(to bottom, black 70%, transparent 100%)",
                   }}
                 />
-                {/* Bottom fade-to-background blend */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: "180px",
-                    background:
-                      "linear-gradient(to top, rgba(4, 8, 16, 1) 0%, rgba(6, 9, 20, 0.92) 30%, rgba(7, 5, 26, 0.6) 60%, transparent 100%)",
-                    zIndex: 3,
-                  }}
-                />
-                {/* Side vignettes for edge blending */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(to right, rgba(4,8,16,0.6) 0%, transparent 20%, transparent 80%, rgba(4,8,16,0.6) 100%)",
-                    zIndex: 3,
-                    pointerEvents: "none",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "16px",
-                    left: "24px",
-                    zIndex: 4,
-                  }}
-                >
+              </div>
+
+              {/* Bio card — clean below the portrait */}
+              <div
+                className="rounded-2xl"
+                style={{
+                  background:
+                    "linear-gradient(160deg, rgba(4,14,30,0.98) 0%, rgba(6,4,20,0.95) 100%)",
+                  border: "1px solid rgba(0,212,184,0.18)",
+                  boxShadow:
+                    "0 0 60px rgba(0,212,184,0.08), 0 0 120px rgba(0,212,184,0.04), inset 0 1px 0 rgba(0,212,184,0.1)",
+                  padding: "36px 32px 32px",
+                  flex: 1,
+                }}
+              >
+                {/* Name + title */}
+                <div className="mb-5">
                   <h3
-                    className="text-xl font-bold"
-                    style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
+                    style={{
+                      fontFamily: "Sora, system-ui, sans-serif",
+                      fontSize: "28px",
+                      fontWeight: 700,
+                      color: "#e8edf8",
+                      lineHeight: 1.2,
+                      marginBottom: "8px",
+                      letterSpacing: "-0.01em",
+                    }}
                   >
                     Mel Kotchey
                   </h3>
-                  <p className="text-sm" style={{ color: "#00d4b8" }}>
-                    Co-Founder & CEO
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      color: "#00d4b8",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      fontFamily: "Cabinet Grotesk, system-ui, sans-serif",
+                    }}
+                  >
+                    Co-Founder &amp; CEO
                   </p>
+                  <div
+                    style={{
+                      marginTop: "16px",
+                      borderTop: "1px solid rgba(0,212,184,0.15)",
+                    }}
+                  />
                 </div>
-              </div>
 
-              <div className="p-7">
+                {/* Bio text */}
                 <p
-                  className="text-sm mb-4"
                   style={{
-                    color: "rgba(232, 237, 248, 0.7)",
-                    lineHeight: 1.75,
+                    color: "rgba(232,237,248,0.75)",
+                    fontSize: "15px",
+                    lineHeight: 1.8,
+                    marginBottom: "12px",
                   }}
                 >
                   Mel Kotchey is an award-winning entrepreneur with extensive
                   experience across regulated industries. Before founding Cybin
                   Enterprises, she built and operated a successful business in
-                  the regulated cannabis and wellness sector. Through that
-                  experience, she saw firsthand how the right payment
-                  infrastructure could dramatically reduce operational stress
-                  and costs for business owners.
+                  the regulated cannabis and wellness sector — seeing firsthand
+                  how the right payment infrastructure reduces operational
+                  stress for business owners.
                 </p>
                 <p
-                  className="text-sm mb-6"
                   style={{
-                    color: "rgba(232, 237, 248, 0.7)",
-                    lineHeight: 1.75,
+                    color: "rgba(232,237,248,0.75)",
+                    fontSize: "15px",
+                    lineHeight: 1.8,
+                    marginBottom: "24px",
                   }}
                 >
                   Mel holds five degrees including a master's in healthcare
@@ -280,39 +431,56 @@ export default function AboutPage() {
                   clarity, and long-term support for merchants.
                 </p>
 
+                {/* Achievements panel */}
                 <div
-                  className="p-4 rounded-xl mb-2"
+                  className="rounded-xl"
                   style={{
-                    backgroundColor: "rgba(0, 212, 184, 0.05)",
-                    border: "1px solid rgba(0, 212, 184, 0.1)",
+                    backgroundColor: "rgba(0,212,184,0.04)",
+                    border: "1px solid rgba(0,212,184,0.1)",
+                    padding: "20px",
                   }}
                 >
-                  <div className="flex items-center gap-2 mb-3">
-                    <Award size={16} style={{ color: "#00d4b8" }} />
+                  <div className="flex items-center gap-2 mb-4">
+                    <Award
+                      size={15}
+                      style={{ color: "#00d4b8", flexShrink: 0 }}
+                    />
                     <span
-                      className="text-xs font-bold uppercase tracking-wider"
-                      style={{ color: "#00d4b8" }}
+                      style={{
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        color: "#00d4b8",
+                        fontFamily: "Cabinet Grotesk, system-ui, sans-serif",
+                      }}
                     >
                       Achievements
                     </span>
                   </div>
-                  <div className="space-y-2">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
+                  >
                     {melAchievements.map((a) => (
-                      <div key={a} className="flex items-start gap-2">
+                      <div key={a} className="flex items-start gap-3">
                         <span
                           style={{
                             color: "#00d4b8",
-                            fontSize: "10px",
-                            marginTop: "5px",
+                            fontSize: "8px",
+                            marginTop: "6px",
                             flexShrink: 0,
                           }}
                         >
                           ◆
                         </span>
                         <p
-                          className="text-xs"
                           style={{
-                            color: "rgba(232, 237, 248, 0.65)",
+                            color: "rgba(232,237,248,0.68)",
+                            fontSize: "13px",
                             lineHeight: 1.5,
                           }}
                         >
@@ -325,178 +493,195 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Shane */}
+            {/* ══ SHANE SUEHR ══ */}
             <div
-              className="animate-fade-up overflow-hidden rounded-2xl"
+              className="animate-fade-up"
+              data-ocid="about.founders.card.2"
               style={{
-                transitionDelay: "100ms",
-                background:
-                  "linear-gradient(160deg, #040810 0%, #0a0520 40%, #030710 100%)",
-                border: "1px solid rgba(124, 92, 191, 0.4)",
-                boxShadow:
-                  "0 0 40px rgba(124, 92, 191, 0.25), 0 0 80px rgba(124, 92, 191, 0.12), 0 0 120px rgba(0, 212, 184, 0.08), inset 0 1px 0 rgba(124, 92, 191, 0.15)",
+                display: "flex",
+                flexDirection: "column",
+                transitionDelay: "120ms",
               }}
             >
+              {/* Portrait hero zone */}
               <div
                 style={{
-                  height: "420px",
-                  overflow: "hidden",
                   position: "relative",
-                  background:
-                    "linear-gradient(160deg, #040810 0%, #0a0520 40%, #030710 100%)",
+                  height: "420px",
+                  backgroundColor: "transparent",
+                  display: "flex",
+                  alignItems: "flex-end",
+                  justifyContent: "center",
+                  overflow: "visible",
                 }}
               >
-                {/* Deep radial glow atmosphere */}
+                {/* Ambient radial glow — purple, behind portrait */}
                 <div
+                  aria-hidden="true"
                   style={{
                     position: "absolute",
-                    inset: 0,
+                    bottom: "-20px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    width: "380px",
+                    height: "420px",
                     background:
-                      "radial-gradient(ellipse 100% 80% at 50% 30%, rgba(124, 92, 191, 0.22) 0%, rgba(124, 92, 191, 0.08) 45%, transparent 70%)",
-                    zIndex: 1,
+                      "radial-gradient(ellipse 75% 80% at 50% 75%, rgba(124,92,191,0.25) 0%, rgba(124,92,191,0.1) 45%, transparent 70%)",
                     pointerEvents: "none",
+                    zIndex: 0,
                   }}
                 />
-                {/* Secondary ambient light */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "radial-gradient(ellipse 80% 50% at 50% 100%, rgba(0, 212, 184, 0.1) 0%, transparent 60%)",
-                    zIndex: 1,
-                    pointerEvents: "none",
-                  }}
-                />
+                {/* Portrait image */}
                 <img
-                  src="/assets/generated/shane-transparent.dim_800x1000.png"
-                  alt="Shane Suehr — Co-Founder & COO"
+                  src="/assets/generated/shane-hero-transparent.dim_900x1100.png"
+                  alt="Shane Suehr, Co-Founder & COO of Cybin Enterprises"
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "contain",
-                    objectPosition: "center top",
-                    transform: "scale(0.88)",
-                    transformOrigin: "center top",
                     position: "relative",
-                    zIndex: 2,
-                    mixBlendMode: "luminosity",
+                    zIndex: 1,
+                    height: "100%",
+                    width: "auto",
+                    maxWidth: "100%",
+                    objectFit: "cover",
+                    objectPosition: "center top",
+                    display: "block",
+                    margin: "0 auto",
                     filter:
-                      "drop-shadow(0 0 24px rgba(124, 92, 191, 0.28)) drop-shadow(0 0 48px rgba(124, 92, 191, 0.14))",
+                      "drop-shadow(0 0 18px rgba(168,126,245,0.5)) drop-shadow(0 0 60px rgba(124,92,191,0.25)) drop-shadow(0 30px 50px rgba(0,0,0,0.9))",
+                    WebkitMaskImage:
+                      "linear-gradient(to bottom, black 70%, transparent 100%)",
+                    maskImage:
+                      "linear-gradient(to bottom, black 70%, transparent 100%)",
                   }}
                 />
-                {/* Bottom fade-to-background blend */}
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    height: "180px",
-                    background:
-                      "linear-gradient(to top, rgba(4, 8, 16, 1) 0%, rgba(6, 5, 26, 0.92) 30%, rgba(8, 5, 28, 0.6) 60%, transparent 100%)",
-                    zIndex: 3,
-                  }}
-                />
-                {/* Side vignettes for edge blending */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(to right, rgba(4,8,16,0.6) 0%, transparent 20%, transparent 80%, rgba(4,8,16,0.6) 100%)",
-                    zIndex: 3,
-                    pointerEvents: "none",
-                  }}
-                />
-                <div
-                  style={{
-                    position: "absolute",
-                    bottom: "16px",
-                    left: "24px",
-                    zIndex: 4,
-                  }}
-                >
+              </div>
+
+              {/* Bio card */}
+              <div
+                className="rounded-2xl"
+                style={{
+                  background:
+                    "linear-gradient(160deg, rgba(4,8,18,0.98) 0%, rgba(8,4,22,0.95) 100%)",
+                  border: "1px solid rgba(124,92,191,0.22)",
+                  boxShadow:
+                    "0 0 60px rgba(124,92,191,0.1), 0 0 120px rgba(124,92,191,0.05), inset 0 1px 0 rgba(124,92,191,0.1)",
+                  padding: "36px 32px 32px",
+                  flex: 1,
+                }}
+              >
+                {/* Name + title */}
+                <div className="mb-5">
                   <h3
-                    className="text-xl font-bold"
-                    style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
+                    style={{
+                      fontFamily: "Sora, system-ui, sans-serif",
+                      fontSize: "28px",
+                      fontWeight: 700,
+                      color: "#e8edf8",
+                      lineHeight: 1.2,
+                      marginBottom: "8px",
+                      letterSpacing: "-0.01em",
+                    }}
                   >
                     Shane Suehr
                   </h3>
-                  <p className="text-sm" style={{ color: "#00d4b8" }}>
-                    Co-Founder & COO
+                  <p
+                    style={{
+                      fontSize: "13px",
+                      fontWeight: 600,
+                      color: "#a87ef5",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.12em",
+                      fontFamily: "Cabinet Grotesk, system-ui, sans-serif",
+                    }}
+                  >
+                    Co-Founder &amp; COO
                   </p>
+                  <div
+                    style={{
+                      marginTop: "16px",
+                      borderTop: "1px solid rgba(124,92,191,0.18)",
+                    }}
+                  />
                 </div>
-              </div>
 
-              <div className="p-7">
+                {/* Bio text */}
                 <p
-                  className="text-sm mb-4"
                   style={{
-                    color: "rgba(232, 237, 248, 0.7)",
-                    lineHeight: 1.75,
+                    color: "rgba(232,237,248,0.75)",
+                    fontSize: "15px",
+                    lineHeight: 1.8,
+                    marginBottom: "12px",
                   }}
                 >
-                  Shane brings experience across logistics, cybersecurity,
+                  Shane brings deep experience across logistics, cybersecurity,
                   health-technology, and consumer services. He focuses on
                   simplifying complex payment environments and helping
                   businesses understand their options in clear, practical terms.
                 </p>
                 <p
-                  className="text-sm mb-6"
                   style={{
-                    color: "rgba(232, 237, 248, 0.7)",
-                    lineHeight: 1.75,
+                    color: "rgba(232,237,248,0.75)",
+                    fontSize: "15px",
+                    lineHeight: 1.8,
+                    marginBottom: "24px",
                   }}
                 >
                   His background includes helping businesses achieve significant
                   operational growth and supporting companies across multiple
                   industries to reach new levels of efficiency and stability.
-                  Shane's expertise in technology and operations ensures that
-                  Cybin Enterprises clients receive practical, implementable
-                  solutions.
+                  Shane's expertise in technology and operations ensures clients
+                  receive practical, implementable solutions.
                 </p>
 
+                {/* Expertise panel */}
                 <div
-                  className="p-4 rounded-xl"
+                  className="rounded-xl"
                   style={{
-                    backgroundColor: "rgba(0, 212, 184, 0.05)",
-                    border: "1px solid rgba(0, 212, 184, 0.1)",
+                    backgroundColor: "rgba(124,92,191,0.05)",
+                    border: "1px solid rgba(124,92,191,0.12)",
+                    padding: "20px",
                   }}
                 >
-                  <div className="flex items-center gap-2 mb-3">
-                    <Award size={16} style={{ color: "#00d4b8" }} />
+                  <div className="flex items-center gap-2 mb-4">
+                    <Award
+                      size={15}
+                      style={{ color: "#a87ef5", flexShrink: 0 }}
+                    />
                     <span
-                      className="text-xs font-bold uppercase tracking-wider"
-                      style={{ color: "#00d4b8" }}
+                      style={{
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        color: "#a87ef5",
+                        fontFamily: "Cabinet Grotesk, system-ui, sans-serif",
+                      }}
                     >
                       Areas of Expertise
                     </span>
                   </div>
-                  <div className="space-y-2">
-                    {[
-                      "Logistics & Operations Management",
-                      "Cybersecurity & Data Protection",
-                      "Health-Technology Systems",
-                      "Consumer Services & Growth",
-                      "Payment Infrastructure Simplification",
-                      "Cross-Industry Business Development",
-                    ].map((a) => (
-                      <div key={a} className="flex items-start gap-2">
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "10px",
+                    }}
+                  >
+                    {shaneExpertise.map((a) => (
+                      <div key={a} className="flex items-start gap-3">
                         <span
                           style={{
-                            color: "#00d4b8",
-                            fontSize: "10px",
-                            marginTop: "5px",
+                            color: "#a87ef5",
+                            fontSize: "8px",
+                            marginTop: "6px",
                             flexShrink: 0,
                           }}
                         >
                           ◆
                         </span>
                         <p
-                          className="text-xs"
                           style={{
-                            color: "rgba(232, 237, 248, 0.65)",
+                            color: "rgba(232,237,248,0.68)",
+                            fontSize: "13px",
                             lineHeight: 1.5,
                           }}
                         >
@@ -509,6 +694,7 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
+          {/* /founders grid */}
         </div>
       </section>
 

@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/JsonLd";
+import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import {
   ArrowRight,
@@ -74,6 +76,13 @@ const steps = [
 ];
 
 export default function PaymentSolutionsPage() {
+  useSeo({
+    title: "Payment Solutions for High-Risk Businesses | Cybin Enterprises",
+    description:
+      "Online, retail, mobile, recurring billing, and international payment processing for high-risk and complex businesses.",
+    canonical: "/payment-solutions",
+  });
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -96,6 +105,26 @@ export default function PaymentSolutionsPage() {
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://cybinenterprises.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Payment Solutions",
+              item: "https://cybinenterprises.com/payment-solutions",
+            },
+          ],
+        }}
+      />
       {/* Hero */}
       <section
         className="page-hero-bg"

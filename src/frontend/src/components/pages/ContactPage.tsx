@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/JsonLd";
+import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -26,6 +28,13 @@ const businessTypes = [
 ];
 
 export default function ContactPage() {
+  useSeo({
+    title: "Contact Cybin Enterprises | Start Your Approval Process",
+    description:
+      "Get in touch with Cybin Enterprises. Ready to start your payment approval process or have questions about merchant services? Contact us today.",
+    canonical: "/contact",
+  });
+
   const { actor } = useActor();
 
   const [form, setForm] = useState({
@@ -76,6 +85,26 @@ export default function ContactPage() {
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://cybinenterprises.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Contact",
+              item: "https://cybinenterprises.com/contact",
+            },
+          ],
+        }}
+      />
       {/* Hero */}
       <section
         className="page-hero-bg"
@@ -467,7 +496,7 @@ export default function ContactPage() {
                         Email
                       </p>
                       <a
-                        href="mailto:info@cybinenterprises.com"
+                        href="mailto:Customercare@CYBINENTERPRISES.COM"
                         className="text-sm transition-colors"
                         style={{ color: "#e8edf8" }}
                         onMouseEnter={(e) => {
@@ -477,7 +506,7 @@ export default function ContactPage() {
                           e.currentTarget.style.color = "#e8edf8";
                         }}
                       >
-                        info@cybinenterprises.com
+                        Customercare@CybinEnterprises.com
                       </a>
                     </div>
                   </div>
@@ -494,11 +523,51 @@ export default function ContactPage() {
                         className="text-xs font-semibold uppercase tracking-wider mb-1"
                         style={{ color: "rgba(232,237,248,0.45)" }}
                       >
-                        Phone
+                        Mobile
                       </p>
-                      <p className="text-sm" style={{ color: "#e8edf8" }}>
-                        Contact us for number
+                      <a
+                        href="tel:7242447111"
+                        className="text-sm transition-colors"
+                        style={{ color: "#e8edf8" }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = "#00d4b8";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = "#e8edf8";
+                        }}
+                      >
+                        724-244-7111
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-3">
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: "rgba(0, 212, 184, 0.1)" }}
+                    >
+                      <Phone size={16} style={{ color: "#00d4b8" }} />
+                    </div>
+                    <div>
+                      <p
+                        className="text-xs font-semibold uppercase tracking-wider mb-1"
+                        style={{ color: "rgba(232,237,248,0.45)" }}
+                      >
+                        Office
                       </p>
+                      <a
+                        href="tel:8883212100"
+                        className="text-sm transition-colors"
+                        style={{ color: "#e8edf8" }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.color = "#00d4b8";
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.color = "#e8edf8";
+                        }}
+                      >
+                        888-321-2100
+                      </a>
                     </div>
                   </div>
                 </div>

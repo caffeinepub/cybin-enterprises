@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@/lib/router";
-import { ChevronRight, Menu, X } from "lucide-react";
+import { ChevronRight, Cookie, Mail, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const navLinks = [
@@ -27,6 +27,12 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [cookieConsent, setCookieConsent] = useState<string | null>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("cybin-cookie-consent");
+    }
+    return null;
+  });
   const location = useLocation();
 
   useEffect(() => {
@@ -40,6 +46,11 @@ export default function Layout({ children }: LayoutProps) {
     setMobileOpen(false);
   }, [location.pathname]);
 
+  const handleCookieChoice = (choice: "accepted" | "declined") => {
+    localStorage.setItem("cybin-cookie-consent", choice);
+    setCookieConsent(choice);
+  };
+
   const currentYear = new Date().getFullYear();
   const hostname =
     typeof window !== "undefined" ? window.location.hostname : "";
@@ -49,6 +60,15 @@ export default function Layout({ children }: LayoutProps) {
       className="min-h-screen flex flex-col"
       style={{ backgroundColor: "#0a0f1e" }}
     >
+      {/* Skip to main content — accessible keyboard shortcut */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] cybin-btn-primary text-sm"
+        style={{ padding: "0.5rem 1rem" }}
+      >
+        Skip to main content
+      </a>
+
       {/* Header */}
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
@@ -146,7 +166,11 @@ export default function Layout({ children }: LayoutProps) {
                   backgroundColor: "rgba(255,255,255,0.05)",
                 }}
                 onClick={() => setMobileOpen(!mobileOpen)}
-                aria-label="Toggle menu"
+                aria-label={
+                  mobileOpen ? "Close navigation menu" : "Open navigation menu"
+                }
+                aria-expanded={mobileOpen}
+                aria-controls="mobile-navigation"
                 data-ocid="nav.mobile_menu.toggle"
               >
                 {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -158,6 +182,7 @@ export default function Layout({ children }: LayoutProps) {
         {/* Mobile Menu */}
         {mobileOpen && (
           <div
+            id="mobile-navigation"
             className="lg:hidden"
             style={{
               backgroundColor: "rgba(10, 15, 30, 0.98)",
@@ -196,7 +221,9 @@ export default function Layout({ children }: LayoutProps) {
       </header>
 
       {/* Main content */}
-      <main className="flex-1 pt-[72px]">{children}</main>
+      <main id="main-content" className="flex-1 pt-[72px]">
+        {children}
+      </main>
 
       {/* Footer */}
       <footer
@@ -265,10 +292,64 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
 
-            {/* Legal */}
+            {/* Contact & Legal */}
             <div>
               <h4
                 className="text-sm font-semibold mb-4"
+                style={{
+                  color: "#00d4b8",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Contact
+              </h4>
+              <div className="flex flex-col gap-3 mb-6">
+                <a
+                  href="mailto:Customercare@CYBINENTERPRISES.COM"
+                  className="flex items-center gap-2 text-sm transition-colors"
+                  style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#00d4b8";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                  }}
+                >
+                  <Mail size={13} style={{ flexShrink: 0 }} />
+                  Customercare@CybinEnterprises.com
+                </a>
+                <a
+                  href="tel:7242447111"
+                  className="flex items-center gap-2 text-sm transition-colors"
+                  style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#00d4b8";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                  }}
+                >
+                  <Phone size={13} style={{ flexShrink: 0 }} />
+                  M: 724-244-7111
+                </a>
+                <a
+                  href="tel:8883212100"
+                  className="flex items-center gap-2 text-sm transition-colors"
+                  style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = "#00d4b8";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                  }}
+                >
+                  <Phone size={13} style={{ flexShrink: 0 }} />
+                  O: 888-321-2100
+                </a>
+              </div>
+              <h4
+                className="text-sm font-semibold mb-3"
                 style={{
                   color: "#00d4b8",
                   letterSpacing: "0.1em",
@@ -324,6 +405,78 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
       </footer>
+
+      {/* Cookie Consent Banner */}
+      {cookieConsent === null && (
+        <section
+          aria-label="Cookie consent"
+          data-ocid="cookie.toast"
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            zIndex: 60,
+            padding: "16px 24px",
+            background: "rgba(10, 15, 30, 0.95)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            borderTop: "1px solid rgba(0, 212, 184, 0.15)",
+            boxShadow: "0 -8px 32px rgba(0, 0, 0, 0.4)",
+          }}
+        >
+          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-3 flex-1">
+              <Cookie
+                size={18}
+                style={{ color: "#00d4b8", flexShrink: 0, marginTop: "1px" }}
+              />
+              <p
+                className="text-sm"
+                style={{ color: "rgba(232, 237, 248, 0.75)", lineHeight: 1.5 }}
+              >
+                We use cookies to improve your experience and analyze site
+                usage.{" "}
+                <Link to="/cookie-policy" style={{ color: "#00d4b8" }}>
+                  Learn more
+                </Link>
+              </p>
+            </div>
+            <div className="flex items-center gap-3 flex-shrink-0">
+              <button
+                type="button"
+                data-ocid="cookie.cancel_button"
+                onClick={() => handleCookieChoice("declined")}
+                className="text-sm font-medium px-4 py-2 rounded-md transition-all"
+                style={{
+                  color: "rgba(232, 237, 248, 0.55)",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                  backgroundColor: "transparent",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#e8edf8";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                }}
+              >
+                Decline
+              </button>
+              <button
+                type="button"
+                data-ocid="cookie.confirm_button"
+                onClick={() => handleCookieChoice("accepted")}
+                className="cybin-btn-primary text-sm"
+                style={{ padding: "0.5rem 1.25rem" }}
+              >
+                Accept
+              </button>
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

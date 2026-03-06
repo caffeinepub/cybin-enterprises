@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/JsonLd";
+import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import {
   AlertTriangle,
@@ -70,6 +72,13 @@ const industries = [
 ];
 
 export default function IndustriesPage() {
+  useSeo({
+    title: "High-Risk Industries We Support | Cybin Enterprises",
+    description:
+      "Payment solutions for CBD, research peptides, telemedicine, firearms, gaming, forex, supplements, and all legal industries including MATCH list merchants.",
+    canonical: "/industries",
+  });
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -92,6 +101,74 @@ export default function IndustriesPage() {
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://cybinenterprises.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Industries",
+              item: "https://cybinenterprises.com/industries",
+            },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "What makes a business high-risk for payment processing?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Businesses are classified as high-risk based on factors like industry type, chargeback history, processing volume, regulatory environment, and business model. Industries such as CBD, nutraceuticals, telemedicine, firearms, and subscription services are commonly flagged.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Can a business on the MATCH list still get payment processing?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Yes. Being on the MATCH (Member Alert to Control High-Risk) list does not permanently disqualify a business from payment processing. Cybin Enterprises works with MATCH list merchants case by case to identify available options and develop a path toward processing stability.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Does Cybin Enterprises support CBD and cannabis-related businesses?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Yes. Cybin Enterprises supports hemp-derived CBD products, botanical businesses, and other cannabis-adjacent industries that operate within legal frameworks. We have experience navigating the regulatory complexity of this space.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "What industries do you support for payment processing?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "We support all legal industries including research peptides, CBD & botanicals, nutraceuticals, telemedicine, digital health, high-volume e-commerce, subscription businesses, specialty retail, firearms, adult entertainment, travel, gaming, forex, crypto, and many more.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "What if my industry isn't listed on your website?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Cybin Enterprises supports all legal industries. If your business operates legally, we can review your situation regardless of whether your specific sector is listed. Contact us to discuss your business and explore available payment options.",
+              },
+            },
+          ],
+        }}
+      />
       {/* Hero */}
       <section
         className="page-hero-bg"

@@ -1,4 +1,6 @@
+import { JsonLd } from "@/components/JsonLd";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import { ArrowRight, ChevronRight, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -74,6 +76,13 @@ const articles = [
 ];
 
 export default function InsightsPage() {
+  useSeo({
+    title: "Payment Industry Insights | Cybin Enterprises Blog",
+    description:
+      "Expert articles on high-risk payment infrastructure, chargeback management, compliance, international payments, and business growth for complex industries.",
+    canonical: "/insights",
+  });
+
   const [activeCategory, setActiveCategory] = useState<Category>("All");
 
   const filtered =
@@ -114,6 +123,26 @@ export default function InsightsPage() {
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://cybinenterprises.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Insights",
+              item: "https://cybinenterprises.com/insights",
+            },
+          ],
+        }}
+      />
       {/* Hero */}
       <section
         className="page-hero-bg"

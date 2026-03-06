@@ -43,6 +43,8 @@ export function BrowserRouter({ children }: { children: ReactNode }) {
     } else {
       window.history.pushState(null, "", to);
     }
+    // Scroll to top instantly on every navigation so users always start at top
+    window.scrollTo({ top: 0, behavior: "instant" });
     setPathname(to.split("?")[0]);
     window.dispatchEvent(new PopStateEvent("popstate"));
   }, []);

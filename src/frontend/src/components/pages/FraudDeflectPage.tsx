@@ -1,3 +1,5 @@
+import { JsonLd } from "@/components/JsonLd";
+import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import {
   AlertTriangle,
@@ -40,6 +42,13 @@ const benefits = [
 ];
 
 export default function FraudDeflectPage() {
+  useSeo({
+    title: "Fraud Deflect: Chargeback Prevention | Cybin Enterprises",
+    description:
+      "Prevent chargebacks before they happen with Fraud Deflect. Real-time dispute alerts via Visa (Verifi) and Mastercard (Ethoca) networks.",
+    canonical: "/fraud-deflect",
+  });
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -62,6 +71,66 @@ export default function FraudDeflectPage() {
 
   return (
     <div>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Home",
+              item: "https://cybinenterprises.com/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "Fraud Deflect",
+              item: "https://cybinenterprises.com/fraud-deflect",
+            },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: [
+            {
+              "@type": "Question",
+              name: "What is a chargeback and why is it harmful to merchants?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "A chargeback occurs when a cardholder disputes a transaction through their bank and the funds are forcibly returned. Chargebacks are costly for merchants — they incur fees, lose the product or service, and risk having their merchant account terminated if their chargeback ratio exceeds processor thresholds.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "How does Fraud Deflect prevent chargebacks?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Fraud Deflect provides early dispute alerts through the Ethoca (Mastercard) and Verifi (Visa) networks. When a cardholder contacts their bank to dispute a transaction, the merchant is notified in near real-time — before the chargeback is officially filed — allowing the merchant to resolve the issue directly with the customer.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "What is the difference between Ethoca and Verifi?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Ethoca is Mastercard's global collaboration network, providing dispute alerts across a broad range of issuers. Verifi is connected directly to the Visa network and provides immediate dispute alerts specifically for Visa transactions. Together, they cover the two largest card networks globally.",
+              },
+            },
+            {
+              "@type": "Question",
+              name: "Is Fraud Deflect available as a standalone service?",
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: "Fraud Deflect is available as an optional add-on with your payment processing setup through Cybin Enterprises. Contact us to learn how to include Fraud Deflect in your merchant account configuration.",
+              },
+            },
+          ],
+        }}
+      />
       {/* Hero */}
       <section
         style={{
