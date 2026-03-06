@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Sora";
+  src: url("/assets/fonts/Sora.woff2") format("woff2");
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk.woff2") format("woff2");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 0.75rem;
+
+    /* Cybin Dark Theme — deep navy + midnight purple + electric teal */
+    --background: 0.12 0.018 265;
+    --foreground: 0.95 0.01 265;
+
+    --card: 0.16 0.025 270;
+    --card-foreground: 0.95 0.01 265;
+
+    --popover: 0.16 0.025 270;
+    --popover-foreground: 0.95 0.01 265;
+
+    /* Teal primary */
+    --primary: 0.76 0.15 185;
+    --primary-foreground: 0.1 0.02 265;
+
+    --secondary: 0.22 0.035 270;
+    --secondary-foreground: 0.9 0.01 265;
+
+    --muted: 0.2 0.025 270;
+    --muted-foreground: 0.62 0.03 270;
+
+    --accent: 0.76 0.15 185;
+    --accent-foreground: 0.1 0.02 265;
+
+    --destructive: 0.62 0.22 27;
+    --destructive-foreground: 0.985 0 0;
+
+    --border: 0.28 0.04 270;
+    --input: 0.22 0.03 270;
+    --ring: 0.76 0.15 185;
+
+    --chart-1: 0.76 0.15 185;
+    --chart-2: 0.7 0.18 300;
+    --chart-3: 0.65 0.2 30;
+    --chart-4: 0.55 0.12 200;
+    --chart-5: 0.8 0.1 100;
+
+    --sidebar: 0.14 0.02 265;
+    --sidebar-foreground: 0.95 0.01 265;
+    --sidebar-primary: 0.76 0.15 185;
+    --sidebar-primary-foreground: 0.1 0.02 265;
+    --sidebar-accent: 0.22 0.035 270;
+    --sidebar-accent-foreground: 0.9 0.01 265;
+    --sidebar-border: 0.28 0.04 270;
+    --sidebar-ring: 0.76 0.15 185;
+
+    /* Cybin brand tokens */
+    --cybin-navy: #0a0f1e;
+    --cybin-purple: #1a0a2e;
+    --cybin-teal: #00d4b8;
+    --cybin-teal-glow: rgba(0, 212, 184, 0.3);
+    --cybin-coral-start: #ff6b6b;
+    --cybin-coral-end: #ff8e53;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Cabinet Grotesk", system-ui, sans-serif;
+    background-color: #0a0f1e;
+    color: #e8edf8;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Sora", system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .cybin-glass {
+    background: rgba(22, 30, 58, 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 212, 184, 0.12);
+  }
+
+  .cybin-glass-card {
+    background: rgba(22, 30, 58, 0.65);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(0, 212, 184, 0.1);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .cybin-glass-card:hover {
+    border-color: rgba(0, 212, 184, 0.3);
+    box-shadow: 0 0 32px rgba(0, 212, 184, 0.08), 0 8px 32px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+  }
+
+  .cybin-btn-primary {
+    background: linear-gradient(135deg, #00d4b8 0%, #00b89e 100%);
+    color: #0a0f1e;
+    font-weight: 700;
+    font-family: "Cabinet Grotesk", system-ui, sans-serif;
+    letter-spacing: 0.02em;
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    transition: all 0.25s ease;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+  }
+
+  .cybin-btn-primary:hover {
+    background: linear-gradient(135deg, #00efd1 0%, #00d4b8 100%);
+    box-shadow: 0 0 24px rgba(0, 212, 184, 0.5), 0 4px 16px rgba(0, 0, 0, 0.3);
+    transform: translateY(-1px) scale(1.02);
+  }
+
+  .cybin-btn-secondary {
+    background: rgba(0, 212, 184, 0.08);
+    color: #00d4b8;
+    font-weight: 600;
+    font-family: "Cabinet Grotesk", system-ui, sans-serif;
+    border: 1px solid rgba(0, 212, 184, 0.3);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    transition: all 0.25s ease;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cybin-btn-secondary:hover {
+    background: rgba(0, 212, 184, 0.15);
+    border-color: rgba(0, 212, 184, 0.6);
+    box-shadow: 0 0 16px rgba(0, 212, 184, 0.2);
+    transform: translateY(-1px);
+  }
+
+  .cybin-gradient-text {
+    background: linear-gradient(135deg, #00d4b8, #7c5cbf, #00d4b8);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 4s linear infinite;
+  }
+
+  .cybin-section-divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 212, 184, 0.3), transparent);
+  }
+
+  .animate-fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate-fade-up.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .animate-fade-in.in-view {
+    opacity: 1;
+  }
+
+  .network-bg {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .network-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 50%, rgba(124, 92, 191, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 212, 184, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 100% 100% at 50% 100%, rgba(10, 15, 30, 0.8) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-hero-bg {
+    background:
+      radial-gradient(ellipse 100% 80% at 0% 0%, rgba(26, 10, 46, 0.8) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 60% at 100% 100%, rgba(0, 212, 184, 0.06) 0%, transparent 50%),
+      #0a0f1e;
+  }
+}
+
+@layer utilities {
+  .text-teal { color: #00d4b8; }
+  .bg-teal { background-color: #00d4b8; }
+  .border-teal { border-color: #00d4b8; }
+  .text-navy { color: #0a0f1e; }
+  .bg-navy { background-color: #0a0f1e; }
+  .bg-purple-dark { background-color: #1a0a2e; }
+
+  .shadow-teal {
+    box-shadow: 0 0 20px rgba(0, 212, 184, 0.25);
+  }
+
+  .glow-teal {
+    text-shadow: 0 0 24px rgba(0, 212, 184, 0.5);
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 32s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-teal {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 184, 0.4); }
+  50% { box-shadow: 0 0 0 12px rgba(0, 212, 184, 0); }
+}
+
+@keyframes network-draw {
+  from { stroke-dashoffset: 1000; opacity: 0.3; }
+  to { stroke-dashoffset: 0; opacity: 0.6; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-float { animation: float 4s ease-in-out infinite; }
+.animate-pulse-teal { animation: pulse-teal 2.5s ease-in-out infinite; }
+
+/* Scrollbar styling */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #0a0f1e; }
+::-webkit-scrollbar-thumb { background: rgba(0, 212, 184, 0.3); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0, 212, 184, 0.5); }
