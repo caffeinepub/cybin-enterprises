@@ -305,9 +305,9 @@ export default function AboutPage() {
             >
               {/* Portrait hero zone — real photo with CSS edge-blend */}
               <div
+                className="h-[460px] lg:h-[540px]"
                 style={{
                   position: "relative",
-                  height: "460px",
                   overflow: "hidden",
                   borderRadius: "20px 20px 0 0",
                 }}
@@ -323,7 +323,7 @@ export default function AboutPage() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center 10%",
+                    objectPosition: "center 8%",
                     display: "block",
                   }}
                 />
@@ -538,9 +538,9 @@ export default function AboutPage() {
             >
               {/* Portrait hero zone — real photo with CSS edge-blend */}
               <div
+                className="h-[460px] lg:h-[540px]"
                 style={{
                   position: "relative",
-                  height: "460px",
                   overflow: "hidden",
                   borderRadius: "20px 20px 0 0",
                 }}
@@ -556,7 +556,7 @@ export default function AboutPage() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center 12%",
+                    objectPosition: "center 10%",
                     display: "block",
                   }}
                 />
