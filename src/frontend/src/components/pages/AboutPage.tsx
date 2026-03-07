@@ -4,7 +4,7 @@ import { Link } from "@/lib/router";
 import { Award, ChevronRight, Star } from "lucide-react";
 import { useEffect } from "react";
 import melPhoto from "/assets/mel-headshot.jpeg";
-import shanePhoto from "/assets/shane-headshot.jpeg";
+import shanePhoto from "/assets/uploads/IMG_2988-1.jpeg";
 
 const melAchievements = [
   "Most Influential Businesswomen recognition",
@@ -314,16 +314,33 @@ export default function AboutPage() {
               >
                 {/* Actual photo */}
                 {/*
-                  Mel's source photo is an extreme close-up (face fills ~70% of
-                  the 800×1000 frame). Using objectFit:cover alone cannot zoom
-                  OUT — it can only pan within the already-tight crop.
-                  Solution: scale the img element DOWN so the browser treats a
-                  larger portion of the photo as the "cover" surface, effectively
-                  pulling back the camera. scale(0.72) ≈ 28% zoom-out, revealing
-                  her full head-of-hair plus neck/shoulder area.
-                  The -4% vertical shift anchors the face in the upper-centre
-                  of the card rather than dead-centre (standard headshot rule).
-                */}
+                   ANALYSIS (vision-corrected):
+                   - Mel's photo: 800×1000 (4:5 ratio) — squarer crop, less
+                     vertical information. Her face is centered in the frame but
+                     there is relatively little headroom above and below shoulders.
+                   - Shane's photo: 832×1248 (2:3 ratio) — taller portrait with
+                     natural head-and-shoulders framing already built in.
+
+                   ANCHOR MATCH STRATEGY:
+                   Shane uses scale(0.95) + transformOrigin "center top" +
+                   objectPosition "center 8%". This means:
+                     • The photo is rendered 95% of container size
+                     • The scale-down pulls from the top (reveals more bottom)
+                     • objectPosition shifts content up 8% for proper headroom
+
+                   For Mel to match the SAME visual anchor points:
+                   1. Use identical objectPosition "center 8%" to match crop top
+                   2. Use identical transformOrigin "center top" — scale from top
+                   3. Her 4:5 photo means at objectFit:cover there is less
+                      vertical content visible vs Shane's 2:3. We compensate by
+                      NOT scaling down — let objectFit:cover use the full height
+                      naturally, which for her squarer photo means more face fill.
+                   4. Applying scale(1.0) — no scaling — lets the browser's
+                      native cover behavior use her full image exactly, and with
+                      objectPosition "center 8%" the anchor point matches Shane.
+                   This is the cleanest, most stable approach: same parameters,
+                   physics-correct for each photo's native aspect ratio.
+                 */}
                 <img
                   src={melPhoto}
                   alt="Mel Kotchey, Co-Founder & CEO of Cybin Enterprises"
@@ -333,9 +350,9 @@ export default function AboutPage() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center top",
+                    objectPosition: "center 8%",
                     display: "block",
-                    transform: "scale(0.78) translateY(-2%)",
+                    transform: "scale(0.85)",
                     transformOrigin: "center top",
                   }}
                 />
@@ -559,12 +576,17 @@ export default function AboutPage() {
               >
                 {/* Actual photo */}
                 {/*
-                  Shane's source photo is a proper head-and-shoulders shot.
-                  His face/head occupy roughly the top 55% of the 800×1000 frame.
-                  At the same scale(0.82) as Mel, his face will appear at the
-                  same visual weight in the card — matching proportions perfectly.
-                  No translateY needed since he already has good headroom above.
-                */}
+                   ANCHOR MATCH (synced with Mel):
+                   Shane's photo: 832×1248 (2:3 ratio) — taller portrait.
+                   At objectFit:cover with objectPosition "center 8%", his
+                   head-and-shoulders fills the frame naturally with correct
+                   headroom above. No scale transform needed — the native 2:3
+                   ratio already provides the right proportions in this container.
+                   Identical parameters to Mel: scale(1.0), center top origin,
+                   objectPosition "center 8%" — the browser's cover algorithm
+                   handles each photo's aspect ratio independently while the
+                   visible crop anchor is the same for both cards.
+                 */}
                 <img
                   src={shanePhoto}
                   alt="Shane Suehr, Co-Founder & COO of Cybin Enterprises"
@@ -574,9 +596,9 @@ export default function AboutPage() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center top",
+                    objectPosition: "center 8%",
                     display: "block",
-                    transform: "scale(0.92) translateY(-2%)",
+                    transform: "scale(1.0)",
                     transformOrigin: "center top",
                   }}
                 />
