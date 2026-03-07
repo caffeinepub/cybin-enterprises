@@ -22,7 +22,7 @@ const pillars = [
     icon: Shield,
     title: "AML / KYC Protocols",
     description:
-      "Cybin enforces Anti-Money Laundering and Know Your Customer procedures aligned with FinCEN guidance. Every merchant application undergoes identity verification and risk assessment before account activation.",
+      "Our partner processors enforce Anti-Money Laundering and Know Your Customer procedures aligned with FinCEN guidance. Every merchant application undergoes identity verification and risk assessment through our partners' established compliance processes.",
     details: [
       "Identity verification for all principals and beneficial owners",
       "Ongoing transaction monitoring for suspicious activity",
@@ -36,7 +36,7 @@ const pillars = [
     icon: Lock,
     title: "PCI-DSS Compliance",
     description:
-      "Payment Card Industry Data Security Standard compliance is fundamental to every payment solution we facilitate. Cardholder data is protected at every point in the transaction lifecycle.",
+      "Payment Card Industry Data Security Standard compliance is maintained by the certified processors we work with. Cardholder data is protected at every point in the transaction lifecycle through our partners' PCI-DSS certified infrastructure.",
     details: [
       "Network security and access control standards",
       "Encryption of cardholder data in transit and at rest",
@@ -50,7 +50,7 @@ const pillars = [
     icon: UserCheck,
     title: "CCPA Privacy Rights",
     description:
-      "Cybin supports California Consumer Privacy Act compliance for merchants serving California residents. We provide mechanisms to honor data rights requests from consumers.",
+      "The partner solutions we facilitate support California Consumer Privacy Act requirements for merchants serving California residents. Mechanisms to honor data rights requests are managed through our partners' platforms.",
     details: [
       "Right to know what personal information is collected",
       "Right to delete personal information",
@@ -64,7 +64,7 @@ const pillars = [
     icon: Globe2,
     title: "GDPR Readiness",
     description:
-      "For merchants with European Union customers, Cybin supports General Data Protection Regulation readiness frameworks. Data processing agreements and data subject rights management are part of our compliance infrastructure.",
+      "For merchants with European Union customers, the partner solutions we connect merchants with support General Data Protection Regulation readiness frameworks. Data processing agreements and data subject rights management are handled through our partners' compliance infrastructure.",
     details: [
       "Lawful basis for data processing documentation",
       "Data subject access and erasure request support",
@@ -78,7 +78,7 @@ const pillars = [
     icon: Server,
     title: "SOC 2 Practices",
     description:
-      "Cybin's operational processes align with SOC 2 Trust Services Criteria covering security, availability, and processing integrity. Our systems and controls are designed to provide reliable, secure payment infrastructure.",
+      "The processing partners we work with align with SOC 2 Trust Services Criteria covering security, availability, and processing integrity. Their systems and controls are designed to provide reliable, secure payment infrastructure.",
     details: [
       "Logical and physical access controls",
       "System availability and performance monitoring",
@@ -92,7 +92,7 @@ const pillars = [
     icon: DollarSign,
     title: "FinCEN Monitoring",
     description:
-      "Financial Crimes Enforcement Network compliance is central to Cybin's onboarding and ongoing monitoring processes. We maintain registered MSB status where applicable and perform sanctions screening on all new accounts.",
+      "Financial Crimes Enforcement Network compliance is central to the processing partners we work with. Our partners maintain registered MSB status where applicable and perform sanctions screening as part of the onboarding process.",
     details: [
       "OFAC sanctions and PEP screening",
       "Beneficial ownership collection per CDD Rule",
@@ -126,11 +126,11 @@ const faqs = [
   },
   {
     q: "What is the 48-hour priority boarding process?",
-    a: "Merchants who provide their FEIN during the intake wizard trigger an automated pre-check against the 2026 FinCEN database. When this preliminary check clears, Cybin's underwriting team prioritizes the application for a 48-hour review window, significantly accelerating the onboarding timeline.",
+    a: "Merchants who provide their FEIN during the intake wizard trigger an automated pre-check against the 2026 FinCEN database. When this preliminary check clears, our partner underwriting team prioritizes the application for a 48-hour review window, significantly accelerating the onboarding timeline.",
   },
   {
     q: "How does Cybin handle suspicious transaction activity?",
-    a: "Cybin and its processing partners maintain real-time transaction monitoring systems. Patterns consistent with fraud, structuring, or money laundering trigger automated alerts and human review. Where required by law, Suspicious Activity Reports (SARs) are filed with FinCEN.",
+    a: "Our processing partners maintain real-time transaction monitoring systems. Patterns consistent with fraud, structuring, or money laundering trigger automated alerts and human review. Where required by law, Suspicious Activity Reports (SARs) are filed with FinCEN.",
   },
   {
     q: "What PCI-DSS level must my business comply with?",
@@ -273,10 +273,10 @@ export default function CompliancePage() {
               className="text-lg"
               style={{ color: "rgba(232, 237, 248, 0.65)", lineHeight: 1.7 }}
             >
-              Cybin Enterprises builds payment solutions on a foundation of
-              rigorous compliance. Our infrastructure meets AML/KYC, PCI-DSS,
-              CCPA, GDPR, SOC 2, and FinCEN standards — protecting merchants and
-              their customers at every layer.
+              Cybin Enterprises connects merchants with payment solutions built
+              on rigorous compliance. Our partner processors maintain AML/KYC,
+              PCI-DSS, CCPA, GDPR, and FinCEN standards — protecting merchants
+              and their customers at every layer.
             </p>
           </div>
         </div>
@@ -293,14 +293,14 @@ export default function CompliancePage() {
                 color: "#e8edf8",
               }}
             >
-              Our Compliance Framework
+              Compliance Standards We Work Within
             </h2>
             <p
               className="text-base max-w-xl mx-auto"
               style={{ color: "rgba(232,237,248,0.55)", lineHeight: 1.7 }}
             >
-              Six pillars of compliance infrastructure that protect our
-              merchants, their customers, and the financial ecosystem.
+              Six compliance standards maintained by our processing partners
+              that protect the merchants we serve and the financial ecosystem.
             </p>
           </div>
 
@@ -520,7 +520,7 @@ export default function CompliancePage() {
             className="text-sm mb-7"
             style={{ color: "rgba(232,237,248,0.55)" }}
           >
-            Our team can walk you through how our compliance framework applies
+            Our team can walk you through how these compliance standards apply
             to your specific industry and situation.
           </p>
           <Link

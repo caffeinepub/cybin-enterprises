@@ -23,7 +23,7 @@ const partnershipTypes = [
     icon: Code2,
     title: "Technology Integration",
     description:
-      "Build native integrations between your platform and Cybin's payment infrastructure. Ideal for SaaS platforms, e-commerce solutions, and fintech applications.",
+      "Build native integrations between your platform and the payment solutions Cybin facilitates through its partner network. Ideal for SaaS platforms, e-commerce solutions, and fintech applications.",
     benefits: [
       "API access & developer sandbox",
       "Co-marketing opportunities",
@@ -51,10 +51,10 @@ const partnershipTypes = [
     icon: Star,
     title: "White-Label Solutions",
     description:
-      "License Cybin's payment infrastructure under your own brand. Build a payment services offering without the operational overhead of becoming a direct processor.",
+      "Access white-labeled payment solutions through Cybin's partner network under your own brand. Build a payment services offering without the operational overhead of becoming a direct processor.",
     benefits: [
       "Full brand customization",
-      "Dedicated infrastructure",
+      "Dedicated partner infrastructure",
       "Compliance support included",
       "Scalable revenue model",
     ],
@@ -65,7 +65,7 @@ const partnershipTypes = [
     icon: Handshake,
     title: "Strategic Alliance",
     description:
-      "Join forces with Cybin to expand into new markets, serve shared clients, or develop new payment products for emerging regulated industries.",
+      "Join forces with Cybin to expand into new markets, serve shared clients, or develop new pathways to payment solutions for emerging regulated industries.",
     benefits: [
       "Joint go-to-market strategy",
       "Shared industry expertise",
@@ -238,9 +238,9 @@ export default function PartnersPage() {
               className="text-lg"
               style={{ color: "rgba(232, 237, 248, 0.65)", lineHeight: 1.7 }}
             >
-              Join our growing ecosystem of technology partners, referral
-              agents, and strategic allies building the future of high-risk
-              payment infrastructure together.
+              Join our growing ecosystem of referral partners, strategic allies,
+              and technology collaborators expanding access to high-risk payment
+              solutions together.
             </p>
           </div>
         </div>
