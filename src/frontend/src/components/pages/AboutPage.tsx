@@ -313,8 +313,18 @@ export default function AboutPage() {
                 }}
               >
                 {/* Actual photo */}
+                {/*
+                  Mel's source photo is an extreme close-up (face fills ~70% of
+                  the 800×1000 frame). Using objectFit:cover alone cannot zoom
+                  OUT — it can only pan within the already-tight crop.
+                  Solution: scale the img element DOWN so the browser treats a
+                  larger portion of the photo as the "cover" surface, effectively
+                  pulling back the camera. scale(0.72) ≈ 28% zoom-out, revealing
+                  her full head-of-hair plus neck/shoulder area.
+                  The -4% vertical shift anchors the face in the upper-centre
+                  of the card rather than dead-centre (standard headshot rule).
+                */}
                 <img
-                  id="grubme"
                   src={melPhoto}
                   alt="Mel Kotchey, Co-Founder & CEO of Cybin Enterprises"
                   style={{
@@ -323,8 +333,10 @@ export default function AboutPage() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center 8%",
+                    objectPosition: "center top",
                     display: "block",
+                    transform: "scale(0.78) translateY(-2%)",
+                    transformOrigin: "center top",
                   }}
                 />
                 {/* Teal rim-light — left + right edges */}
@@ -546,8 +558,14 @@ export default function AboutPage() {
                 }}
               >
                 {/* Actual photo */}
+                {/*
+                  Shane's source photo is a proper head-and-shoulders shot.
+                  His face/head occupy roughly the top 55% of the 800×1000 frame.
+                  At the same scale(0.82) as Mel, his face will appear at the
+                  same visual weight in the card — matching proportions perfectly.
+                  No translateY needed since he already has good headroom above.
+                */}
                 <img
-                  id="1p1oo1h"
                   src={shanePhoto}
                   alt="Shane Suehr, Co-Founder & COO of Cybin Enterprises"
                   style={{
@@ -556,8 +574,10 @@ export default function AboutPage() {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
-                    objectPosition: "center 10%",
+                    objectPosition: "center top",
                     display: "block",
+                    transform: "scale(0.92) translateY(-2%)",
+                    transformOrigin: "center top",
                   }}
                 />
                 {/* Purple rim-light — left + right edges */}
