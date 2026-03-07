@@ -1,5 +1,6 @@
 import { usePageTracking } from "@/hooks/usePageTracking";
-import { BrowserRouter, Route, Routes } from "@/lib/router";
+import { BrowserRouter, Route, Routes, useNavigate } from "@/lib/router";
+import { useEffect } from "react";
 import Layout from "./components/Layout";
 import AboutPage from "./components/pages/AboutPage";
 import AdminPage from "./components/pages/AdminPage";
@@ -10,7 +11,6 @@ import FraudDeflectPage from "./components/pages/FraudDeflectPage";
 import HomePage from "./components/pages/HomePage";
 import IndustriesPage from "./components/pages/IndustriesPage";
 import InsightsPage from "./components/pages/InsightsPage";
-import IntegrationsPage from "./components/pages/IntegrationsPage";
 import KnowledgePage from "./components/pages/KnowledgePage";
 import {
   CookiePolicyPage,
@@ -20,6 +20,14 @@ import {
 import PartnersPage from "./components/pages/PartnersPage";
 import PaymentSolutionsPage from "./components/pages/PaymentSolutionsPage";
 import WizardPage from "./components/pages/WizardPage";
+
+function IntegrationsRedirect() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/", { replace: true });
+  }, [navigate]);
+  return null;
+}
 
 function AppRoutes() {
   usePageTracking();
@@ -136,14 +144,7 @@ function AppRoutes() {
           </Layout>
         }
       />
-      <Route
-        path="/integrations"
-        element={
-          <Layout>
-            <IntegrationsPage />
-          </Layout>
-        }
-      />
+      <Route path="/integrations" element={<IntegrationsRedirect />} />
       <Route
         path="/compliance"
         element={

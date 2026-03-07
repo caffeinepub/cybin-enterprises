@@ -286,7 +286,6 @@ export default function Layout({ children }: LayoutProps) {
                   { label: "FAQ", href: "/faq" },
                   { label: "Knowledge Base", href: "/knowledge" },
                   { label: "Partners", href: "/partners" },
-                  { label: "Integrations", href: "/integrations" },
                   { label: "Compliance", href: "/compliance" },
                 ].map((link) => (
                   <Link

@@ -3,10 +3,10 @@ import Map "mo:core/Map";
 import Int "mo:core/Int";
 import Array "mo:core/Array";
 import Runtime "mo:core/Runtime";
-import Migration "migration";
+
 
 // Specify migration in with clause
-(with migration = Migration.run)
+
 actor {
   // Contact Form Types and Storage
   type SubmissionId = Nat;

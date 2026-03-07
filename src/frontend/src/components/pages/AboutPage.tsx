@@ -3,7 +3,7 @@ import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
 import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
-import { Award, CheckCircle2, ChevronRight, Shield, Star } from "lucide-react";
+import { Award, ChevronRight, Star } from "lucide-react";
 import { useEffect } from "react";
 import melPhoto from "/assets/mel-headshot.jpeg";
 import shanePhoto from "/assets/uploads/IMG_2988-1.jpeg";
@@ -747,116 +747,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════
-          EXPERT VALIDATION SECTION
-          ══════════════════════════════════════ */}
-      <section
-        style={{
-          backgroundColor: "#06090f",
-          padding: "80px 0",
-          overflow: "hidden",
-          position: "relative",
-        }}
-      >
-        {/* Background glow */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: "600px",
-            height: "300px",
-            background:
-              "radial-gradient(ellipse, rgba(0,212,184,0.06) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-12 animate-fade-up">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Shield size={18} style={{ color: "#00d4b8" }} />
-              <span
-                className="text-xs font-bold uppercase tracking-widest"
-                style={{ color: "#00d4b8", letterSpacing: "0.2em" }}
-              >
-                Expert Validated
-              </span>
-            </div>
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-4"
-              style={{
-                fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
-              }}
-            >
-              Platform Reviewed by Industry Experts
-            </h2>
-            <p
-              className="text-base max-w-2xl mx-auto"
-              style={{ color: "rgba(232,237,248,0.55)", lineHeight: 1.7 }}
-            >
-              17 independent specialists have reviewed Cybin's compliance,
-              security, and payment infrastructure standards
-            </p>
-          </div>
-
-          {/* Scrolling ticker */}
-          <div
-            style={{
-              overflow: "hidden",
-              WebkitMaskImage:
-                "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-              maskImage:
-                "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
-            }}
-          >
-            <div
-              className="expert-ticker-track"
-              style={{
-                display: "flex",
-                gap: "16px",
-                width: "max-content",
-                animation: "expertTicker 40s linear infinite",
-              }}
-            >
-              {[
-                ...expertBadges,
-                ...expertBadges, // duplicate for seamless loop
-              ].map((expert, i) => (
-                <div
-                  // biome-ignore lint/suspicious/noArrayIndexKey: duplicated list for infinite scroll
-                  key={i}
-                  className="flex items-center gap-3 px-4 py-3 rounded-xl flex-shrink-0"
-                  style={{
-                    backgroundColor: "rgba(0,212,184,0.05)",
-                    border: "1px solid rgba(0,212,184,0.15)",
-                    boxShadow: "0 0 16px rgba(0,212,184,0.06)",
-                  }}
-                >
-                  <Shield
-                    size={14}
-                    style={{ color: "#00d4b8", flexShrink: 0 }}
-                  />
-                  <span
-                    className="text-sm font-medium whitespace-nowrap"
-                    style={{ color: "rgba(232,237,248,0.85)" }}
-                  >
-                    {expert}
-                  </span>
-                  <CheckCircle2
-                    size={13}
-                    style={{ color: "#00d4b8", flexShrink: 0 }}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA */}
       <section style={{ backgroundColor: "#0a0f1e", padding: "72px 0" }}>
         <div className="max-w-3xl mx-auto px-4 text-center animate-fade-up">
@@ -883,23 +773,3 @@ export default function AboutPage() {
     </div>
   );
 }
-
-const expertBadges = [
-  "AML Compliance Specialist",
-  "PCI-DSS Level 1 Auditor",
-  "KYC Regulatory Expert",
-  "Cybersecurity Architect",
-  "Payment Fraud Analyst",
-  "FinCEN Compliance Advisor",
-  "High-Risk Merchant Consultant",
-  "CCPA Privacy Attorney",
-  "GDPR Data Protection Officer",
-  "Chargeback Risk Analyst",
-  "International Payments Expert",
-  "SOC 2 Security Auditor",
-  "Banking Regulatory Specialist",
-  "Digital Identity Verification Expert",
-  "Healthcare Payments Compliance Advisor",
-  "E-Commerce Risk Management Specialist",
-  "Emerging Markets Payment Expert",
-];

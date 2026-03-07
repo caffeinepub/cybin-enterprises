@@ -29,7 +29,10 @@ import {
   Check,
   ChevronDown,
   ChevronUp,
+  Code2,
+  Globe,
   Grid3x3,
+  Link2,
   Maximize2,
   Minimize2,
   Move,
@@ -61,7 +64,8 @@ type EditorSection =
   | "about"
   | "contact"
   | "colors"
-  | "compare";
+  | "compare"
+  | "integrations";
 
 // ─── Color Picker ──────────────────────────────────────────────────────────────
 
@@ -1354,6 +1358,12 @@ export default function SiteEditorPanel() {
     { id: "about", label: "About / Founders", icon: Type, color: "#a87ef5" },
     { id: "contact", label: "Contact Info", icon: Type, color: "#ffc832" },
     { id: "colors", label: "Color Theme", icon: Palette, color: "#ff6b6b" },
+    {
+      id: "integrations",
+      label: "Export & Integrations",
+      icon: Globe,
+      color: "#00d4b8",
+    },
   ];
 
   return (
@@ -1918,6 +1928,338 @@ export default function SiteEditorPanel() {
             />
           </div>
         </SectionCard>
+      )}
+
+      {/* ── INTEGRATIONS & EXPORT SECTION ── */}
+      {activeSection === "integrations" && (
+        <div className="space-y-4">
+          {/* Domain Transfer */}
+          <SectionCard
+            title="Domain Transfer (GoDaddy / Cloudflare / Namecheap)"
+            icon={Globe}
+            accentColor="#00d4b8"
+          >
+            <p
+              style={{
+                fontSize: "12px",
+                color: "rgba(232,237,248,0.55)",
+                marginBottom: "12px",
+                lineHeight: 1.6,
+              }}
+            >
+              To point your domain (e.g. cybinenterprises.com) to this
+              ICP-hosted site:
+            </p>
+            <ol
+              style={{
+                paddingLeft: "18px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "8px",
+              }}
+            >
+              {[
+                "Get your frontend canister ID from the Caffeine project dashboard → Project Settings.",
+                "In GoDaddy/Cloudflare DNS, add a CNAME record: Name = @ (or www), Value = <your-canister-id>.icp0.io",
+                "Add a second CNAME: Name = _canister-id, Value = <your-canister-id>",
+                "In the Caffeine dashboard, register your custom domain under Settings → Custom Domain.",
+                "DNS propagation typically takes 5–30 minutes. Your site will then be live at cybinenterprises.com.",
+              ].map((step, i) => (
+                <li
+                  key={step}
+                  style={{ fontSize: "12px", color: "rgba(232,237,248,0.6)" }}
+                >
+                  <span style={{ color: "#00d4b8", fontWeight: 700 }}>
+                    {i + 1}.{" "}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+            <div
+              style={{
+                marginTop: "12px",
+                padding: "10px 12px",
+                borderRadius: "8px",
+                backgroundColor: "rgba(0,212,184,0.04)",
+                border: "1px solid rgba(0,212,184,0.15)",
+              }}
+            >
+              <p style={{ fontSize: "11px", color: "rgba(232,237,248,0.45)" }}>
+                Full step-by-step instructions with DNS record examples are in
+                the README.md file in your project root.
+              </p>
+            </div>
+          </SectionCard>
+
+          {/* GitHub Export */}
+          <SectionCard
+            title="GitHub Export & Developer Handoff"
+            icon={Code2}
+            accentColor="#a87ef5"
+            defaultOpen={false}
+          >
+            <p
+              style={{
+                fontSize: "12px",
+                color: "rgba(232,237,248,0.55)",
+                marginBottom: "12px",
+                lineHeight: 1.6,
+              }}
+            >
+              To export this project to GitHub so your dev team can work on it:
+            </p>
+            <ol
+              style={{
+                paddingLeft: "18px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "8px",
+              }}
+            >
+              {[
+                "In the Caffeine dashboard, go to Project Settings → GitHub Export.",
+                "Authorize the Caffeine GitHub app and select or create a private repository.",
+                "Click 'Push to GitHub' — the full project source code will be pushed.",
+                "Your dev team can clone the repo: git clone https://github.com/yourorg/cybin-enterprises",
+                "Install dependencies: pnpm install (from project root)",
+                "Build frontend: cd src/frontend && pnpm build",
+                "Deploy to ICP: dfx deploy --network ic (requires dfx CLI and cycles wallet)",
+              ].map((step, i) => (
+                <li
+                  key={step}
+                  style={{ fontSize: "12px", color: "rgba(232,237,248,0.6)" }}
+                >
+                  <span style={{ color: "#a87ef5", fontWeight: 700 }}>
+                    {i + 1}.{" "}
+                  </span>
+                  {step}
+                </li>
+              ))}
+            </ol>
+          </SectionCard>
+
+          {/* Third-Party Website Editors */}
+          <SectionCard
+            title="Third-Party Editor Integration (Webflow, Framer, Figma)"
+            icon={Link2}
+            accentColor="#ffc832"
+            defaultOpen={false}
+          >
+            <p
+              style={{
+                fontSize: "12px",
+                color: "rgba(232,237,248,0.55)",
+                marginBottom: "12px",
+                lineHeight: 1.6,
+              }}
+            >
+              There are two ways to use a third-party editor alongside this
+              site:
+            </p>
+            <div style={{ marginBottom: "14px" }}>
+              <p
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  color: "#ffc832",
+                  marginBottom: "6px",
+                }}
+              >
+                Option A — Iframe Embed
+              </p>
+              <p
+                style={{
+                  fontSize: "12px",
+                  color: "rgba(232,237,248,0.55)",
+                  lineHeight: 1.6,
+                  marginBottom: "8px",
+                }}
+              >
+                Embed the live site inside any platform that supports iframes
+                (Notion, Webflow, custom portals):
+              </p>
+              <code
+                style={{
+                  display: "block",
+                  fontSize: "11px",
+                  padding: "8px 10px",
+                  borderRadius: "8px",
+                  backgroundColor: "rgba(255,200,50,0.06)",
+                  border: "1px solid rgba(255,200,50,0.2)",
+                  color: "#ffc832",
+                  wordBreak: "break-all",
+                }}
+              >
+                {
+                  '<iframe src="https://cybinenterprises.com" width="100%" height="100%" frameborder="0" />'
+                }
+              </code>
+            </div>
+            <div style={{ marginBottom: "14px" }}>
+              <p
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  color: "#ffc832",
+                  marginBottom: "6px",
+                }}
+              >
+                Option B — Headless CMS / API Export
+              </p>
+              <p
+                style={{
+                  fontSize: "12px",
+                  color: "rgba(232,237,248,0.55)",
+                  lineHeight: 1.6,
+                }}
+              >
+                Export the project via GitHub (see above), then rebuild the
+                frontend inside Webflow or Framer using the exported design
+                tokens (colors, fonts from index.css and tailwind.config.js).
+                The ICP backend stays live — your custom frontend connects via
+                the backend.d.ts API definitions.
+              </p>
+            </div>
+            <div
+              style={{
+                padding: "10px 12px",
+                borderRadius: "8px",
+                backgroundColor: "rgba(255,107,107,0.05)",
+                border: "1px solid rgba(255,107,107,0.2)",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "11px",
+                  color: "rgba(255,107,107,0.8)",
+                  lineHeight: 1.5,
+                }}
+              >
+                Security note: Do not expose admin credentials, canister IDs, or
+                backend API keys in any third-party editor environment. All
+                sensitive configuration must remain in server-side variables or
+                ICP canister state.
+              </p>
+            </div>
+          </SectionCard>
+
+          {/* AI / LLM Integration */}
+          <SectionCard
+            title="AI / LLM Integration (ChatGPT, Claude, Grok, Local LLM)"
+            icon={Code2}
+            accentColor="#ff8c42"
+            defaultOpen={false}
+          >
+            <p
+              style={{
+                fontSize: "12px",
+                color: "rgba(232,237,248,0.55)",
+                marginBottom: "12px",
+                lineHeight: 1.6,
+              }}
+            >
+              This site is built to be AI-ready. Your dev team can wire in any
+              AI service using the patterns below.
+            </p>
+            <div style={{ marginBottom: "14px" }}>
+              <p
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  color: "#ff8c42",
+                  marginBottom: "6px",
+                }}
+              >
+                Public AI APIs (ChatGPT, Claude, Grok, Gemini)
+              </p>
+              <ol
+                style={{
+                  paddingLeft: "16px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                }}
+              >
+                {[
+                  "Get an API key: OpenAI (platform.openai.com), Anthropic (console.anthropic.com), xAI (grok), Google (ai.google.dev)",
+                  "Never store API keys in the frontend — they must live in a server-side function or ICP backend canister",
+                  "Create an ICP HTTP outcall in the backend canister to call the AI API server-side",
+                  "Pass prompts from the admin panel → backend canister → AI API → return generated content",
+                  "Wire the response to the Blog Manager createBlogPost endpoint for automated post creation",
+                ].map((step, i) => (
+                  <li
+                    key={step}
+                    style={{
+                      fontSize: "12px",
+                      color: "rgba(232,237,248,0.55)",
+                    }}
+                  >
+                    <span style={{ color: "#ff8c42", fontWeight: 700 }}>
+                      {i + 1}.{" "}
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div>
+              <p
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 700,
+                  color: "#ff8c42",
+                  marginBottom: "6px",
+                }}
+              >
+                Locally Hosted LLM (Ollama, LM Studio, Jan.ai)
+              </p>
+              <ol
+                style={{
+                  paddingLeft: "16px",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                }}
+              >
+                {[
+                  "Install Ollama (ollama.ai) or LM Studio on your local machine or VPS",
+                  "Pull a model: ollama pull llama3 or ollama pull mistral",
+                  "Ollama exposes a REST API at http://localhost:11434/api/generate",
+                  "From your local dev environment, POST to this endpoint and forward the result to the site backend",
+                  "For production, host the LLM on a VPS and call it via ICP HTTP outcalls",
+                ].map((step, i) => (
+                  <li
+                    key={step}
+                    style={{
+                      fontSize: "12px",
+                      color: "rgba(232,237,248,0.55)",
+                    }}
+                  >
+                    <span style={{ color: "#ff8c42", fontWeight: 700 }}>
+                      {i + 1}.{" "}
+                    </span>
+                    {step}
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div
+              style={{
+                marginTop: "12px",
+                padding: "10px 12px",
+                borderRadius: "8px",
+                backgroundColor: "rgba(255,140,66,0.05)",
+                border: "1px solid rgba(255,140,66,0.2)",
+              }}
+            >
+              <p style={{ fontSize: "11px", color: "rgba(232,237,248,0.4)" }}>
+                Full integration code examples and webhook patterns are
+                documented in README.md at the project root.
+              </p>
+            </div>
+          </SectionCard>
+        </div>
       )}
     </div>
   );
