@@ -4,24 +4,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a0f1e" />
-    <title>Cybin Enterprises | High-Risk Payment Solutions</title>
+    <meta name="application-name" content="Cybin Enterprises" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="geo.region" content="US" />
+    <meta name="geo.country" content="US" />
+    <title>High-Risk Payment Solutions | Cybin Enterprises</title>
     <meta name="description" content="Cybin Enterprises provides trusted payment solutions for high-risk and hard-to-place businesses. Domestic and international merchant accounts, MATCH list assistance, and chargeback protection." />
     <meta name="keywords" content="high-risk merchant account, payment processing, CBD payment processing, MATCH list merchant, chargeback protection, high risk payments, payment solutions, merchant services" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Cybin Enterprises" />
     <link rel="canonical" href="https://cybinenterprises.com/" />
+    <link rel="apple-touch-icon" href="/assets/cybin-logo.png" />
+    <!-- Font preloads for LCP performance -->
+    <link rel="preload" href="/assets/fonts/Sora.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/CabinetGrotesk.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Preconnect -->
+    <link rel="preconnect" href="https://cybinenterprises.com" />
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Cybin Enterprises" />
-    <meta property="og:title" content="Cybin Enterprises | High-Risk Payment Solutions" />
+    <meta property="og:title" content="High-Risk Payment Solutions | Cybin Enterprises" />
     <meta property="og:description" content="Trusted payment solutions for high-risk and hard-to-place businesses. Domestic and international merchant accounts." />
     <meta property="og:url" content="https://cybinenterprises.com/" />
-    <meta property="og:image" content="https://cybinenterprises.com/assets/uploads/Untitled-design-1.png" />
+    <meta property="og:image" content="https://cybinenterprises.com/assets/cybin-logo.png" />
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Cybin Enterprises | High-Risk Payment Solutions" />
+    <meta name="twitter:title" content="High-Risk Payment Solutions | Cybin Enterprises" />
     <meta name="twitter:description" content="Trusted payment solutions for high-risk and hard-to-place businesses." />
-    <meta name="twitter:image" content="https://cybinenterprises.com/assets/uploads/Untitled-design-1.png" />
+    <meta name="twitter:image" content="https://cybinenterprises.com/assets/cybin-logo.png" />
     <!-- JSON-LD Organization Schema -->
     <script type="application/ld+json">
     {
@@ -29,15 +39,17 @@
       "@type": "Organization",
       "name": "Cybin Enterprises",
       "url": "https://cybinenterprises.com",
-      "logo": "https://cybinenterprises.com/assets/uploads/Untitled-design-1.png",
+      "logo": "https://cybinenterprises.com/assets/cybin-logo.png",
       "description": "Trusted payment solutions for high-risk and hard-to-place businesses. Domestic and international merchant accounts.",
-      "email": "info@cybinenterprises.com",
+      "email": "Customercare@cybinenterprises.com",
+      "telephone": ["+17242447111", "+18883212100"],
       "foundingDate": "2024",
       "sameAs": [],
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer service",
-        "email": "info@cybinenterprises.com",
+        "telephone": "+17242447111",
+        "email": "Customercare@cybinenterprises.com",
         "availableLanguage": "English"
       },
       "founders": [
@@ -46,8 +58,42 @@
       ]
     }
     </script>
+    <!-- JSON-LD WebSite Schema (enables Sitelinks Searchbox) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Cybin Enterprises",
+      "url": "https://cybinenterprises.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://cybinenterprises.com/insights?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <!-- JSON-LD LocalBusiness Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Cybin Enterprises",
+      "description": "Trusted payment solutions for high-risk and hard-to-place businesses. Domestic and international merchant accounts.",
+      "url": "https://cybinenterprises.com",
+      "telephone": "+17242447111",
+      "email": "Customercare@cybinenterprises.com",
+      "areaServed": "US",
+      "priceRange": "$$",
+      "serviceType": "Payment Processing",
+      "founder": [
+        {"@type": "Person", "name": "Mel Kotchey", "jobTitle": "Co-Founder & CEO"},
+        {"@type": "Person", "name": "Shane Suehr", "jobTitle": "Co-Founder & COO"}
+      ]
+    }
+    </script>
   </head>
   <body>
+    <noscript>Please enable JavaScript to use Cybin Enterprises.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

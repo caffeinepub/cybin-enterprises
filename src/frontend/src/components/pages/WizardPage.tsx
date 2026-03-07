@@ -531,7 +531,8 @@ function Step3({
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
 
   const handleEmailBlur = useCallback(async () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
     if (
       emailRegex.test(state.email) &&
       state.industry &&
@@ -550,7 +551,8 @@ function Step3({
   const handleNext = () => {
     const newErrors: { name?: string; email?: string } = {};
     if (!state.name.trim()) newErrors.name = "Full name is required";
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(state.email))
       newErrors.email = "Valid email is required";
     if (Object.keys(newErrors).length > 0) {
@@ -634,6 +636,7 @@ function Step3({
             type="text"
             data-ocid="wizard.step3.name.input"
             value={state.name}
+            maxLength={100}
             onChange={(e) => {
               onChange("name", e.target.value);
               if (errors.name) setErrors((p) => ({ ...p, name: undefined }));
@@ -680,6 +683,7 @@ function Step3({
             type="email"
             data-ocid="wizard.step3.email.input"
             value={state.email}
+            maxLength={254}
             onChange={(e) => {
               onChange("email", e.target.value);
               if (errors.email) setErrors((p) => ({ ...p, email: undefined }));
@@ -729,6 +733,7 @@ function Step3({
             type="tel"
             data-ocid="wizard.step3.phone.input"
             value={state.phone}
+            maxLength={20}
             onChange={(e) => onChange("phone", e.target.value)}
             placeholder="+1 (555) 000-0000"
             autoComplete="tel"
@@ -769,6 +774,7 @@ function Step3({
             type="url"
             data-ocid="wizard.step3.website.input"
             value={state.website}
+            maxLength={100}
             onChange={(e) => onChange("website", e.target.value)}
             placeholder="https://yourbusiness.com"
             autoComplete="url"
@@ -927,6 +933,7 @@ function Step4({
             type="text"
             data-ocid="wizard.step4.business_name.input"
             value={state.businessName}
+            maxLength={100}
             onChange={(e) => onChange("businessName", e.target.value)}
             placeholder="Acme Corp LLC"
             autoComplete="organization"
@@ -971,8 +978,9 @@ function Step4({
               onChange("fein", e.target.value);
               if (e.target.value.trim()) onChange("feinSkipped", false);
             }}
-            placeholder="XX-XXXXXXX"
+            placeholder="12-3456789"
             maxLength={10}
+            pattern="[0-9]{2}-[0-9]{7}"
             className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
             style={{
               backgroundColor: "rgba(255,255,255,0.03)",

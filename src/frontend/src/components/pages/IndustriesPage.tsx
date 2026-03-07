@@ -73,7 +73,8 @@ const industries = [
 
 export default function IndustriesPage() {
   useSeo({
-    title: "High-Risk Industries We Support | Cybin Enterprises",
+    title:
+      "High-Risk Industries Payment Processing | CBD, Nutraceuticals, Telemedicine | Cybin Enterprises",
     description:
       "Payment solutions for CBD, research peptides, telemedicine, firearms, gaming, forex, supplements, and all legal industries including MATCH list merchants.",
     canonical: "/industries",

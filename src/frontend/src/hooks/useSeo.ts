@@ -4,13 +4,16 @@ interface SeoProps {
   title: string;
   description: string;
   canonical: string;
+  ogImage?: string;
 }
+
+const DEFAULT_OG_IMAGE = "https://cybinenterprises.com/assets/cybin-logo.png";
 
 /**
  * Dynamically updates page-level SEO meta tags on route changes.
  * Sets title, meta description, canonical URL, and Open Graph / Twitter tags.
  */
-export function useSeo({ title, description, canonical }: SeoProps) {
+export function useSeo({ title, description, canonical, ogImage }: SeoProps) {
   useEffect(() => {
     // Page title
     document.title = title;
@@ -53,6 +56,8 @@ export function useSeo({ title, description, canonical }: SeoProps) {
     setOgMeta("og:title", title);
     setOgMeta("og:description", description);
     setOgMeta("og:url", `https://cybinenterprises.com${canonical}`);
+    setOgMeta("og:type", "website");
+    setOgMeta("og:image", ogImage ?? DEFAULT_OG_IMAGE);
 
     // Twitter tags
     const setTwitterMeta = (name: string, content: string) => {
@@ -67,5 +72,7 @@ export function useSeo({ title, description, canonical }: SeoProps) {
 
     setTwitterMeta("twitter:title", title);
     setTwitterMeta("twitter:description", description);
-  }, [title, description, canonical]);
+    setTwitterMeta("twitter:card", "summary_large_image");
+    setTwitterMeta("twitter:image", ogImage ?? DEFAULT_OG_IMAGE);
+  }, [title, description, canonical, ogImage]);
 }

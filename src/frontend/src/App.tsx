@@ -3,10 +3,12 @@ import Layout from "./components/Layout";
 import AboutPage from "./components/pages/AboutPage";
 import AdminPage from "./components/pages/AdminPage";
 import ContactPage from "./components/pages/ContactPage";
+import FaqPage from "./components/pages/FaqPage";
 import FraudDeflectPage from "./components/pages/FraudDeflectPage";
 import HomePage from "./components/pages/HomePage";
 import IndustriesPage from "./components/pages/IndustriesPage";
 import InsightsPage from "./components/pages/InsightsPage";
+import KnowledgePage from "./components/pages/KnowledgePage";
 import {
   CookiePolicyPage,
   PrivacyPolicyPage,
@@ -103,6 +105,22 @@ export default function App() {
           element={
             <Layout>
               <CookiePolicyPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/faq"
+          element={
+            <Layout>
+              <FaqPage />
+            </Layout>
+          }
+        />
+        <Route
+          path="/knowledge"
+          element={
+            <Layout>
+              <KnowledgePage />
             </Layout>
           }
         />

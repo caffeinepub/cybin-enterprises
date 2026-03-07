@@ -77,7 +77,7 @@ const steps = [
 
 export default function PaymentSolutionsPage() {
   useSeo({
-    title: "Payment Solutions for High-Risk Businesses | Cybin Enterprises",
+    title: "High-Risk Payment Processing Solutions | Cybin Enterprises",
     description:
       "Online, retail, mobile, recurring billing, and international payment processing for high-risk and complex businesses.",
     canonical: "/payment-solutions",
@@ -123,6 +123,63 @@ export default function PaymentSolutionsPage() {
               item: "https://cybinenterprises.com/payment-solutions",
             },
           ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: "High-Risk Payment Processing",
+          provider: {
+            "@type": "Organization",
+            name: "Cybin Enterprises",
+            url: "https://cybinenterprises.com",
+          },
+          serviceType: "Payment Processing",
+          description:
+            "Domestic and international payment processing for high-risk businesses including CBD, nutraceuticals, telemedicine, firearms, MATCH list merchants, and all legal industries.",
+          areaServed: { "@type": "Country", name: "United States" },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Payment Solutions",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Domestic Payment Processing",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "International Payment Processing",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Subscription & Recurring Billing",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Retail POS Payments",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Mobile Payment Acceptance",
+                },
+              },
+            ],
+          },
         }}
       />
       {/* Hero */}

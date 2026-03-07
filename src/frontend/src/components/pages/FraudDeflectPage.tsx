@@ -43,7 +43,7 @@ const benefits = [
 
 export default function FraudDeflectPage() {
   useSeo({
-    title: "Fraud Deflect: Chargeback Prevention | Cybin Enterprises",
+    title: "Chargeback Prevention & Fraud Deflect Alerts | Cybin Enterprises",
     description:
       "Prevent chargebacks before they happen with Fraud Deflect. Real-time dispute alerts via Visa (Verifi) and Mastercard (Ethoca) networks.",
     canonical: "/fraud-deflect",

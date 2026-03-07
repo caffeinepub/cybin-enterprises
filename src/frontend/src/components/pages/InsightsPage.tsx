@@ -77,7 +77,7 @@ const articles = [
 
 export default function InsightsPage() {
   useSeo({
-    title: "Payment Industry Insights | Cybin Enterprises Blog",
+    title: "High-Risk Merchant Insights & Resources | Cybin Enterprises",
     description:
       "Expert articles on high-risk payment infrastructure, chargeback management, compliance, international payments, and business growth for complex industries.",
     canonical: "/insights",
@@ -139,6 +139,65 @@ export default function InsightsPage() {
               position: 2,
               name: "Insights",
               item: "https://cybinenterprises.com/insights",
+            },
+          ],
+        }}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: "Cybin Enterprises Insights",
+          description:
+            "Expert articles on high-risk payment infrastructure, chargeback management, compliance, and business growth",
+          url: "https://cybinenterprises.com/insights",
+          publisher: {
+            "@type": "Organization",
+            name: "Cybin Enterprises",
+            url: "https://cybinenterprises.com",
+          },
+          blogPost: [
+            {
+              "@type": "BlogPosting",
+              headline: "What Makes a Business High-Risk",
+              datePublished: "2026-02-01",
+              author: { "@type": "Organization", name: "Cybin Enterprises" },
+              url: "https://cybinenterprises.com/insights",
+            },
+            {
+              "@type": "BlogPosting",
+              headline: "How Early Alerts Reduce Chargebacks",
+              datePublished: "2026-01-15",
+              author: { "@type": "Organization", name: "Cybin Enterprises" },
+              url: "https://cybinenterprises.com/insights",
+            },
+            {
+              "@type": "BlogPosting",
+              headline: "International Payment Options Explained",
+              datePublished: "2026-01-01",
+              author: { "@type": "Organization", name: "Cybin Enterprises" },
+              url: "https://cybinenterprises.com/insights",
+            },
+            {
+              "@type": "BlogPosting",
+              headline: "Preventing Payment Account Shutdowns",
+              datePublished: "2025-12-15",
+              author: { "@type": "Organization", name: "Cybin Enterprises" },
+              url: "https://cybinenterprises.com/insights",
+            },
+            {
+              "@type": "BlogPosting",
+              headline: "Subscription Billing in High-Risk Industries",
+              datePublished: "2025-12-01",
+              author: { "@type": "Organization", name: "Cybin Enterprises" },
+              url: "https://cybinenterprises.com/insights",
+            },
+            {
+              "@type": "BlogPosting",
+              headline: "Compliance Essentials for High-Risk Merchants",
+              datePublished: "2025-11-15",
+              author: { "@type": "Organization", name: "Cybin Enterprises" },
+              url: "https://cybinenterprises.com/insights",
             },
           ],
         }}

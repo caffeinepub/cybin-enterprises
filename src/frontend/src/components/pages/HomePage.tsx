@@ -143,9 +143,19 @@ function NetworkCanvas() {
 
     draw();
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        cancelAnimationFrame(animFrameId);
+      } else {
+        draw();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     return () => {
       cancelAnimationFrame(animFrameId);
       window.removeEventListener("resize", resize);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
   }, []);
 
@@ -166,7 +176,7 @@ function NetworkCanvas() {
 
 export default function HomePage() {
   useSeo({
-    title: "Cybin Enterprises | High-Risk Payment Solutions",
+    title: "High-Risk Payment Solutions | Cybin Enterprises",
     description:
       "Trusted payment processing for high-risk businesses. MATCH list merchants, CBD, nutraceuticals, telemedicine, and more. Domestic & international options.",
     canonical: "/",
@@ -888,6 +898,94 @@ export default function HomePage() {
             </p>
             <Link to="/about" className="cybin-btn-secondary">
               Meet the Founders <ChevronRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Snippets / AI Q&A Block */}
+      <section style={{ backgroundColor: "#080d1a", padding: "80px 0" }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span
+              className="text-xs font-bold uppercase tracking-widest"
+              style={{ color: "#00d4b8" }}
+            >
+              Quick Answers
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl font-bold mt-3"
+              style={{
+                fontFamily: "Sora, system-ui, sans-serif",
+                color: "#e8edf8",
+              }}
+            >
+              High-Risk Payment Processing — Explained
+            </h2>
+          </div>
+          <div className="space-y-6">
+            {[
+              {
+                q: "What is a high-risk merchant account?",
+                a: "A high-risk merchant account is a payment processing account for businesses that banks and standard processors consider elevated risk — due to industry type, chargeback history, or business model. Cybin Enterprises specializes in securing these accounts for merchants who cannot access standard processing.",
+              },
+              {
+                q: "Who can help merchants on the MATCH list?",
+                a: "Cybin Enterprises works directly with MATCH list merchants to explore domestic and international payment processing alternatives. Being on the MATCH list does not mean you cannot accept card payments — it means you need a specialist.",
+              },
+              {
+                q: "What businesses does Cybin Enterprises work with?",
+                a: "Cybin Enterprises works with all legal businesses including CBD, nutraceuticals, telemedicine, research peptides, online gaming, firearms, tobacco, adult entertainment, forex, debt collection, subscription businesses, and any merchant previously denied or operating in a regulated industry.",
+              },
+              {
+                q: "How do you prevent chargebacks as a high-risk merchant?",
+                a: "The most effective approach is early dispute alerts — Cybin Enterprises offers Fraud Deflect, which integrates with the Ethoca and Verifi networks to notify you the moment a cardholder opens a dispute, giving you the chance to resolve it before it becomes a chargeback.",
+              },
+              {
+                q: "Can a business get payment processing after being denied?",
+                a: "Yes. Many merchants denied by Stripe, PayPal, Square, or traditional banks can still access payment processing through specialized high-risk processors. Cybin Enterprises reviews your situation and structures an approach to get your account approved.",
+              },
+            ].map((item) => (
+              <div
+                key={item.q}
+                itemScope
+                itemType="https://schema.org/Question"
+                style={{
+                  background: "rgba(255,255,255,0.025)",
+                  border: "1px solid rgba(0,212,184,0.1)",
+                  borderRadius: 12,
+                  padding: "24px 28px",
+                }}
+              >
+                <h3
+                  itemProp="name"
+                  className="text-base font-bold mb-3"
+                  style={{
+                    color: "#00d4b8",
+                    fontFamily: "Sora, system-ui, sans-serif",
+                  }}
+                >
+                  {item.q}
+                </h3>
+                <div itemScope itemType="https://schema.org/Answer">
+                  <p
+                    itemProp="text"
+                    style={{
+                      color: "rgba(232,237,248,0.72)",
+                      lineHeight: 1.8,
+                      fontSize: "0.97rem",
+                      margin: 0,
+                    }}
+                  >
+                    {item.a}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center mt-10">
+            <Link to="/faq" className="cybin-btn-secondary">
+              View Full FAQ <ChevronRight size={16} />
             </Link>
           </div>
         </div>

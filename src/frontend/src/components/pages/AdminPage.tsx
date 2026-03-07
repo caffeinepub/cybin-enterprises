@@ -3,6 +3,7 @@ import {
   AlertCircle,
   Download,
   FileText,
+  ImageIcon,
   Loader2,
   Lock,
   LogOut,
@@ -14,11 +15,12 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useActor } from "../../hooks/useActor";
+import ImageEditorPanel from "./admin/ImageEditorPanel";
 
 // ─── Simple client-side PIN guard ────────────────────────────────────────────
 const ADMIN_PIN = "cybin2026";
 
-type Tab = "submissions" | "applications" | "leads";
+type Tab = "submissions" | "applications" | "leads" | "images";
 
 function formatDate(timestamp: bigint): string {
   const ms = Number(timestamp / 1_000_000n);
@@ -222,7 +224,7 @@ export default function AdminPage() {
   const [authed, setAuthed] = useState(() => {
     return sessionStorage.getItem("cybin-admin-auth") === "true";
   });
-  const [activeTab, setActiveTab] = useState<Tab>("applications");
+  const [activeTab, setActiveTab] = useState<Tab>("images");
   const { actor } = useActor();
 
   const handleLogin = () => {
@@ -307,9 +309,16 @@ export default function AdminPage() {
     id: Tab;
     label: string;
     icon: React.ElementType;
-    count: number;
+    count: number | null;
     color: string;
   }[] = [
+    {
+      id: "images",
+      label: "Image Editor",
+      icon: ImageIcon,
+      count: null,
+      color: "#ff8c42",
+    },
     {
       id: "applications",
       label: "Wizard Applications",
@@ -487,23 +496,26 @@ export default function AdminPage() {
                   >
                     <Icon size={14} />
                     {tab.label}
-                    <span
-                      className="px-1.5 py-0.5 rounded-full text-xs font-bold"
-                      style={{
-                        backgroundColor: isActive
-                          ? `${tab.color}20`
-                          : "rgba(255,255,255,0.06)",
-                        color: isActive ? tab.color : "rgba(232,237,248,0.4)",
-                      }}
-                    >
-                      {tab.count}
-                    </span>
+                    {tab.count !== null && (
+                      <span
+                        className="px-1.5 py-0.5 rounded-full text-xs font-bold"
+                        style={{
+                          backgroundColor: isActive
+                            ? `${tab.color}20`
+                            : "rgba(255,255,255,0.06)",
+                          color: isActive ? tab.color : "rgba(232,237,248,0.4)",
+                        }}
+                      >
+                        {tab.count}
+                      </span>
+                    )}
                   </button>
                 );
               })}
             </div>
 
             {/* Content */}
+            {activeTab === "images" && <ImageEditorPanel />}
             {activeTab === "applications" && (
               <ApplicationsTable applications={applications} />
             )}

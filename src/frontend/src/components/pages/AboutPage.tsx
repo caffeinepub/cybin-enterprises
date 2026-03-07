@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import { Award, ChevronRight, Star } from "lucide-react";
@@ -25,9 +26,12 @@ const shaneExpertise = [
 ];
 
 export default function AboutPage() {
+  const { style: melStyle, config: melCfg } = useLiveImageSettings("mel");
+  const { style: shaneStyle, config: shaneCfg } = useLiveImageSettings("shane");
+
   useSeo({
     title:
-      "About Cybin Enterprises | Meet the Founders Mel Kotchey & Shane Suehr",
+      "About Cybin Enterprises | Mel Kotchey & Shane Suehr | High-Risk Payments",
     description:
       "Cybin Enterprises was founded by Mel Kotchey and Shane Suehr to bring clarity and stability to businesses navigating complex payment environments.",
     canonical: "/about",
@@ -305,55 +309,26 @@ export default function AboutPage() {
             >
               {/* Portrait hero zone — real photo with CSS edge-blend */}
               <div
-                className="h-[460px] lg:h-[540px]"
                 style={{
                   position: "relative",
+                  height: `${melCfg.containerHeight}px`,
                   overflow: "hidden",
                   borderRadius: "20px 20px 0 0",
                 }}
               >
-                {/* Actual photo */}
-                {/*
-                   ANALYSIS (vision-corrected):
-                   - Mel's photo: 800×1000 (4:5 ratio) — squarer crop, less
-                     vertical information. Her face is centered in the frame but
-                     there is relatively little headroom above and below shoulders.
-                   - Shane's photo: 832×1248 (2:3 ratio) — taller portrait with
-                     natural head-and-shoulders framing already built in.
-
-                   ANCHOR MATCH STRATEGY:
-                   Shane uses scale(0.95) + transformOrigin "center top" +
-                   objectPosition "center 8%". This means:
-                     • The photo is rendered 95% of container size
-                     • The scale-down pulls from the top (reveals more bottom)
-                     • objectPosition shifts content up 8% for proper headroom
-
-                   For Mel to match the SAME visual anchor points:
-                   1. Use identical objectPosition "center 8%" to match crop top
-                   2. Use identical transformOrigin "center top" — scale from top
-                   3. Her 4:5 photo means at objectFit:cover there is less
-                      vertical content visible vs Shane's 2:3. We compensate by
-                      NOT scaling down — let objectFit:cover use the full height
-                      naturally, which for her squarer photo means more face fill.
-                   4. Applying scale(1.0) — no scaling — lets the browser's
-                      native cover behavior use her full image exactly, and with
-                      objectPosition "center 8%" the anchor point matches Shane.
-                   This is the cleanest, most stable approach: same parameters,
-                   physics-correct for each photo's native aspect ratio.
-                 */}
                 <img
                   src={melPhoto}
                   alt="Mel Kotchey, Co-Founder & CEO of Cybin Enterprises"
+                  loading="lazy"
+                  width={800}
+                  height={1000}
                   style={{
                     position: "absolute",
                     inset: 0,
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 8%",
                     display: "block",
-                    transform: "scale(0.85)",
-                    transformOrigin: "center top",
+                    ...melStyle,
                   }}
                 />
                 {/* Teal rim-light — left + right edges */}
@@ -567,39 +542,26 @@ export default function AboutPage() {
             >
               {/* Portrait hero zone — real photo with CSS edge-blend */}
               <div
-                className="h-[460px] lg:h-[540px]"
                 style={{
                   position: "relative",
+                  height: `${shaneCfg.containerHeight}px`,
                   overflow: "hidden",
                   borderRadius: "20px 20px 0 0",
                 }}
               >
-                {/* Actual photo */}
-                {/*
-                   ANCHOR MATCH (synced with Mel):
-                   Shane's photo: 832×1248 (2:3 ratio) — taller portrait.
-                   At objectFit:cover with objectPosition "center 8%", his
-                   head-and-shoulders fills the frame naturally with correct
-                   headroom above. No scale transform needed — the native 2:3
-                   ratio already provides the right proportions in this container.
-                   Identical parameters to Mel: scale(1.0), center top origin,
-                   objectPosition "center 8%" — the browser's cover algorithm
-                   handles each photo's aspect ratio independently while the
-                   visible crop anchor is the same for both cards.
-                 */}
                 <img
                   src={shanePhoto}
                   alt="Shane Suehr, Co-Founder & COO of Cybin Enterprises"
+                  loading="lazy"
+                  width={832}
+                  height={1248}
                   style={{
                     position: "absolute",
                     inset: 0,
                     width: "100%",
                     height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center 8%",
                     display: "block",
-                    transform: "scale(1.0)",
-                    transformOrigin: "center top",
+                    ...shaneStyle,
                   }}
                 />
                 {/* Purple rim-light — left + right edges */}

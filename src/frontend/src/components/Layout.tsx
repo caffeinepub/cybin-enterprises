@@ -1,3 +1,4 @@
+import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
 import { Link, useLocation } from "@/lib/router";
 import { ChevronRight, Cookie, Mail, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -26,6 +27,7 @@ interface LayoutProps {
 }
 
 export default function Layout({ children }: LayoutProps) {
+  const { style: logoStyle, config: logoCfg } = useLiveImageSettings("logo");
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cookieConsent, setCookieConsent] = useState<string | null>(() => {
@@ -99,13 +101,16 @@ export default function Layout({ children }: LayoutProps) {
               <img
                 src={logoImg}
                 alt="Cybin Enterprises"
+                loading="eager"
+                // @ts-ignore fetchpriority is a valid HTML attribute
+                fetchpriority="high"
                 style={{
-                  width: "64px",
-                  height: "64px",
-                  objectFit: "contain",
+                  width: `${logoCfg.containerHeight}px`,
+                  height: `${logoCfg.containerHeight}px`,
                   display: "block",
                   flexShrink: 0,
                   mixBlendMode: "screen",
+                  ...logoStyle,
                 }}
               />
             </Link>
@@ -241,12 +246,12 @@ export default function Layout({ children }: LayoutProps) {
                 src={logoImg}
                 alt="Cybin Enterprises"
                 style={{
-                  width: "64px",
-                  height: "64px",
-                  objectFit: "contain",
+                  width: `${logoCfg.containerHeight}px`,
+                  height: `${logoCfg.containerHeight}px`,
                   display: "block",
                   marginBottom: "12px",
                   mixBlendMode: "screen",
+                  ...logoStyle,
                 }}
               />
               <p
@@ -274,7 +279,11 @@ export default function Layout({ children }: LayoutProps) {
                 Resources
               </h4>
               <div className="flex flex-col gap-2">
-                {navLinks.map((link) => (
+                {[
+                  ...navLinks,
+                  { label: "FAQ", href: "/faq" },
+                  { label: "Company Overview", href: "/knowledge" },
+                ].map((link) => (
                   <Link
                     key={link.href}
                     to={link.href}

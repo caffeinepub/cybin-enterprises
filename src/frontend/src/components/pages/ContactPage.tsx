@@ -29,7 +29,7 @@ const businessTypes = [
 
 export default function ContactPage() {
   useSeo({
-    title: "Contact Cybin Enterprises | Start Your Approval Process",
+    title: "Contact Cybin Enterprises | High-Risk Merchant Account Help",
     description:
       "Get in touch with Cybin Enterprises. Ready to start your payment approval process or have questions about merchant services? Contact us today.",
     canonical: "/contact",
@@ -253,6 +253,7 @@ export default function ContactPage() {
                         value={form.name}
                         onChange={handleChange}
                         required
+                        maxLength={100}
                         placeholder="Your full name"
                         data-ocid="contact.name.input"
                         className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none"
@@ -289,6 +290,7 @@ export default function ContactPage() {
                         value={form.email}
                         onChange={handleChange}
                         required
+                        maxLength={254}
                         placeholder="your@email.com"
                         data-ocid="contact.email.input"
                         className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none"
@@ -326,6 +328,7 @@ export default function ContactPage() {
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
+                        maxLength={20}
                         placeholder="(555) 000-0000"
                         data-ocid="contact.phone.input"
                         className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none"
@@ -417,6 +420,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       required
                       rows={5}
+                      maxLength={2000}
                       placeholder="Tell us about your business and payment needs..."
                       data-ocid="contact.message.textarea"
                       className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none resize-none"
