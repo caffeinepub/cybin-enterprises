@@ -89,6 +89,41 @@ export class ExternalBlob {
         return this;
     }
 }
+export type SubmissionId = bigint;
+export interface BlogPost {
+    id: BlogPostId;
+    title: string;
+    publishDate: string;
+    body: string;
+    published: boolean;
+    author: string;
+    readTime: string;
+    timestamp: bigint;
+    excerpt: string;
+    category: string;
+}
+export type WizardApplicationId = bigint;
+export interface PartnerLead {
+    id: PartnerLeadId;
+    contactName: string;
+    partnershipType: string;
+    description: string;
+    email: string;
+    timestamp: bigint;
+    companyName: string;
+    phone: string;
+}
+export interface ContactSubmission {
+    id: SubmissionId;
+    name: string;
+    businessType: string;
+    email: string;
+    message: string;
+    timestamp: bigint;
+    phone: string;
+}
+export type BlogPostId = bigint;
+export type PartialLeadId = bigint;
 export interface WizardApplication {
     id: WizardApplicationId;
     hasFein: boolean;
@@ -101,7 +136,6 @@ export interface WizardApplication {
     phone: string;
     industry: string;
 }
-export type PartialLeadId = bigint;
 export interface PartialLead {
     id: PartialLeadId;
     regulatoryHurdle: string;
@@ -109,29 +143,73 @@ export interface PartialLead {
     timestamp: bigint;
     industry: string;
 }
-export type WizardApplicationId = bigint;
-export interface ContactSubmission {
-    id: SubmissionId;
-    name: string;
-    businessType: string;
-    email: string;
-    message: string;
-    timestamp: bigint;
-    phone: string;
-}
-export type SubmissionId = bigint;
+export type PartnerLeadId = bigint;
 export interface backendInterface {
+    createBlogPost(title: string, category: string, excerpt: string, body: string, author: string, readTime: string, publishDate: string): Promise<BlogPostId>;
+    deleteBlogPost(id: BlogPostId): Promise<boolean>;
+    getAllBlogPosts(): Promise<Array<BlogPost>>;
     getAllPartialLeads(): Promise<Array<PartialLead>>;
+    getAllPartnerLeads(): Promise<Array<PartnerLead>>;
     getAllSubmissions(): Promise<Array<ContactSubmission>>;
     getAllWizardApplications(): Promise<Array<WizardApplication>>;
+    getBlogPost(id: BlogPostId): Promise<BlogPost | null>;
+    getPublishedBlogPosts(): Promise<Array<BlogPost>>;
+    getTotalPartnerLeads(): Promise<bigint>;
     getTotalSubmissions(): Promise<bigint>;
     getTotalWizardApplications(): Promise<bigint>;
+    publishBlogPost(id: BlogPostId): Promise<boolean>;
     savePartialLead(email: string, industry: string, regulatoryHurdle: string): Promise<PartialLeadId>;
     submitContactForm(name: string, email: string, phone: string, businessType: string, message: string): Promise<SubmissionId>;
+    submitPartnerLead(companyName: string, contactName: string, email: string, phone: string, partnershipType: string, description: string): Promise<PartnerLeadId>;
     submitWizardApplication(industry: string, regulatoryHurdle: string, name: string, email: string, phone: string, businessName: string, fein: string, hasFein: boolean): Promise<WizardApplicationId>;
+    unpublishBlogPost(id: BlogPostId): Promise<boolean>;
+    updateBlogPost(id: BlogPostId, title: string, category: string, excerpt: string, body: string, author: string, readTime: string, publishDate: string): Promise<boolean>;
 }
+import type { BlogPost as _BlogPost } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async createBlogPost(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string, arg6: string): Promise<BlogPostId> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.createBlogPost(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.createBlogPost(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+            return result;
+        }
+    }
+    async deleteBlogPost(arg0: BlogPostId): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.deleteBlogPost(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.deleteBlogPost(arg0);
+            return result;
+        }
+    }
+    async getAllBlogPosts(): Promise<Array<BlogPost>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllBlogPosts();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllBlogPosts();
+            return result;
+        }
+    }
     async getAllPartialLeads(): Promise<Array<PartialLead>> {
         if (this.processError) {
             try {
@@ -143,6 +221,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.getAllPartialLeads();
+            return result;
+        }
+    }
+    async getAllPartnerLeads(): Promise<Array<PartnerLead>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllPartnerLeads();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllPartnerLeads();
             return result;
         }
     }
@@ -174,6 +266,48 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async getBlogPost(arg0: BlogPostId): Promise<BlogPost | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getBlogPost(arg0);
+                return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getBlogPost(arg0);
+            return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getPublishedBlogPosts(): Promise<Array<BlogPost>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getPublishedBlogPosts();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getPublishedBlogPosts();
+            return result;
+        }
+    }
+    async getTotalPartnerLeads(): Promise<bigint> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getTotalPartnerLeads();
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getTotalPartnerLeads();
+            return result;
+        }
+    }
     async getTotalSubmissions(): Promise<bigint> {
         if (this.processError) {
             try {
@@ -199,6 +333,20 @@ export class Backend implements backendInterface {
             }
         } else {
             const result = await this.actor.getTotalWizardApplications();
+            return result;
+        }
+    }
+    async publishBlogPost(arg0: BlogPostId): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.publishBlogPost(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.publishBlogPost(arg0);
             return result;
         }
     }
@@ -230,6 +378,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async submitPartnerLead(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string): Promise<PartnerLeadId> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.submitPartnerLead(arg0, arg1, arg2, arg3, arg4, arg5);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.submitPartnerLead(arg0, arg1, arg2, arg3, arg4, arg5);
+            return result;
+        }
+    }
     async submitWizardApplication(arg0: string, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string, arg6: string, arg7: boolean): Promise<WizardApplicationId> {
         if (this.processError) {
             try {
@@ -244,6 +406,37 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async unpublishBlogPost(arg0: BlogPostId): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.unpublishBlogPost(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.unpublishBlogPost(arg0);
+            return result;
+        }
+    }
+    async updateBlogPost(arg0: BlogPostId, arg1: string, arg2: string, arg3: string, arg4: string, arg5: string, arg6: string, arg7: string): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateBlogPost(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateBlogPost(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
+            return result;
+        }
+    }
+}
+function from_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_BlogPost]): BlogPost | null {
+    return value.length === 0 ? null : value[0];
 }
 export interface CreateActorOptions {
     agent?: Agent;

@@ -13,11 +13,30 @@ import {
 } from "./useImageSettings";
 
 function configToStyle(cfg: ImageConfig): React.CSSProperties {
+  // Clean strategy: objectPosition handles vertical crop (Y) reliably with cover fit.
+  // Scale is applied as a transform only when explicitly set by the admin editor,
+  // using translateY to compensate for any crop shift caused by scaling.
+  // No compounding transforms — each axis is independent.
+
+  const transforms: string[] = [];
+
+  // X shift: objectPosition X is ignored on portrait cover (no horizontal overflow).
+  // Use translateX instead for horizontal adjustment.
+  const xShift = cfg.posX - 50;
+  if (xShift !== 0) transforms.push(`translateX(${xShift * 0.5}%)`);
+
+  // Scale: zoom in/out around center of image
+  if (cfg.scale !== 1.0) {
+    // When scaling, objectPosition Y still controls the crop anchor.
+    // We don't need extra compensation — browser handles this correctly.
+    transforms.push(`scale(${cfg.scale})`);
+  }
+
   return {
     objectFit: cfg.fit,
-    objectPosition: `${cfg.posX}% ${cfg.posY}%`,
-    transform: cfg.scale !== 1.0 ? `scale(${cfg.scale})` : undefined,
-    transformOrigin: `center ${cfg.originY}`,
+    objectPosition: `center ${cfg.posY}%`,
+    transform: transforms.length > 0 ? transforms.join(" ") : "none",
+    transformOrigin: "center top",
   };
 }
 

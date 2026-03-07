@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import { useMutation } from "@tanstack/react-query";
@@ -35,6 +36,7 @@ export default function ContactPage() {
     canonical: "/contact",
   });
 
+  const site = useLiveSiteSettings();
   const { actor } = useActor();
 
   const [form, setForm] = useState({
@@ -500,7 +502,7 @@ export default function ContactPage() {
                         Email
                       </p>
                       <a
-                        href="mailto:Customercare@CYBINENTERPRISES.COM"
+                        href={`mailto:${site.contact.email}`}
                         className="text-sm transition-colors"
                         style={{ color: "#e8edf8" }}
                         onMouseEnter={(e) => {
@@ -510,7 +512,7 @@ export default function ContactPage() {
                           e.currentTarget.style.color = "#e8edf8";
                         }}
                       >
-                        Customercare@CybinEnterprises.com
+                        {site.contact.email}
                       </a>
                     </div>
                   </div>
@@ -530,7 +532,7 @@ export default function ContactPage() {
                         Mobile
                       </p>
                       <a
-                        href="tel:7242447111"
+                        href={`tel:${site.contact.phone1.replace(/\D/g, "")}`}
                         className="text-sm transition-colors"
                         style={{ color: "#e8edf8" }}
                         onMouseEnter={(e) => {
@@ -540,7 +542,7 @@ export default function ContactPage() {
                           e.currentTarget.style.color = "#e8edf8";
                         }}
                       >
-                        724-244-7111
+                        {site.contact.phone1Label}: {site.contact.phone1}
                       </a>
                     </div>
                   </div>
@@ -560,7 +562,7 @@ export default function ContactPage() {
                         Office
                       </p>
                       <a
-                        href="tel:8883212100"
+                        href={`tel:${site.contact.phone2.replace(/\D/g, "")}`}
                         className="text-sm transition-colors"
                         style={{ color: "#e8edf8" }}
                         onMouseEnter={(e) => {
@@ -570,7 +572,7 @@ export default function ContactPage() {
                           e.currentTarget.style.color = "#e8edf8";
                         }}
                       >
-                        888-321-2100
+                        {site.contact.phone2Label}: {site.contact.phone2}
                       </a>
                     </div>
                   </div>

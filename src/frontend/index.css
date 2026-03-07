@@ -241,6 +241,11 @@
   100% { background-position: 200% center; }
 }
 
+@keyframes expertTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 @keyframes ticker-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
@@ -301,6 +306,9 @@
     transition: none;
   }
   .ticker-track {
+    animation: none;
+  }
+  .expert-ticker-track {
     animation: none;
   }
   .animate-float,

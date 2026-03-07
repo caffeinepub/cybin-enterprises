@@ -1,4 +1,5 @@
 import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
+import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { Link, useLocation } from "@/lib/router";
 import { ChevronRight, Cookie, Mail, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -28,6 +29,7 @@ interface LayoutProps {
 
 export default function Layout({ children }: LayoutProps) {
   const { style: logoStyle, config: logoCfg } = useLiveImageSettings("logo");
+  const site = useLiveSiteSettings();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cookieConsent, setCookieConsent] = useState<string | null>(() => {
@@ -282,7 +284,10 @@ export default function Layout({ children }: LayoutProps) {
                 {[
                   ...navLinks,
                   { label: "FAQ", href: "/faq" },
-                  { label: "Company Overview", href: "/knowledge" },
+                  { label: "Knowledge Base", href: "/knowledge" },
+                  { label: "Partners", href: "/partners" },
+                  { label: "Integrations", href: "/integrations" },
+                  { label: "Compliance", href: "/compliance" },
                 ].map((link) => (
                   <Link
                     key={link.href}
@@ -316,7 +321,7 @@ export default function Layout({ children }: LayoutProps) {
               </h4>
               <div className="flex flex-col gap-3 mb-6">
                 <a
-                  href="mailto:Customercare@CYBINENTERPRISES.COM"
+                  href={`mailto:${site.contact.email}`}
                   className="flex items-center gap-2 text-sm transition-colors"
                   style={{ color: "rgba(232, 237, 248, 0.55)" }}
                   onMouseEnter={(e) => {
@@ -327,10 +332,10 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Mail size={13} style={{ flexShrink: 0 }} />
-                  Customercare@CybinEnterprises.com
+                  {site.contact.email}
                 </a>
                 <a
-                  href="tel:7242447111"
+                  href={`tel:${site.contact.phone1.replace(/\D/g, "")}`}
                   className="flex items-center gap-2 text-sm transition-colors"
                   style={{ color: "rgba(232, 237, 248, 0.55)" }}
                   onMouseEnter={(e) => {
@@ -341,10 +346,10 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Phone size={13} style={{ flexShrink: 0 }} />
-                  M: 724-244-7111
+                  {site.contact.phone1Label}: {site.contact.phone1}
                 </a>
                 <a
-                  href="tel:8883212100"
+                  href={`tel:${site.contact.phone2.replace(/\D/g, "")}`}
                   className="flex items-center gap-2 text-sm transition-colors"
                   style={{ color: "rgba(232, 237, 248, 0.55)" }}
                   onMouseEnter={(e) => {
@@ -355,7 +360,7 @@ export default function Layout({ children }: LayoutProps) {
                   }}
                 >
                   <Phone size={13} style={{ flexShrink: 0 }} />
-                  O: 888-321-2100
+                  {site.contact.phone2Label}: {site.contact.phone2}
                 </a>
               </div>
               <h4

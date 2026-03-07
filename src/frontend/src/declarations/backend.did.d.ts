@@ -10,6 +10,19 @@ import type { ActorMethod } from '@icp-sdk/core/agent';
 import type { IDL } from '@icp-sdk/core/candid';
 import type { Principal } from '@icp-sdk/core/principal';
 
+export interface BlogPost {
+  'id' : BlogPostId,
+  'title' : string,
+  'publishDate' : string,
+  'body' : string,
+  'published' : boolean,
+  'author' : string,
+  'readTime' : string,
+  'timestamp' : bigint,
+  'excerpt' : string,
+  'category' : string,
+}
+export type BlogPostId = bigint;
 export interface ContactSubmission {
   'id' : SubmissionId,
   'name' : string,
@@ -27,6 +40,17 @@ export interface PartialLead {
   'industry' : string,
 }
 export type PartialLeadId = bigint;
+export interface PartnerLead {
+  'id' : PartnerLeadId,
+  'contactName' : string,
+  'partnershipType' : string,
+  'description' : string,
+  'email' : string,
+  'timestamp' : bigint,
+  'companyName' : string,
+  'phone' : string,
+}
+export type PartnerLeadId = bigint;
 export type SubmissionId = bigint;
 export interface WizardApplication {
   'id' : WizardApplicationId,
@@ -42,19 +66,39 @@ export interface WizardApplication {
 }
 export type WizardApplicationId = bigint;
 export interface _SERVICE {
+  'createBlogPost' : ActorMethod<
+    [string, string, string, string, string, string, string],
+    BlogPostId
+  >,
+  'deleteBlogPost' : ActorMethod<[BlogPostId], boolean>,
+  'getAllBlogPosts' : ActorMethod<[], Array<BlogPost>>,
   'getAllPartialLeads' : ActorMethod<[], Array<PartialLead>>,
+  'getAllPartnerLeads' : ActorMethod<[], Array<PartnerLead>>,
   'getAllSubmissions' : ActorMethod<[], Array<ContactSubmission>>,
   'getAllWizardApplications' : ActorMethod<[], Array<WizardApplication>>,
+  'getBlogPost' : ActorMethod<[BlogPostId], [] | [BlogPost]>,
+  'getPublishedBlogPosts' : ActorMethod<[], Array<BlogPost>>,
+  'getTotalPartnerLeads' : ActorMethod<[], bigint>,
   'getTotalSubmissions' : ActorMethod<[], bigint>,
   'getTotalWizardApplications' : ActorMethod<[], bigint>,
+  'publishBlogPost' : ActorMethod<[BlogPostId], boolean>,
   'savePartialLead' : ActorMethod<[string, string, string], PartialLeadId>,
   'submitContactForm' : ActorMethod<
     [string, string, string, string, string],
     SubmissionId
   >,
+  'submitPartnerLead' : ActorMethod<
+    [string, string, string, string, string, string],
+    PartnerLeadId
+  >,
   'submitWizardApplication' : ActorMethod<
     [string, string, string, string, string, string, string, boolean],
     WizardApplicationId
+  >,
+  'unpublishBlogPost' : ActorMethod<[BlogPostId], boolean>,
+  'updateBlogPost' : ActorMethod<
+    [BlogPostId, string, string, string, string, string, string, string],
+    boolean
   >,
 }
 export declare const idlService: IDL.ServiceClass;

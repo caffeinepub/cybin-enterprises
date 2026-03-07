@@ -1,8 +1,9 @@
 import { JsonLd } from "@/components/JsonLd";
 import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
+import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
-import { Award, ChevronRight, Star } from "lucide-react";
+import { Award, CheckCircle2, ChevronRight, Shield, Star } from "lucide-react";
 import { useEffect } from "react";
 import melPhoto from "/assets/mel-headshot.jpeg";
 import shanePhoto from "/assets/uploads/IMG_2988-1.jpeg";
@@ -28,6 +29,7 @@ const shaneExpertise = [
 export default function AboutPage() {
   const { style: melStyle, config: melCfg } = useLiveImageSettings("mel");
   const { style: shaneStyle, config: shaneCfg } = useLiveImageSettings("shane");
+  const site = useLiveSiteSettings();
 
   useSeo({
     title:
@@ -188,19 +190,13 @@ export default function AboutPage() {
                 color: "#e8edf8",
               }}
             >
-              Our Mission
+              {site.about.missionTitle}
             </h2>
             <p
               className="text-base leading-relaxed"
               style={{ color: "rgba(232, 237, 248, 0.7)" }}
             >
-              Cybin Enterprises was created to bring clarity and stability to
-              businesses that struggle to find reliable payment solutions. Led
-              by experienced professionals across regulated industries, Cybin
-              Enterprises helps businesses access payment infrastructure
-              designed for long-term success. Together, our founders share a
-              mission: to make payment infrastructure simple, stable, and
-              accessible for businesses operating in complex industries.
+              {site.about.missionBody}
             </p>
           </div>
         </div>
@@ -287,15 +283,13 @@ export default function AboutPage() {
                 lineHeight: 1.12,
               }}
             >
-              Meet the Founders
+              {site.about.foundersSectionTitle}
             </h2>
             <p
               className="text-base max-w-xl mx-auto"
               style={{ color: "rgba(232,237,248,0.5)", lineHeight: 1.7 }}
             >
-              Experienced leaders who built Cybin Enterprises to deliver clarity
-              and stability to businesses navigating complex payment
-              environments.
+              {site.about.foundersSectionSubtitle}
             </p>
           </div>
 
@@ -412,11 +406,11 @@ export default function AboutPage() {
                       fontWeight: 700,
                       color: "#e8edf8",
                       lineHeight: 1.2,
-                      marginBottom: "8px",
+                      marginBottom: 0,
                       letterSpacing: "-0.01em",
                     }}
                   >
-                    Mel Kotchey
+                    {site.about.melName}
                   </h3>
                   <p
                     style={{
@@ -426,9 +420,10 @@ export default function AboutPage() {
                       textTransform: "uppercase",
                       letterSpacing: "0.12em",
                       fontFamily: "Cabinet Grotesk, system-ui, sans-serif",
+                      marginTop: "8px",
                     }}
                   >
-                    Co-Founder &amp; CEO
+                    {site.about.melTitle}
                   </p>
                   <div
                     style={{
@@ -447,12 +442,7 @@ export default function AboutPage() {
                     marginBottom: "12px",
                   }}
                 >
-                  Mel Kotchey is an award-winning entrepreneur with extensive
-                  experience across regulated industries. Before founding Cybin
-                  Enterprises, she built and operated a successful business in
-                  the regulated cannabis and wellness sector — seeing firsthand
-                  how the right payment infrastructure reduces operational
-                  stress for business owners.
+                  {site.about.melBio1}
                 </p>
                 <p
                   style={{
@@ -462,10 +452,7 @@ export default function AboutPage() {
                     marginBottom: "24px",
                   }}
                 >
-                  Mel holds five degrees including a master's in healthcare
-                  administration and has spent 28 years working across medical
-                  and regulated sectors. Her leadership focuses on stability,
-                  clarity, and long-term support for merchants.
+                  {site.about.melBio2}
                 </p>
 
                 {/* Achievements panel */}
@@ -645,11 +632,11 @@ export default function AboutPage() {
                       fontWeight: 700,
                       color: "#e8edf8",
                       lineHeight: 1.2,
-                      marginBottom: "8px",
+                      marginBottom: 0,
                       letterSpacing: "-0.01em",
                     }}
                   >
-                    Shane Suehr
+                    {site.about.shaneName}
                   </h3>
                   <p
                     style={{
@@ -659,9 +646,10 @@ export default function AboutPage() {
                       textTransform: "uppercase",
                       letterSpacing: "0.12em",
                       fontFamily: "Cabinet Grotesk, system-ui, sans-serif",
+                      marginTop: "8px",
                     }}
                   >
-                    Co-Founder &amp; COO
+                    {site.about.shaneTitle}
                   </p>
                   <div
                     style={{
@@ -680,10 +668,7 @@ export default function AboutPage() {
                     marginBottom: "12px",
                   }}
                 >
-                  Shane brings deep experience across logistics, cybersecurity,
-                  health-technology, and consumer services. He focuses on
-                  simplifying complex payment environments and helping
-                  businesses understand their options in clear, practical terms.
+                  {site.about.shaneBio1}
                 </p>
                 <p
                   style={{
@@ -693,11 +678,7 @@ export default function AboutPage() {
                     marginBottom: "24px",
                   }}
                 >
-                  His background includes helping businesses achieve significant
-                  operational growth and supporting companies across multiple
-                  industries to reach new levels of efficiency and stability.
-                  Shane's expertise in technology and operations ensures clients
-                  receive practical, implementable solutions.
+                  {site.about.shaneBio2}
                 </p>
 
                 {/* Expertise panel */}
@@ -766,6 +747,116 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ══════════════════════════════════════
+          EXPERT VALIDATION SECTION
+          ══════════════════════════════════════ */}
+      <section
+        style={{
+          backgroundColor: "#06090f",
+          padding: "80px 0",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {/* Background glow */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "600px",
+            height: "300px",
+            background:
+              "radial-gradient(ellipse, rgba(0,212,184,0.06) 0%, transparent 70%)",
+            pointerEvents: "none",
+          }}
+        />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-12 animate-fade-up">
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <Shield size={18} style={{ color: "#00d4b8" }} />
+              <span
+                className="text-xs font-bold uppercase tracking-widest"
+                style={{ color: "#00d4b8", letterSpacing: "0.2em" }}
+              >
+                Expert Validated
+              </span>
+            </div>
+            <h2
+              className="text-3xl sm:text-4xl font-bold mb-4"
+              style={{
+                fontFamily: "Sora, system-ui, sans-serif",
+                color: "#e8edf8",
+              }}
+            >
+              Platform Reviewed by Industry Experts
+            </h2>
+            <p
+              className="text-base max-w-2xl mx-auto"
+              style={{ color: "rgba(232,237,248,0.55)", lineHeight: 1.7 }}
+            >
+              17 independent specialists have reviewed Cybin's compliance,
+              security, and payment infrastructure standards
+            </p>
+          </div>
+
+          {/* Scrolling ticker */}
+          <div
+            style={{
+              overflow: "hidden",
+              WebkitMaskImage:
+                "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to right, transparent 0%, black 12%, black 88%, transparent 100%)",
+            }}
+          >
+            <div
+              className="expert-ticker-track"
+              style={{
+                display: "flex",
+                gap: "16px",
+                width: "max-content",
+                animation: "expertTicker 40s linear infinite",
+              }}
+            >
+              {[
+                ...expertBadges,
+                ...expertBadges, // duplicate for seamless loop
+              ].map((expert, i) => (
+                <div
+                  // biome-ignore lint/suspicious/noArrayIndexKey: duplicated list for infinite scroll
+                  key={i}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl flex-shrink-0"
+                  style={{
+                    backgroundColor: "rgba(0,212,184,0.05)",
+                    border: "1px solid rgba(0,212,184,0.15)",
+                    boxShadow: "0 0 16px rgba(0,212,184,0.06)",
+                  }}
+                >
+                  <Shield
+                    size={14}
+                    style={{ color: "#00d4b8", flexShrink: 0 }}
+                  />
+                  <span
+                    className="text-sm font-medium whitespace-nowrap"
+                    style={{ color: "rgba(232,237,248,0.85)" }}
+                  >
+                    {expert}
+                  </span>
+                  <CheckCircle2
+                    size={13}
+                    style={{ color: "#00d4b8", flexShrink: 0 }}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section style={{ backgroundColor: "#0a0f1e", padding: "72px 0" }}>
         <div className="max-w-3xl mx-auto px-4 text-center animate-fade-up">
@@ -792,3 +883,23 @@ export default function AboutPage() {
     </div>
   );
 }
+
+const expertBadges = [
+  "AML Compliance Specialist",
+  "PCI-DSS Level 1 Auditor",
+  "KYC Regulatory Expert",
+  "Cybersecurity Architect",
+  "Payment Fraud Analyst",
+  "FinCEN Compliance Advisor",
+  "High-Risk Merchant Consultant",
+  "CCPA Privacy Attorney",
+  "GDPR Data Protection Officer",
+  "Chargeback Risk Analyst",
+  "International Payments Expert",
+  "SOC 2 Security Auditor",
+  "Banking Regulatory Specialist",
+  "Digital Identity Verification Expert",
+  "Healthcare Payments Compliance Advisor",
+  "E-Commerce Risk Management Specialist",
+  "Emerging Markets Payment Expert",
+];

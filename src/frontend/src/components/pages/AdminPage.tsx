@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import {
   AlertCircle,
+  BarChart2,
+  BookOpen,
   Download,
+  Edit3,
   FileText,
+  Handshake,
   ImageIcon,
   Loader2,
   Lock,
@@ -15,12 +19,24 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { useActor } from "../../hooks/useActor";
+import AnalyticsPanel from "./admin/AnalyticsPanel";
+import BlogManagerPanel from "./admin/BlogManagerPanel";
 import ImageEditorPanel from "./admin/ImageEditorPanel";
+import PartnerLeadsPanel from "./admin/PartnerLeadsPanel";
+import SiteEditorPanel from "./admin/SiteEditorPanel";
 
 // ─── Simple client-side PIN guard ────────────────────────────────────────────
 const ADMIN_PIN = "cybin2026";
 
-type Tab = "submissions" | "applications" | "leads" | "images";
+type Tab =
+  | "editor"
+  | "submissions"
+  | "applications"
+  | "leads"
+  | "images"
+  | "blog"
+  | "analytics"
+  | "partners";
 
 function formatDate(timestamp: bigint): string {
   const ms = Number(timestamp / 1_000_000n);
@@ -224,7 +240,7 @@ export default function AdminPage() {
   const [authed, setAuthed] = useState(() => {
     return sessionStorage.getItem("cybin-admin-auth") === "true";
   });
-  const [activeTab, setActiveTab] = useState<Tab>("images");
+  const [activeTab, setActiveTab] = useState<Tab>("editor");
   const { actor } = useActor();
 
   const handleLogin = () => {
@@ -313,6 +329,13 @@ export default function AdminPage() {
     color: string;
   }[] = [
     {
+      id: "editor",
+      label: "Site Editor",
+      icon: Edit3,
+      count: null,
+      color: "#00d4b8",
+    },
+    {
       id: "images",
       label: "Image Editor",
       icon: ImageIcon,
@@ -320,18 +343,32 @@ export default function AdminPage() {
       color: "#ff8c42",
     },
     {
+      id: "blog",
+      label: "Blog Manager",
+      icon: BookOpen,
+      count: null,
+      color: "#4ade80",
+    },
+    {
+      id: "analytics",
+      label: "Analytics",
+      icon: BarChart2,
+      count: null,
+      color: "#60a5fa",
+    },
+    {
       id: "applications",
       label: "Wizard Applications",
       icon: Shield,
       count: applications.length,
-      color: "#00d4b8",
+      color: "#a87ef5",
     },
     {
       id: "submissions",
       label: "Contact Submissions",
       icon: Mail,
       count: submissions.length,
-      color: "#a87ef5",
+      color: "#7cb9f0",
     },
     {
       id: "leads",
@@ -339,6 +376,13 @@ export default function AdminPage() {
       icon: TrendingUp,
       count: leads.length,
       color: "#ffc832",
+    },
+    {
+      id: "partners",
+      label: "Partner Leads",
+      icon: Handshake,
+      count: null,
+      color: "#ff8c42",
     },
   ];
 
@@ -515,7 +559,10 @@ export default function AdminPage() {
             </div>
 
             {/* Content */}
+            {activeTab === "editor" && <SiteEditorPanel />}
             {activeTab === "images" && <ImageEditorPanel />}
+            {activeTab === "blog" && <BlogManagerPanel />}
+            {activeTab === "analytics" && <AnalyticsPanel />}
             {activeTab === "applications" && (
               <ApplicationsTable applications={applications} />
             )}
@@ -523,6 +570,7 @@ export default function AdminPage() {
               <SubmissionsTable submissions={submissions} />
             )}
             {activeTab === "leads" && <LeadsTable leads={leads} />}
+            {activeTab === "partners" && <PartnerLeadsPanel />}
           </>
         )}
       </main>

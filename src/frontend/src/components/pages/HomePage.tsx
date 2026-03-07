@@ -1,3 +1,4 @@
+import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import {
@@ -175,6 +176,8 @@ function NetworkCanvas() {
 }
 
 export default function HomePage() {
+  const site = useLiveSiteSettings();
+
   useSeo({
     title: "High-Risk Payment Solutions | Cybin Enterprises",
     description:
@@ -258,29 +261,34 @@ export default function HomePage() {
               className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
               style={{
                 fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
+                color: site.colors.textPrimary,
                 letterSpacing: "-0.02em",
               }}
             >
-              Trusted Payment Solutions for{" "}
-              <span style={{ color: "#00d4b8" }}>High-Risk</span> and
-              Hard-to-Place Businesses
+              {site.hero.headline.split("High-Risk").length > 1 ? (
+                <>
+                  {site.hero.headline.split("High-Risk")[0]}
+                  <span style={{ color: site.colors.accentTeal }}>
+                    High-Risk
+                  </span>
+                  {site.hero.headline.split("High-Risk")[1]}
+                </>
+              ) : (
+                site.hero.headline
+              )}
             </h1>
 
             <p
               className="text-lg mb-4"
               style={{ color: "rgba(232, 237, 248, 0.7)", lineHeight: 1.7 }}
             >
-              Domestic and international payment solutions designed for
-              businesses that need stability, flexibility, and long-term
-              reliability.
+              {site.hero.subheadline}
             </p>
             <p
               className="text-base mb-10"
               style={{ color: "rgba(232, 237, 248, 0.55)", lineHeight: 1.7 }}
             >
-              Cybin Enterprises helps businesses access the right payment setup,
-              prepare for approval, and maintain long-term processing stability.
+              {site.hero.body}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -289,7 +297,7 @@ export default function HomePage() {
                 data-ocid="hero.primary.button"
                 className="cybin-btn-primary text-base"
               >
-                Start Your Approval Process
+                {site.hero.primaryCta}
                 <ChevronRight size={16} />
               </Link>
               <Link
@@ -297,7 +305,7 @@ export default function HomePage() {
                 data-ocid="hero.secondary.button"
                 className="cybin-btn-secondary text-base"
               >
-                Explore Payment Solutions
+                {site.hero.secondaryCta}
               </Link>
             </div>
           </div>

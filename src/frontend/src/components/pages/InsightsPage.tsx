@@ -1,8 +1,16 @@
 import { JsonLd } from "@/components/JsonLd";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useActor } from "@/hooks/useActor";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
-import { ArrowRight, ChevronRight, Clock } from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { ArrowRight, ChevronRight, Clock, X } from "lucide-react";
 import { useEffect, useState } from "react";
 
 type Category =
@@ -75,6 +83,19 @@ const articles = [
   },
 ];
 
+interface BackendPost {
+  id: bigint;
+  title: string;
+  category: string;
+  excerpt: string;
+  body: string;
+  author: string;
+  readTime: string;
+  publishDate: string;
+  published: boolean;
+  timestamp: bigint;
+}
+
 export default function InsightsPage() {
   useSeo({
     title: "High-Risk Merchant Insights & Resources | Cybin Enterprises",
@@ -83,12 +104,40 @@ export default function InsightsPage() {
     canonical: "/insights",
   });
 
+  const { actor } = useActor();
   const [activeCategory, setActiveCategory] = useState<Category>("All");
+  const [openPost, setOpenPost] = useState<BackendPost | null>(null);
+
+  const publishedQuery = useQuery({
+    queryKey: ["published-blog-posts"],
+    queryFn: async () => {
+      if (!actor) return [];
+      return actor.getPublishedBlogPosts();
+    },
+    enabled: !!actor,
+    staleTime: 60_000,
+  });
+
+  const backendPosts: BackendPost[] = publishedQuery.data ?? [];
+  const useBackend = backendPosts.length > 0;
+
+  // Build unified display list
+  const displayArticles = useBackend
+    ? backendPosts.map((p) => ({
+        id: Number(p.id),
+        title: p.title,
+        category: p.category as Category,
+        excerpt: p.excerpt,
+        readTime: p.readTime,
+        date: p.publishDate,
+        body: p,
+      }))
+    : articles.map((a) => ({ ...a, id: -1, body: null }));
 
   const filtered =
     activeCategory === "All"
-      ? articles
-      : articles.filter((a) => a.category === activeCategory);
+      ? displayArticles
+      : displayArticles.filter((a) => a.category === activeCategory);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: re-observe on category change
   useEffect(() => {
@@ -298,77 +347,164 @@ export default function InsightsPage() {
 
           {/* Articles Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map(({ title, category, excerpt, readTime, date }, i) => (
-              <div
-                key={title}
-                className="animate-fade-up cybin-glass-card p-6 flex flex-col"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <span
-                    className="text-xs font-semibold px-3 py-1 rounded-full"
-                    style={{
-                      backgroundColor: `${categoryColors[category]}18`,
-                      border: `1px solid ${categoryColors[category]}30`,
-                      color: categoryColors[category],
-                    }}
+            {filtered.map(
+              ({ title, category, excerpt, readTime, date, body }, i) => (
+                <div
+                  key={title}
+                  className="animate-fade-up cybin-glass-card p-6 flex flex-col"
+                  style={{ transitionDelay: `${i * 60}ms` }}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <span
+                      className="text-xs font-semibold px-3 py-1 rounded-full"
+                      style={{
+                        backgroundColor: `${categoryColors[category as Category] ?? "#00d4b8"}18`,
+                        border: `1px solid ${categoryColors[category as Category] ?? "#00d4b8"}30`,
+                        color:
+                          categoryColors[category as Category] ?? "#00d4b8",
+                      }}
+                    >
+                      {category}
+                    </span>
+                    <div className="flex items-center gap-1.5">
+                      <Clock
+                        size={12}
+                        style={{ color: "rgba(232,237,248,0.35)" }}
+                      />
+                      <span
+                        className="text-xs"
+                        style={{ color: "rgba(232,237,248,0.35)" }}
+                      >
+                        {readTime}
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3
+                    className="text-base font-bold mb-3 leading-snug"
+                    style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
                   >
-                    {category}
-                  </span>
-                  <div className="flex items-center gap-1.5">
-                    <Clock
-                      size={12}
-                      style={{ color: "rgba(232,237,248,0.35)" }}
-                    />
+                    {title}
+                  </h3>
+                  <p
+                    className="text-sm leading-relaxed flex-1 mb-4"
+                    style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                  >
+                    {excerpt}
+                  </p>
+
+                  <div
+                    className="flex items-center justify-between mt-auto pt-4"
+                    style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+                  >
                     <span
                       className="text-xs"
                       style={{ color: "rgba(232,237,248,0.35)" }}
                     >
-                      {readTime}
+                      {date}
                     </span>
+                    <button
+                      type="button"
+                      data-ocid="insights.read_more.button"
+                      onClick={() =>
+                        body ? setOpenPost(body as BackendPost) : undefined
+                      }
+                      className="flex items-center gap-1.5 text-xs font-semibold transition-colors"
+                      style={{ color: "#00d4b8" }}
+                      onMouseEnter={(e) => {
+                        (e.currentTarget as HTMLElement).style.color =
+                          "#00efd1";
+                      }}
+                      onMouseLeave={(e) => {
+                        (e.currentTarget as HTMLElement).style.color =
+                          "#00d4b8";
+                      }}
+                    >
+                      Read More <ArrowRight size={12} />
+                    </button>
                   </div>
                 </div>
-
-                <h3
-                  className="text-base font-bold mb-3 leading-snug"
-                  style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
-                >
-                  {title}
-                </h3>
-                <p
-                  className="text-sm leading-relaxed flex-1 mb-4"
-                  style={{ color: "rgba(232, 237, 248, 0.55)" }}
-                >
-                  {excerpt}
-                </p>
-
-                <div
-                  className="flex items-center justify-between mt-auto pt-4"
-                  style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
-                >
-                  <span
-                    className="text-xs"
-                    style={{ color: "rgba(232,237,248,0.35)" }}
-                  >
-                    {date}
-                  </span>
-                  <button
-                    type="button"
-                    className="flex items-center gap-1.5 text-xs font-semibold transition-colors"
-                    style={{ color: "#00d4b8" }}
-                    onMouseEnter={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "#00efd1";
-                    }}
-                    onMouseLeave={(e) => {
-                      (e.currentTarget as HTMLElement).style.color = "#00d4b8";
-                    }}
-                  >
-                    Read More <ArrowRight size={12} />
-                  </button>
-                </div>
-              </div>
-            ))}
+              ),
+            )}
           </div>
+
+          {/* Blog Post Modal (backend posts only) */}
+          <Dialog
+            open={!!openPost}
+            onOpenChange={(open) => !open && setOpenPost(null)}
+          >
+            <DialogContent
+              className="max-w-2xl max-h-[80vh] overflow-y-auto"
+              style={{
+                backgroundColor: "#080d1a",
+                border: "1px solid rgba(0,212,184,0.2)",
+                color: "#e8edf8",
+              }}
+              data-ocid="insights.article.dialog"
+            >
+              <DialogHeader>
+                <div className="flex items-center justify-between gap-4 mb-2">
+                  {openPost && (
+                    <span
+                      className="text-xs px-2 py-1 rounded-full font-semibold"
+                      style={{
+                        backgroundColor: `${categoryColors[openPost.category as Category] ?? "#00d4b8"}15`,
+                        color:
+                          categoryColors[openPost.category as Category] ??
+                          "#00d4b8",
+                      }}
+                    >
+                      {openPost?.category}
+                    </span>
+                  )}
+                </div>
+                <DialogTitle
+                  style={{
+                    fontFamily: "Sora, sans-serif",
+                    color: "#e8edf8",
+                    fontSize: "20px",
+                    lineHeight: 1.3,
+                  }}
+                >
+                  {openPost?.title}
+                </DialogTitle>
+                {openPost && (
+                  <div
+                    className="flex items-center gap-3 text-xs mt-2"
+                    style={{ color: "rgba(232,237,248,0.4)" }}
+                  >
+                    <span>{openPost.author}</span>
+                    <span>·</span>
+                    <span>{openPost.readTime}</span>
+                    <span>·</span>
+                    <span>{openPost.publishDate}</span>
+                  </div>
+                )}
+              </DialogHeader>
+              <div
+                className="mt-4 text-sm leading-relaxed whitespace-pre-wrap"
+                style={{ color: "rgba(232,237,248,0.75)" }}
+              >
+                {openPost?.body}
+              </div>
+              <div className="mt-6 flex justify-end">
+                <button
+                  type="button"
+                  data-ocid="insights.article.close_button"
+                  onClick={() => setOpenPost(null)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold"
+                  style={{
+                    backgroundColor: "rgba(255,255,255,0.06)",
+                    border: "1px solid rgba(255,255,255,0.1)",
+                    color: "rgba(232,237,248,0.7)",
+                  }}
+                >
+                  <X size={14} />
+                  Close
+                </button>
+              </div>
+            </DialogContent>
+          </Dialog>
 
           {filtered.length === 0 && (
             <div className="text-center py-20" data-ocid="insights.empty_state">

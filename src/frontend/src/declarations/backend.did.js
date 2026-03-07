@@ -8,6 +8,19 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const BlogPostId = IDL.Nat;
+export const BlogPost = IDL.Record({
+  'id' : BlogPostId,
+  'title' : IDL.Text,
+  'publishDate' : IDL.Text,
+  'body' : IDL.Text,
+  'published' : IDL.Bool,
+  'author' : IDL.Text,
+  'readTime' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'excerpt' : IDL.Text,
+  'category' : IDL.Text,
+});
 export const PartialLeadId = IDL.Nat;
 export const PartialLead = IDL.Record({
   'id' : PartialLeadId,
@@ -15,6 +28,17 @@ export const PartialLead = IDL.Record({
   'email' : IDL.Text,
   'timestamp' : IDL.Int,
   'industry' : IDL.Text,
+});
+export const PartnerLeadId = IDL.Nat;
+export const PartnerLead = IDL.Record({
+  'id' : PartnerLeadId,
+  'contactName' : IDL.Text,
+  'partnershipType' : IDL.Text,
+  'description' : IDL.Text,
+  'email' : IDL.Text,
+  'timestamp' : IDL.Int,
+  'companyName' : IDL.Text,
+  'phone' : IDL.Text,
 });
 export const SubmissionId = IDL.Nat;
 export const ContactSubmission = IDL.Record({
@@ -41,15 +65,27 @@ export const WizardApplication = IDL.Record({
 });
 
 export const idlService = IDL.Service({
+  'createBlogPost' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [BlogPostId],
+      [],
+    ),
+  'deleteBlogPost' : IDL.Func([BlogPostId], [IDL.Bool], []),
+  'getAllBlogPosts' : IDL.Func([], [IDL.Vec(BlogPost)], ['query']),
   'getAllPartialLeads' : IDL.Func([], [IDL.Vec(PartialLead)], ['query']),
+  'getAllPartnerLeads' : IDL.Func([], [IDL.Vec(PartnerLead)], ['query']),
   'getAllSubmissions' : IDL.Func([], [IDL.Vec(ContactSubmission)], ['query']),
   'getAllWizardApplications' : IDL.Func(
       [],
       [IDL.Vec(WizardApplication)],
       ['query'],
     ),
+  'getBlogPost' : IDL.Func([BlogPostId], [IDL.Opt(BlogPost)], ['query']),
+  'getPublishedBlogPosts' : IDL.Func([], [IDL.Vec(BlogPost)], ['query']),
+  'getTotalPartnerLeads' : IDL.Func([], [IDL.Nat], ['query']),
   'getTotalSubmissions' : IDL.Func([], [IDL.Nat], ['query']),
   'getTotalWizardApplications' : IDL.Func([], [IDL.Nat], ['query']),
+  'publishBlogPost' : IDL.Func([BlogPostId], [IDL.Bool], []),
   'savePartialLead' : IDL.Func(
       [IDL.Text, IDL.Text, IDL.Text],
       [PartialLeadId],
@@ -58,6 +94,11 @@ export const idlService = IDL.Service({
   'submitContactForm' : IDL.Func(
       [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
       [SubmissionId],
+      [],
+    ),
+  'submitPartnerLead' : IDL.Func(
+      [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+      [PartnerLeadId],
       [],
     ),
   'submitWizardApplication' : IDL.Func(
@@ -74,11 +115,39 @@ export const idlService = IDL.Service({
       [WizardApplicationId],
       [],
     ),
+  'unpublishBlogPost' : IDL.Func([BlogPostId], [IDL.Bool], []),
+  'updateBlogPost' : IDL.Func(
+      [
+        BlogPostId,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+        IDL.Text,
+      ],
+      [IDL.Bool],
+      [],
+    ),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const BlogPostId = IDL.Nat;
+  const BlogPost = IDL.Record({
+    'id' : BlogPostId,
+    'title' : IDL.Text,
+    'publishDate' : IDL.Text,
+    'body' : IDL.Text,
+    'published' : IDL.Bool,
+    'author' : IDL.Text,
+    'readTime' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'excerpt' : IDL.Text,
+    'category' : IDL.Text,
+  });
   const PartialLeadId = IDL.Nat;
   const PartialLead = IDL.Record({
     'id' : PartialLeadId,
@@ -86,6 +155,17 @@ export const idlFactory = ({ IDL }) => {
     'email' : IDL.Text,
     'timestamp' : IDL.Int,
     'industry' : IDL.Text,
+  });
+  const PartnerLeadId = IDL.Nat;
+  const PartnerLead = IDL.Record({
+    'id' : PartnerLeadId,
+    'contactName' : IDL.Text,
+    'partnershipType' : IDL.Text,
+    'description' : IDL.Text,
+    'email' : IDL.Text,
+    'timestamp' : IDL.Int,
+    'companyName' : IDL.Text,
+    'phone' : IDL.Text,
   });
   const SubmissionId = IDL.Nat;
   const ContactSubmission = IDL.Record({
@@ -112,15 +192,27 @@ export const idlFactory = ({ IDL }) => {
   });
   
   return IDL.Service({
+    'createBlogPost' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [BlogPostId],
+        [],
+      ),
+    'deleteBlogPost' : IDL.Func([BlogPostId], [IDL.Bool], []),
+    'getAllBlogPosts' : IDL.Func([], [IDL.Vec(BlogPost)], ['query']),
     'getAllPartialLeads' : IDL.Func([], [IDL.Vec(PartialLead)], ['query']),
+    'getAllPartnerLeads' : IDL.Func([], [IDL.Vec(PartnerLead)], ['query']),
     'getAllSubmissions' : IDL.Func([], [IDL.Vec(ContactSubmission)], ['query']),
     'getAllWizardApplications' : IDL.Func(
         [],
         [IDL.Vec(WizardApplication)],
         ['query'],
       ),
+    'getBlogPost' : IDL.Func([BlogPostId], [IDL.Opt(BlogPost)], ['query']),
+    'getPublishedBlogPosts' : IDL.Func([], [IDL.Vec(BlogPost)], ['query']),
+    'getTotalPartnerLeads' : IDL.Func([], [IDL.Nat], ['query']),
     'getTotalSubmissions' : IDL.Func([], [IDL.Nat], ['query']),
     'getTotalWizardApplications' : IDL.Func([], [IDL.Nat], ['query']),
+    'publishBlogPost' : IDL.Func([BlogPostId], [IDL.Bool], []),
     'savePartialLead' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Text],
         [PartialLeadId],
@@ -129,6 +221,11 @@ export const idlFactory = ({ IDL }) => {
     'submitContactForm' : IDL.Func(
         [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
         [SubmissionId],
+        [],
+      ),
+    'submitPartnerLead' : IDL.Func(
+        [IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text, IDL.Text],
+        [PartnerLeadId],
         [],
       ),
     'submitWizardApplication' : IDL.Func(
@@ -143,6 +240,21 @@ export const idlFactory = ({ IDL }) => {
           IDL.Bool,
         ],
         [WizardApplicationId],
+        [],
+      ),
+    'unpublishBlogPost' : IDL.Func([BlogPostId], [IDL.Bool], []),
+    'updateBlogPost' : IDL.Func(
+        [
+          BlogPostId,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+          IDL.Text,
+        ],
+        [IDL.Bool],
         [],
       ),
   });
