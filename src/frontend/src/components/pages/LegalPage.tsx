@@ -239,6 +239,7 @@ export function PrivacyPolicyPage() {
               "(d) Right to Opt-Out of Sale or Sharing (§ 1798.120): We do not sell personal information as defined under the CCPA, nor do we share personal information for cross-context behavioral advertising. This right is therefore satisfied as a matter of our standard practice.",
               "(e) Right to Limit Use of Sensitive Personal Information (§ 1798.121): We use sensitive personal information (including government identifiers and financial compliance records) solely for purposes of providing our services and fulfilling legal obligations — not for inferring characteristics unrelated to our services.",
               "(f) Right to Non-Discrimination (§ 1798.125): We will not discriminate against you for exercising any CCPA rights — including by denying services, charging different prices, or providing a different quality of service.",
+              "(g) Right to Opt-Out of Sale/Sharing — Dedicated Page: You may exercise your right to opt-out by visiting our dedicated opt-out page at cybinenterprises.com/do-not-sell or by contacting us at Customercare@cybinenterprises.com.",
               "To exercise your CCPA rights, submit a verifiable consumer request to Customercare@cybinenterprises.com with the subject line 'CCPA Privacy Request.' We will acknowledge your request within ten (10) business days and respond within forty-five (45) calendar days, with a possible extension of an additional forty-five (45) days where reasonably necessary. We may require identity verification before processing your request.",
             ],
           },
@@ -290,6 +291,13 @@ export function PrivacyPolicyPage() {
             title: "Cookies and Tracking Technologies",
             content: [
               "For detailed information about cookies and tracking technologies used on this site, please review our Cookie Policy. We do not use cross-site tracking cookies, third-party advertising pixels, or behavioral profiling tools.",
+            ],
+          },
+          {
+            title: "CAN-SPAM Act and TCPA Compliance",
+            content: [
+              "(a) Email Communications (CAN-SPAM Act, 15 U.S.C. § 7701 et seq.): Any commercial email communications sent by Cybin Enterprises comply with the CAN-SPAM Act. All marketing emails include: (i) a clear and conspicuous identification that the message is an advertisement; (ii) our valid physical postal address; (iii) a clear and easy opt-out/unsubscribe mechanism; and (iv) honored opt-out requests within ten (10) business days. To opt out of marketing emails, click the unsubscribe link in any email or contact Customercare@cybinenterprises.com with the subject 'Unsubscribe.'",
+              "(b) SMS/Text Message Marketing (TCPA, 47 U.S.C. § 227): We do not engage in SMS or text message marketing without obtaining prior express written consent as required by the Telephone Consumer Protection Act (TCPA) and FCC regulations (47 C.F.R. § 64.1200). If you provide a phone number, it is used solely for the purpose of responding to your inquiry. We do not use autodialers or prerecorded messages for marketing purposes without explicit prior written consent. To revoke any consent, contact Customercare@cybinenterprises.com.",
             ],
           },
           {
@@ -396,6 +404,30 @@ export function TermsOfServicePage() {
             ],
           },
           {
+            title: "Acceptable Use Policy (AUP)",
+            content: [
+              "You agree not to use this website or our services for any of the following prohibited activities:",
+              "(a) Any unlawful, fraudulent, or deceptive purpose, including the submission of false business information, fabricated financial records, or misrepresented beneficial ownership.",
+              "(b) Operating any business that violates federal, state, or local law in its jurisdiction of operation, including without limitation operating without required licenses, permits, or registrations.",
+              "(c) Facilitating any transaction that violates OFAC sanctions, BSA anti-structuring rules, or any applicable anti-money laundering regulation.",
+              "(d) Processing payments for illegal goods or services, including but not limited to controlled substances without appropriate DEA or state licensing, weapons not compliant with ATF regulations, or any product or service prohibited by applicable law.",
+              "(e) Attempting to circumvent or evade card network rules (Visa, Mastercard, American Express, Discover) or acquiring bank policies.",
+              "(f) Engaging in 'friendly fraud,' manipulating chargeback processes, or submitting false dispute claims.",
+              "(g) Unauthorized access to, interference with, or disruption of this website, its infrastructure, or the ICP (Internet Computer Protocol) platform on which it operates.",
+              "(h) Impersonating Cybin Enterprises, its employees, or any acquiring bank or payment processor.",
+              "Violation of this AUP is grounds for immediate termination of services and may result in referral to applicable law enforcement or regulatory authorities.",
+            ],
+          },
+          {
+            title: "DMCA Policy and Copyright Infringement",
+            content: [
+              "Cybin Enterprises respects intellectual property rights and complies with the Digital Millennium Copyright Act (DMCA, 17 U.S.C. § 512).",
+              "DMCA Agent: To report alleged copyright infringement on this website, send a written notification to our designated DMCA agent at: Customercare@cybinenterprises.com (Subject: 'DMCA Takedown Notice'). Mail: Cybin Enterprises LLC, ATTN: DMCA Agent, Pennsylvania, United States.",
+              "Your DMCA notification must include: (a) identification of the copyrighted work claimed to be infringed; (b) identification of the allegedly infringing material and its location on our website; (c) your contact information; (d) a statement of good faith belief; (e) a statement under penalty of perjury that the information is accurate and you are authorized to act on behalf of the copyright owner; and (f) your physical or electronic signature.",
+              "Counter-Notification: If you believe your content was wrongly removed, you may submit a counter-notification. We will reinstate content within 10–14 business days if no court action is filed. Repeat infringers will have their access terminated.",
+            ],
+          },
+          {
             title: "CCPA / GDPR — Compliance Acknowledgment",
             content: [
               "Cybin Enterprises processes personal information in compliance with the California Consumer Privacy Act (CCPA/CPRA) and General Data Protection Regulation (GDPR), as detailed in our Privacy Policy. By submitting information through this website, you acknowledge that you have read and understood our Privacy Policy, which is incorporated herein by reference.",
@@ -462,6 +494,7 @@ export function TermsOfServicePage() {
             content: [
               "These Terms shall be governed by and construed in accordance with the laws of the Commonwealth of Pennsylvania, without regard to its conflict of law provisions or any choice-of-law principles that would require application of another jurisdiction's laws.",
               "For any disputes not subject to mandatory arbitration under Section 11, the parties irrevocably consent to the exclusive personal jurisdiction and venue of the state and federal courts located in the Commonwealth of Pennsylvania. You waive any objection to the exercise of personal jurisdiction over you by such courts or to venue in such courts.",
+              "Communications and marketing conducted by Cybin Enterprises comply with the CAN-SPAM Act (15 U.S.C. § 7701 et seq.) and, where applicable, the Telephone Consumer Protection Act (TCPA, 47 U.S.C. § 227). Users who receive communications may opt out at any time per our Privacy Policy.",
             ],
           },
           {

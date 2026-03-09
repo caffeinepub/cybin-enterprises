@@ -6,6 +6,13 @@
     <meta name="theme-color" content="#0a0f1e" />
     <meta name="application-name" content="Cybin Enterprises" />
     <meta name="format-detection" content="telephone=no" />
+    <!-- Security headers via meta equivalents -->
+    <!-- NOTE FOR DEV TEAM: CSP and HSTS must be configured at the server/CDN level (nginx, Cloudflare, etc.) — they cannot be set via meta tags -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
+    <meta name="csrf-protection" content="same-origin" />
     <meta name="geo.region" content="US" />
     <meta name="geo.country" content="US" />
     <title>High-Risk Payment Solutions | Cybin Enterprises</title>

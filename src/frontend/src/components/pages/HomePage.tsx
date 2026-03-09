@@ -285,10 +285,19 @@ export default function HomePage() {
               {site.hero.subheadline}
             </p>
             <p
-              className="text-base mb-10"
+              className="text-base mb-4"
               style={{ color: "rgba(232, 237, 248, 0.55)", lineHeight: 1.7 }}
             >
               {site.hero.body}
+            </p>
+
+            <p
+              className="text-xs mb-8 italic"
+              style={{ color: "rgba(232, 237, 248, 0.4)", lineHeight: 1.6 }}
+            >
+              Payment solutions facilitated through our network of licensed
+              acquiring banks and processors. Approval is not guaranteed.
+              Results vary by business type, history, and underwriting criteria.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -425,6 +434,14 @@ export default function HomePage() {
           >
             Explore Supported Industries <ChevronRight size={16} />
           </Link>
+          <p
+            className="text-xs mt-4 italic"
+            style={{ color: "rgba(232,237,248,0.35)", lineHeight: 1.6 }}
+          >
+            * Approval not guaranteed. Cybin Enterprises is a payment
+            intermediary only. Not investment advice. Each merchant is
+            responsible for their own regulatory compliance.
+          </p>
         </div>
       </section>
 
@@ -557,6 +574,14 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+          <p
+            className="text-xs mt-6 italic"
+            style={{ color: "rgba(232,237,248,0.35)", lineHeight: 1.6 }}
+          >
+            † Guidance and support are provided on a consultation basis. Payment
+            account approval, approval timelines, and long-term stability are
+            determined by acquiring banks and processors, not Cybin Enterprises.
+          </p>
         </div>
       </section>
 

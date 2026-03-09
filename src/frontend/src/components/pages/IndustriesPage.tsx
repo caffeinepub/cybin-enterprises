@@ -218,6 +218,52 @@ export default function IndustriesPage() {
         </div>
       </section>
 
+      {/* Legal Disclaimer Banner */}
+      <section
+        data-ocid="industries.disclaimer.section"
+        style={{ backgroundColor: "#0a0f1e", padding: "28px 0 0" }}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div
+            className="flex items-start gap-3 rounded-xl p-4 sm:p-5"
+            style={{
+              backgroundColor: "rgba(255, 193, 7, 0.05)",
+              border: "1px solid rgba(255, 193, 7, 0.2)",
+            }}
+          >
+            <AlertTriangle
+              size={16}
+              style={{ color: "#ffc107", flexShrink: 0, marginTop: "1px" }}
+            />
+            <div>
+              <p
+                className="text-xs font-bold uppercase tracking-wider mb-1.5"
+                style={{ color: "#ffc107" }}
+              >
+                Important Legal Notice
+              </p>
+              <p
+                className="text-xs leading-relaxed"
+                style={{ color: "rgba(232,237,248,0.6)" }}
+              >
+                Cybin Enterprises is a payment services intermediary — not a
+                registered broker-dealer, investment adviser, money transmitter,
+                or financial institution. We do not provide investment advice.
+                References to "Forex &amp; Crypto" and "Financial Services"
+                industries indicate our ability to facilitate payment processing
+                introductions for legally operating businesses in those sectors
+                only. Trading involves substantial risk of loss. Nothing on this
+                website constitutes investment, financial, legal, or tax advice.
+                Merchant account approval is not guaranteed and is determined
+                solely by acquiring banks and payment processors. Each merchant
+                is independently responsible for compliance with all applicable
+                laws and regulations governing their industry.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Industry Grid */}
       <section style={{ backgroundColor: "#0a0f1e", padding: "72px 0" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -5,6 +5,13 @@ import { ChevronRight, Cookie, Mail, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import logoImg from "/assets/cybin-logo.png";
 
+interface CookieCategories {
+  necessary: boolean;
+  analytics: boolean;
+  preferences: boolean;
+  timestamp: string;
+}
+
 const navLinks = [
   { label: "Home", href: "/", ocid: "nav.home.link" },
   {
@@ -32,12 +39,22 @@ export default function Layout({ children }: LayoutProps) {
   const site = useLiveSiteSettings();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [cookieConsent, setCookieConsent] = useState<string | null>(() => {
-    if (typeof window !== "undefined") {
-      return localStorage.getItem("cybin-cookie-consent");
-    }
-    return null;
-  });
+  const [cookieConsent, setCookieConsent] = useState<CookieCategories | null>(
+    () => {
+      if (typeof window !== "undefined") {
+        const raw = localStorage.getItem("cybin-cookie-consent");
+        if (!raw) return null;
+        try {
+          return JSON.parse(raw) as CookieCategories;
+        } catch {
+          return null;
+        }
+      }
+      return null;
+    },
+  );
+  const [cookieAnalytics, setCookieAnalytics] = useState(false);
+  const [cookiePreferences, setCookiePreferences] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -51,9 +68,22 @@ export default function Layout({ children }: LayoutProps) {
     setMobileOpen(false);
   }, [location.pathname]);
 
-  const handleCookieChoice = (choice: "accepted" | "declined") => {
-    localStorage.setItem("cybin-cookie-consent", choice);
-    setCookieConsent(choice);
+  const handleCookieSave = (analytics: boolean, preferences: boolean) => {
+    const consent: CookieCategories = {
+      necessary: true,
+      analytics,
+      preferences,
+      timestamp: new Date().toISOString(),
+    };
+    localStorage.setItem("cybin-cookie-consent", JSON.stringify(consent));
+    setCookieConsent(consent);
+  };
+
+  const handleCookieSettingsReset = () => {
+    localStorage.removeItem("cybin-cookie-consent");
+    setCookieConsent(null);
+    setCookieAnalytics(false);
+    setCookiePreferences(false);
   };
 
   const currentYear = new Date().getFullYear();
@@ -377,6 +407,11 @@ export default function Layout({ children }: LayoutProps) {
                   { label: "Privacy Policy", href: "/privacy-policy" },
                   { label: "Terms of Service", href: "/terms-of-service" },
                   { label: "Cookie Policy", href: "/cookie-policy" },
+                  {
+                    label: "Do Not Sell or Share My Info",
+                    href: "/do-not-sell",
+                  },
+                  { label: "Accessibility Statement", href: "/accessibility" },
                 ].map((link) => (
                   <Link
                     key={link.href}
@@ -401,26 +436,55 @@ export default function Layout({ children }: LayoutProps) {
             className="mt-10 pt-6"
             style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
           >
-            <p
-              className="text-xs text-center"
-              style={{ color: "rgba(232, 237, 248, 0.35)" }}
-            >
-              © {currentYear} Cybin Enterprises. All rights reserved. Built with
-              ♥ using{" "}
-              <a
-                href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(hostname)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#00d4b8" }}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+              <p
+                className="text-xs text-center"
+                style={{ color: "rgba(232, 237, 248, 0.35)" }}
               >
-                caffeine.ai
-              </a>
-            </p>
+                © {currentYear} Cybin Enterprises. All rights reserved. Built
+                with ♥ using{" "}
+                <a
+                  href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(hostname)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#00d4b8" }}
+                >
+                  caffeine.ai
+                </a>
+              </p>
+              <span
+                className="hidden sm:block text-xs"
+                style={{ color: "rgba(232,237,248,0.2)" }}
+              >
+                ·
+              </span>
+              <button
+                type="button"
+                data-ocid="footer.cookie_settings.button"
+                onClick={handleCookieSettingsReset}
+                className="text-xs transition-colors"
+                style={{
+                  color: "rgba(232, 237, 248, 0.35)",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: 0,
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = "#00d4b8";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = "rgba(232, 237, 248, 0.35)";
+                }}
+              >
+                Cookie Settings
+              </button>
+            </div>
           </div>
         </div>
       </footer>
 
-      {/* Cookie Consent Banner */}
+      {/* Granular Cookie Consent Banner — GDPR/CCPA compliant */}
       {cookieConsent === null && (
         <section
           aria-label="Cookie consent"
@@ -431,40 +495,215 @@ export default function Layout({ children }: LayoutProps) {
             left: 0,
             right: 0,
             zIndex: 60,
-            padding: "16px 24px",
-            background: "rgba(10, 15, 30, 0.95)",
-            backdropFilter: "blur(20px)",
-            WebkitBackdropFilter: "blur(20px)",
-            borderTop: "1px solid rgba(0, 212, 184, 0.15)",
-            boxShadow: "0 -8px 32px rgba(0, 0, 0, 0.4)",
+            background: "rgba(8, 12, 24, 0.98)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            borderTop: "1px solid rgba(0, 212, 184, 0.18)",
+            boxShadow: "0 -8px 40px rgba(0, 0, 0, 0.6)",
           }}
         >
-          <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-start gap-3 flex-1">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
+            {/* Header row */}
+            <div className="flex items-start gap-3 mb-4">
               <Cookie
                 size={18}
-                style={{ color: "#00d4b8", flexShrink: 0, marginTop: "1px" }}
+                style={{ color: "#00d4b8", flexShrink: 0, marginTop: "2px" }}
               />
-              <p
-                className="text-sm"
-                style={{ color: "rgba(232, 237, 248, 0.75)", lineHeight: 1.5 }}
-              >
-                We use cookies to improve your experience and analyze site
-                usage.{" "}
-                <Link to="/cookie-policy" style={{ color: "#00d4b8" }}>
-                  Learn more
-                </Link>
-              </p>
+              <div className="flex-1">
+                <p
+                  className="text-sm font-semibold mb-1"
+                  style={{ color: "#e8edf8" }}
+                >
+                  Your Privacy Choices
+                </p>
+                <p
+                  className="text-xs leading-relaxed"
+                  style={{ color: "rgba(232, 237, 248, 0.6)" }}
+                >
+                  We use cookies to operate this site and, with your consent, to
+                  analyze usage. Under GDPR and CCPA you have the right to
+                  manage these choices.{" "}
+                  <Link
+                    to="/cookie-policy"
+                    style={{ color: "#00d4b8", textDecoration: "underline" }}
+                  >
+                    Cookie Policy
+                  </Link>
+                  {" · "}
+                  <Link
+                    to="/do-not-sell"
+                    style={{ color: "#00d4b8", textDecoration: "underline" }}
+                  >
+                    Do Not Sell My Info
+                  </Link>
+                </p>
+              </div>
             </div>
-            <div className="flex items-center gap-3 flex-shrink-0">
+
+            {/* Cookie categories */}
+            <div
+              className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5 p-3 rounded-xl"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.03)",
+                border: "1px solid rgba(255,255,255,0.06)",
+              }}
+            >
+              {/* Necessary — always on */}
+              <div
+                className="flex items-start gap-3 p-3 rounded-lg"
+                style={{ backgroundColor: "rgba(0,212,184,0.04)" }}
+              >
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span
+                      className="text-xs font-semibold"
+                      style={{ color: "#e8edf8" }}
+                    >
+                      Necessary
+                    </span>
+                    <span
+                      className="text-xs px-2 py-0.5 rounded-full font-medium"
+                      style={{
+                        backgroundColor: "rgba(0,212,184,0.15)",
+                        color: "#00d4b8",
+                      }}
+                    >
+                      Always On
+                    </span>
+                  </div>
+                  <p
+                    className="text-xs leading-relaxed"
+                    style={{ color: "rgba(232,237,248,0.5)" }}
+                  >
+                    Required for site functionality. Cannot be disabled.
+                  </p>
+                </div>
+              </div>
+
+              {/* Analytics — toggleable */}
+              <div
+                className="flex items-start gap-3 p-3 rounded-lg"
+                style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
+              >
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span
+                      className="text-xs font-semibold"
+                      style={{ color: "#e8edf8" }}
+                    >
+                      Analytics
+                    </span>
+                    <button
+                      type="button"
+                      data-ocid="cookie.analytics.toggle"
+                      role="switch"
+                      aria-checked={cookieAnalytics}
+                      onClick={() => setCookieAnalytics(!cookieAnalytics)}
+                      style={{
+                        width: "36px",
+                        height: "20px",
+                        borderRadius: "10px",
+                        backgroundColor: cookieAnalytics
+                          ? "#00d4b8"
+                          : "rgba(255,255,255,0.15)",
+                        position: "relative",
+                        border: "none",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                        transition: "background-color 0.2s",
+                      }}
+                    >
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "2px",
+                          left: cookieAnalytics ? "18px" : "2px",
+                          width: "16px",
+                          height: "16px",
+                          borderRadius: "50%",
+                          backgroundColor: "#fff",
+                          transition: "left 0.2s",
+                        }}
+                      />
+                    </button>
+                  </div>
+                  <p
+                    className="text-xs leading-relaxed"
+                    style={{ color: "rgba(232,237,248,0.5)" }}
+                  >
+                    Privacy-first, device-local page analytics. Never shared
+                    with third parties.
+                  </p>
+                </div>
+              </div>
+
+              {/* Preferences — toggleable */}
+              <div
+                className="flex items-start gap-3 p-3 rounded-lg"
+                style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
+              >
+                <div className="flex-1">
+                  <div className="flex items-center justify-between mb-1">
+                    <span
+                      className="text-xs font-semibold"
+                      style={{ color: "#e8edf8" }}
+                    >
+                      Preferences
+                    </span>
+                    <button
+                      type="button"
+                      data-ocid="cookie.preferences.toggle"
+                      role="switch"
+                      aria-checked={cookiePreferences}
+                      onClick={() => setCookiePreferences(!cookiePreferences)}
+                      style={{
+                        width: "36px",
+                        height: "20px",
+                        borderRadius: "10px",
+                        backgroundColor: cookiePreferences
+                          ? "#00d4b8"
+                          : "rgba(255,255,255,0.15)",
+                        position: "relative",
+                        border: "none",
+                        cursor: "pointer",
+                        flexShrink: 0,
+                        transition: "background-color 0.2s",
+                      }}
+                    >
+                      <span
+                        style={{
+                          position: "absolute",
+                          top: "2px",
+                          left: cookiePreferences ? "18px" : "2px",
+                          width: "16px",
+                          height: "16px",
+                          borderRadius: "50%",
+                          backgroundColor: "#fff",
+                          transition: "left 0.2s",
+                        }}
+                      />
+                    </button>
+                  </div>
+                  <p
+                    className="text-xs leading-relaxed"
+                    style={{ color: "rgba(232,237,248,0.5)" }}
+                  >
+                    Stores your display preferences and wizard progress locally.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Action buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-end gap-3">
               <button
                 type="button"
-                data-ocid="cookie.cancel_button"
-                onClick={() => handleCookieChoice("declined")}
-                className="text-sm font-medium px-4 py-2 rounded-md transition-all"
+                data-ocid="cookie.necessary_only.button"
+                onClick={() => handleCookieSave(false, false)}
+                className="text-xs font-medium px-4 py-2 rounded-md w-full sm:w-auto transition-all"
                 style={{
-                  color: "rgba(232, 237, 248, 0.55)",
-                  border: "1px solid rgba(255,255,255,0.1)",
+                  color: "rgba(232, 237, 248, 0.45)",
+                  border: "1px solid rgba(255,255,255,0.08)",
                   backgroundColor: "transparent",
                 }}
                 onMouseEnter={(e) => {
@@ -472,22 +711,54 @@ export default function Layout({ children }: LayoutProps) {
                   e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)";
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
-                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+                  e.currentTarget.style.color = "rgba(232, 237, 248, 0.45)";
+                  e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
                 }}
               >
-                Decline
+                Necessary Only
               </button>
               <button
                 type="button"
-                data-ocid="cookie.confirm_button"
-                onClick={() => handleCookieChoice("accepted")}
-                className="cybin-btn-primary text-sm"
+                data-ocid="cookie.save_preferences.button"
+                onClick={() =>
+                  handleCookieSave(cookieAnalytics, cookiePreferences)
+                }
+                className="text-xs font-medium px-4 py-2 rounded-md w-full sm:w-auto transition-all"
+                style={{
+                  color: "#e8edf8",
+                  border: "1px solid rgba(255,255,255,0.18)",
+                  backgroundColor: "rgba(255,255,255,0.06)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "rgba(255,255,255,0.1)";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "rgba(255,255,255,0.06)";
+                }}
+              >
+                Save Preferences
+              </button>
+              <button
+                type="button"
+                data-ocid="cookie.accept_all.button"
+                onClick={() => handleCookieSave(true, true)}
+                className="cybin-btn-primary text-xs w-full sm:w-auto"
                 style={{ padding: "0.5rem 1.25rem" }}
               >
-                Accept
+                Accept All
               </button>
             </div>
+
+            {/* Legal notice at collection */}
+            <p
+              className="text-xs mt-3 text-center"
+              style={{ color: "rgba(232,237,248,0.3)" }}
+            >
+              Notice at Collection (Cal. Civ. Code § 1798.100). Consent can be
+              withdrawn at any time via "Cookie Settings" in the footer.
+            </p>
           </div>
         </section>
       )}

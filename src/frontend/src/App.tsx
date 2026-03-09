@@ -3,10 +3,12 @@ import { BrowserRouter, Route, Routes, useNavigate } from "@/lib/router";
 import { useEffect } from "react";
 import Layout from "./components/Layout";
 import AboutPage from "./components/pages/AboutPage";
+import AccessibilityPage from "./components/pages/AccessibilityPage";
 import AdminPage from "./components/pages/AdminPage";
 import BlogPostPage from "./components/pages/BlogPostPage";
 import CompliancePage from "./components/pages/CompliancePage";
 import ContactPage from "./components/pages/ContactPage";
+import DoNotSellPage from "./components/pages/DoNotSellPage";
 import FaqPage from "./components/pages/FaqPage";
 import FraudDeflectPage from "./components/pages/FraudDeflectPage";
 import HomePage from "./components/pages/HomePage";
@@ -159,6 +161,22 @@ function AppRoutes() {
         element={
           <Layout>
             <CompliancePage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/do-not-sell"
+        element={
+          <Layout>
+            <DoNotSellPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/accessibility"
+        element={
+          <Layout>
+            <AccessibilityPage />
           </Layout>
         }
       />
