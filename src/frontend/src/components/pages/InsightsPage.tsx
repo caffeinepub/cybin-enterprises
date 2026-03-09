@@ -1,26 +1,10 @@
 import { JsonLd } from "@/components/JsonLd";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useActor } from "@/hooks/useActor";
+import { type Category, blogPosts } from "@/data/blogPosts";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
-import { useQuery } from "@tanstack/react-query";
-import { ArrowRight, ChevronRight, Clock, X } from "lucide-react";
+import { ArrowRight, ChevronRight, Clock } from "lucide-react";
 import { useEffect, useState } from "react";
-
-type Category =
-  | "All"
-  | "Payment Infrastructure"
-  | "High-Risk Industries"
-  | "Chargebacks & Fraud"
-  | "Compliance"
-  | "Business Growth"
-  | "International Payments";
 
 const categories: Category[] = [
   "All",
@@ -32,70 +16,6 @@ const categories: Category[] = [
   "International Payments",
 ];
 
-const articles = [
-  {
-    title: "What Makes a Business High-Risk",
-    category: "High-Risk Industries" as Category,
-    excerpt:
-      "Understanding the factors that classify a business as high-risk is the first step to securing stable payment processing. Learn what processors look for and how to position your business for approval.",
-    readTime: "5 min read",
-    date: "February 2026",
-  },
-  {
-    title: "How Early Alerts Reduce Chargebacks",
-    category: "Chargebacks & Fraud" as Category,
-    excerpt:
-      "Chargeback disputes can threaten your merchant account. Discover how early dispute alert systems like Ethoca and Verifi allow merchants to resolve issues before they escalate.",
-    readTime: "4 min read",
-    date: "January 2026",
-  },
-  {
-    title: "International Payment Options Explained",
-    category: "International Payments" as Category,
-    excerpt:
-      "For businesses operating across borders, international payment processing opens new markets. This guide breaks down the key options, considerations, and best practices for cross-border commerce.",
-    readTime: "6 min read",
-    date: "January 2026",
-  },
-  {
-    title: "Preventing Payment Account Shutdowns",
-    category: "Payment Infrastructure" as Category,
-    excerpt:
-      "Sudden account terminations are one of the biggest risks for high-risk merchants. Learn the warning signs, proactive steps, and strategies to maintain long-term account stability.",
-    readTime: "7 min read",
-    date: "December 2025",
-  },
-  {
-    title: "Subscription Billing in High-Risk Industries",
-    category: "Business Growth" as Category,
-    excerpt:
-      "Subscription models offer predictable revenue, but high-risk merchants face unique challenges. Explore how to structure recurring billing that processors accept and customers trust.",
-    readTime: "5 min read",
-    date: "December 2025",
-  },
-  {
-    title: "Compliance Essentials for High-Risk Merchants",
-    category: "Compliance" as Category,
-    excerpt:
-      "Staying compliant isn't just about avoiding fines — it's about keeping your payment infrastructure intact. A practical overview of what high-risk businesses need to know.",
-    readTime: "8 min read",
-    date: "November 2025",
-  },
-];
-
-interface BackendPost {
-  id: bigint;
-  title: string;
-  category: string;
-  excerpt: string;
-  body: string;
-  author: string;
-  readTime: string;
-  publishDate: string;
-  published: boolean;
-  timestamp: bigint;
-}
-
 export default function InsightsPage() {
   useSeo({
     title: "High-Risk Merchant Insights & Resources | Cybin Enterprises",
@@ -104,40 +24,12 @@ export default function InsightsPage() {
     canonical: "/insights",
   });
 
-  const { actor } = useActor();
   const [activeCategory, setActiveCategory] = useState<Category>("All");
-  const [openPost, setOpenPost] = useState<BackendPost | null>(null);
-
-  const publishedQuery = useQuery({
-    queryKey: ["published-blog-posts"],
-    queryFn: async () => {
-      if (!actor) return [];
-      return actor.getPublishedBlogPosts();
-    },
-    enabled: !!actor,
-    staleTime: 60_000,
-  });
-
-  const backendPosts: BackendPost[] = publishedQuery.data ?? [];
-  const useBackend = backendPosts.length > 0;
-
-  // Build unified display list
-  const displayArticles = useBackend
-    ? backendPosts.map((p) => ({
-        id: Number(p.id),
-        title: p.title,
-        category: p.category as Category,
-        excerpt: p.excerpt,
-        readTime: p.readTime,
-        date: p.publishDate,
-        body: p,
-      }))
-    : articles.map((a) => ({ ...a, id: -1, body: null }));
 
   const filtered =
     activeCategory === "All"
-      ? displayArticles
-      : displayArticles.filter((a) => a.category === activeCategory);
+      ? blogPosts
+      : blogPosts.filter((a) => a.category === activeCategory);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: re-observe on category change
   useEffect(() => {
@@ -205,50 +97,16 @@ export default function InsightsPage() {
             name: "Cybin Enterprises",
             url: "https://cybinenterprises.com",
           },
-          blogPost: [
-            {
-              "@type": "BlogPosting",
-              headline: "What Makes a Business High-Risk",
-              datePublished: "2026-02-01",
-              author: { "@type": "Organization", name: "Cybin Enterprises" },
-              url: "https://cybinenterprises.com/insights",
-            },
-            {
-              "@type": "BlogPosting",
-              headline: "How Early Alerts Reduce Chargebacks",
-              datePublished: "2026-01-15",
-              author: { "@type": "Organization", name: "Cybin Enterprises" },
-              url: "https://cybinenterprises.com/insights",
-            },
-            {
-              "@type": "BlogPosting",
-              headline: "International Payment Options Explained",
-              datePublished: "2026-01-01",
-              author: { "@type": "Organization", name: "Cybin Enterprises" },
-              url: "https://cybinenterprises.com/insights",
-            },
-            {
-              "@type": "BlogPosting",
-              headline: "Preventing Payment Account Shutdowns",
-              datePublished: "2025-12-15",
-              author: { "@type": "Organization", name: "Cybin Enterprises" },
-              url: "https://cybinenterprises.com/insights",
-            },
-            {
-              "@type": "BlogPosting",
-              headline: "Subscription Billing in High-Risk Industries",
-              datePublished: "2025-12-01",
-              author: { "@type": "Organization", name: "Cybin Enterprises" },
-              url: "https://cybinenterprises.com/insights",
-            },
-            {
-              "@type": "BlogPosting",
-              headline: "Compliance Essentials for High-Risk Merchants",
-              datePublished: "2025-11-15",
-              author: { "@type": "Organization", name: "Cybin Enterprises" },
-              url: "https://cybinenterprises.com/insights",
-            },
-          ],
+          blogPost: blogPosts.map((p) => ({
+            "@type": "BlogPosting",
+            headline: p.title,
+            description: p.excerpt,
+            datePublished: p.dateISO,
+            author: { "@type": "Organization", name: "Cybin Enterprises" },
+            url: `https://cybinenterprises.com/insights/${p.slug}`,
+            articleSection: p.category,
+            keywords: p.category,
+          })),
         }}
       />
       {/* Hero */}
@@ -347,24 +205,30 @@ export default function InsightsPage() {
 
           {/* Articles Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map(
-              ({ title, category, excerpt, readTime, date, body }, i) => (
-                <div
-                  key={title}
-                  className="animate-fade-up cybin-glass-card p-6 flex flex-col"
-                  style={{ transitionDelay: `${i * 60}ms` }}
+            {filtered.map((post, i) => {
+              const color = categoryColors[post.category] ?? "#00d4b8";
+              return (
+                <Link
+                  key={post.slug}
+                  to={`/insights/${post.slug}`}
+                  data-ocid="insights.article.item"
+                  className="animate-fade-up cybin-glass-card p-6 flex flex-col group"
+                  style={{
+                    transitionDelay: `${i * 60}ms`,
+                    textDecoration: "none",
+                    cursor: "pointer",
+                  }}
                 >
                   <div className="flex items-center justify-between mb-4">
                     <span
                       className="text-xs font-semibold px-3 py-1 rounded-full"
                       style={{
-                        backgroundColor: `${categoryColors[category as Category] ?? "#00d4b8"}18`,
-                        border: `1px solid ${categoryColors[category as Category] ?? "#00d4b8"}30`,
-                        color:
-                          categoryColors[category as Category] ?? "#00d4b8",
+                        backgroundColor: `${color}18`,
+                        border: `1px solid ${color}30`,
+                        color,
                       }}
                     >
-                      {category}
+                      {post.category}
                     </span>
                     <div className="flex items-center gap-1.5">
                       <Clock
@@ -375,22 +239,25 @@ export default function InsightsPage() {
                         className="text-xs"
                         style={{ color: "rgba(232,237,248,0.35)" }}
                       >
-                        {readTime}
+                        {post.readTime}
                       </span>
                     </div>
                   </div>
 
                   <h3
-                    className="text-base font-bold mb-3 leading-snug"
-                    style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
+                    className="text-base font-bold mb-3 leading-snug group-hover:text-teal-400 transition-colors"
+                    style={{
+                      fontFamily: "Sora, sans-serif",
+                      color: "#e8edf8",
+                    }}
                   >
-                    {title}
+                    {post.title}
                   </h3>
                   <p
                     className="text-sm leading-relaxed flex-1 mb-4"
                     style={{ color: "rgba(232, 237, 248, 0.55)" }}
                   >
-                    {excerpt}
+                    {post.excerpt}
                   </p>
 
                   <div
@@ -401,110 +268,19 @@ export default function InsightsPage() {
                       className="text-xs"
                       style={{ color: "rgba(232,237,248,0.35)" }}
                     >
-                      {date}
+                      {post.date}
                     </span>
-                    <button
-                      type="button"
-                      data-ocid="insights.read_more.button"
-                      onClick={() =>
-                        body ? setOpenPost(body as BackendPost) : undefined
-                      }
-                      className="flex items-center gap-1.5 text-xs font-semibold transition-colors"
-                      style={{ color: "#00d4b8" }}
-                      onMouseEnter={(e) => {
-                        (e.currentTarget as HTMLElement).style.color =
-                          "#00efd1";
-                      }}
-                      onMouseLeave={(e) => {
-                        (e.currentTarget as HTMLElement).style.color =
-                          "#00d4b8";
-                      }}
-                    >
-                      Read More <ArrowRight size={12} />
-                    </button>
-                  </div>
-                </div>
-              ),
-            )}
-          </div>
-
-          {/* Blog Post Modal (backend posts only) */}
-          <Dialog
-            open={!!openPost}
-            onOpenChange={(open) => !open && setOpenPost(null)}
-          >
-            <DialogContent
-              className="max-w-2xl max-h-[80vh] overflow-y-auto"
-              style={{
-                backgroundColor: "#080d1a",
-                border: "1px solid rgba(0,212,184,0.2)",
-                color: "#e8edf8",
-              }}
-              data-ocid="insights.article.dialog"
-            >
-              <DialogHeader>
-                <div className="flex items-center justify-between gap-4 mb-2">
-                  {openPost && (
                     <span
-                      className="text-xs px-2 py-1 rounded-full font-semibold"
-                      style={{
-                        backgroundColor: `${categoryColors[openPost.category as Category] ?? "#00d4b8"}15`,
-                        color:
-                          categoryColors[openPost.category as Category] ??
-                          "#00d4b8",
-                      }}
+                      className="flex items-center gap-1.5 text-xs font-semibold"
+                      style={{ color: "#00d4b8" }}
                     >
-                      {openPost?.category}
+                      Read Article <ArrowRight size={12} />
                     </span>
-                  )}
-                </div>
-                <DialogTitle
-                  style={{
-                    fontFamily: "Sora, sans-serif",
-                    color: "#e8edf8",
-                    fontSize: "20px",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {openPost?.title}
-                </DialogTitle>
-                {openPost && (
-                  <div
-                    className="flex items-center gap-3 text-xs mt-2"
-                    style={{ color: "rgba(232,237,248,0.4)" }}
-                  >
-                    <span>{openPost.author}</span>
-                    <span>·</span>
-                    <span>{openPost.readTime}</span>
-                    <span>·</span>
-                    <span>{openPost.publishDate}</span>
                   </div>
-                )}
-              </DialogHeader>
-              <div
-                className="mt-4 text-sm leading-relaxed whitespace-pre-wrap"
-                style={{ color: "rgba(232,237,248,0.75)" }}
-              >
-                {openPost?.body}
-              </div>
-              <div className="mt-6 flex justify-end">
-                <button
-                  type="button"
-                  data-ocid="insights.article.close_button"
-                  onClick={() => setOpenPost(null)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold"
-                  style={{
-                    backgroundColor: "rgba(255,255,255,0.06)",
-                    border: "1px solid rgba(255,255,255,0.1)",
-                    color: "rgba(232,237,248,0.7)",
-                  }}
-                >
-                  <X size={14} />
-                  Close
-                </button>
-              </div>
-            </DialogContent>
-          </Dialog>
+                </Link>
+              );
+            })}
+          </div>
 
           {filtered.length === 0 && (
             <div className="text-center py-20" data-ocid="insights.empty_state">

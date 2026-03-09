@@ -81,14 +81,19 @@ export function Routes({ children }: RoutesProps) {
     }
   });
 
-  // Find matching route — support wildcard "/*"
+  // Find matching route — support wildcard "/*" and dynamic segments
   for (const route of routes) {
     const pattern = route.path;
     if (pattern === "/*" || pattern === "*") {
       return <>{route.element}</>;
     }
-    if (matchPath(pattern, pathname)) {
-      return <>{route.element}</>;
+    const { matched, params } = matchPath(pattern, pathname);
+    if (matched) {
+      return (
+        <ParamsContext.Provider value={params}>
+          {route.element}
+        </ParamsContext.Provider>
+      );
     }
   }
   return null;
@@ -99,13 +104,38 @@ export function Route(_props: RouteProps) {
   return null;
 }
 
-function matchPath(pattern: string, pathname: string): boolean {
-  if (pattern === pathname) return true;
+// ─── Path matching & params ───────────────────────────────────────────────────
+
+const ParamsContext = createContext<Record<string, string>>({});
+
+function matchPath(
+  pattern: string,
+  pathname: string,
+): { matched: boolean; params: Record<string, string> } {
+  if (pattern === pathname) return { matched: true, params: {} };
   if (pattern.endsWith("/*")) {
     const base = pattern.slice(0, -2);
-    return pathname === base || pathname.startsWith(`${base}/`);
+    if (pathname === base || pathname.startsWith(`${base}/`)) {
+      return { matched: true, params: {} };
+    }
+    return { matched: false, params: {} };
   }
-  return false;
+
+  // Dynamic segments e.g. /insights/:slug
+  const patternParts = pattern.split("/");
+  const pathParts = pathname.split("/");
+  if (patternParts.length !== pathParts.length) {
+    return { matched: false, params: {} };
+  }
+  const params: Record<string, string> = {};
+  for (let i = 0; i < patternParts.length; i++) {
+    if (patternParts[i].startsWith(":")) {
+      params[patternParts[i].slice(1)] = decodeURIComponent(pathParts[i]);
+    } else if (patternParts[i] !== pathParts[i]) {
+      return { matched: false, params: {} };
+    }
+  }
+  return { matched: true, params };
 }
 
 // ─── Link ─────────────────────────────────────────────────────────────────────
@@ -153,6 +183,10 @@ export function useLocation() {
 export function useNavigate() {
   const { navigate } = useContext(RouteContext);
   return navigate;
+}
+
+export function useParams<T extends Record<string, string>>(): Partial<T> {
+  return useContext(ParamsContext) as Partial<T>;
 }
 
 export function useSearchParams(): [

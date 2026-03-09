@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Layout from "./components/Layout";
 import AboutPage from "./components/pages/AboutPage";
 import AdminPage from "./components/pages/AdminPage";
+import BlogPostPage from "./components/pages/BlogPostPage";
 import CompliancePage from "./components/pages/CompliancePage";
 import ContactPage from "./components/pages/ContactPage";
 import FaqPage from "./components/pages/FaqPage";
@@ -85,6 +86,14 @@ function AppRoutes() {
         element={
           <Layout>
             <InsightsPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/insights/:slug"
+        element={
+          <Layout>
+            <BlogPostPage />
           </Layout>
         }
       />
