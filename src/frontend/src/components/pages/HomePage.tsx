@@ -55,10 +55,10 @@ const industries = [
   "Subscription Businesses",
   "Specialty Retail",
   "Firearms & Ammunition",
-  "Adult Entertainment",
   "Travel & Booking",
   "Online Gaming",
   "Kratom & Ethnobotanicals",
+  "Mushrooms & Spores",
   "Debt Collection",
   "Forex & Crypto",
   "Legal Services",
@@ -351,8 +351,8 @@ export default function HomePage() {
                 color: "#e8edf8",
               }}
             >
-              We Support{" "}
-              <span style={{ color: "#00d4b8" }}>All Legal Industries</span>
+              If Banks Said No,{" "}
+              <span style={{ color: "#00d4b8" }}>We Say Yes</span>
             </h2>
             <p
               style={{
@@ -361,9 +361,9 @@ export default function HomePage() {
                 margin: "0 auto",
               }}
             >
-              If your business operates legally, we can work with you —
-              including industries that have been previously declined or flagged
-              as high-risk.
+              Cybin Enterprises works with businesses across every industry —
+              including those labeled high-risk, hard-to-place, or previously
+              declined. If your business operates, we'll find you a solution.
             </p>
           </div>
         </div>
@@ -432,7 +432,7 @@ export default function HomePage() {
             className="cybin-btn-primary"
             data-ocid="industries.qualify.button"
           >
-            Explore Supported Industries <ChevronRight size={16} />
+            Explore Our Industries <ChevronRight size={16} />
           </Link>
           <p
             className="text-xs mt-4 italic"
@@ -441,6 +441,69 @@ export default function HomePage() {
             * Approval not guaranteed. Cybin Enterprises is a payment
             intermediary only. Not investment advice. Each merchant is
             responsible for their own regulatory compliance.
+          </p>
+        </div>
+
+        {/* Common Industries Discovery Strip */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pb-2">
+          <p
+            className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
+            style={{ color: "rgba(232,237,248,0.35)" }}
+          >
+            Common Industries We Serve
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { label: "Cannabis & CBD", slug: "cannabis-cbd" },
+              { label: "Firearms & Ammo", slug: "firearms-ammunition" },
+              { label: "Online Gaming", slug: "online-gaming" },
+              { label: "Nutraceuticals", slug: "nutraceuticals-supplements" },
+              {
+                label: "Kratom & Spores",
+                slug: "kratom-spores-ethnobotanicals",
+              },
+              { label: "Telemedicine", slug: "telemedicine-healthcare" },
+              { label: "Vaping & E-Cigs", slug: "e-cigarettes-vaping" },
+              { label: "Subscriptions", slug: "subscription-businesses" },
+            ].map((ind) => (
+              <Link
+                key={ind.slug}
+                to={`/industries/${ind.slug}`}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium transition-all"
+                style={{
+                  backgroundColor: "rgba(0,212,184,0.06)",
+                  border: "1px solid rgba(0,212,184,0.18)",
+                  color: "rgba(232,237,248,0.75)",
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "rgba(0,212,184,0.12)";
+                  e.currentTarget.style.borderColor = "rgba(0,212,184,0.4)";
+                  e.currentTarget.style.color = "#e8edf8";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor =
+                    "rgba(0,212,184,0.06)";
+                  e.currentTarget.style.borderColor = "rgba(0,212,184,0.18)";
+                  e.currentTarget.style.color = "rgba(232,237,248,0.75)";
+                }}
+              >
+                <span style={{ color: "#00d4b8", fontSize: "8px" }}>◆</span>
+                {ind.label}
+              </Link>
+            ))}
+          </div>
+          <p
+            className="text-xs text-center mt-4"
+            style={{ color: "rgba(232,237,248,0.3)" }}
+          >
+            Don't see your industry? We likely work with it.{" "}
+            <Link
+              to="/contact"
+              style={{ color: "#00d4b8", textDecoration: "underline" }}
+            >
+              Contact us to discuss.
+            </Link>
           </p>
         </div>
       </section>

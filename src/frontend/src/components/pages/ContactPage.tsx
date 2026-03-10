@@ -517,35 +517,37 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <div
-                      className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: "rgba(0, 212, 184, 0.1)" }}
-                    >
-                      <Phone size={16} style={{ color: "#00d4b8" }} />
-                    </div>
-                    <div>
-                      <p
-                        className="text-xs font-semibold uppercase tracking-wider mb-1"
-                        style={{ color: "rgba(232,237,248,0.45)" }}
+                  {site.contact.phone1 && (
+                    <div className="flex items-start gap-3">
+                      <div
+                        className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{ backgroundColor: "rgba(0, 212, 184, 0.1)" }}
                       >
-                        Mobile
-                      </p>
-                      <a
-                        href={`tel:${site.contact.phone1.replace(/\D/g, "")}`}
-                        className="text-sm transition-colors"
-                        style={{ color: "#e8edf8" }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.color = "#00d4b8";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.color = "#e8edf8";
-                        }}
-                      >
-                        {site.contact.phone1Label}: {site.contact.phone1}
-                      </a>
+                        <Phone size={16} style={{ color: "#00d4b8" }} />
+                      </div>
+                      <div>
+                        <p
+                          className="text-xs font-semibold uppercase tracking-wider mb-1"
+                          style={{ color: "rgba(232,237,248,0.45)" }}
+                        >
+                          Mobile
+                        </p>
+                        <a
+                          href={`tel:${site.contact.phone1.replace(/\D/g, "")}`}
+                          className="text-sm transition-colors"
+                          style={{ color: "#e8edf8" }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = "#00d4b8";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = "#e8edf8";
+                          }}
+                        >
+                          {site.contact.phone1Label}: {site.contact.phone1}
+                        </a>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div className="flex items-start gap-3">
                     <div

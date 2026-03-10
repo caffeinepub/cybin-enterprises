@@ -36,6 +36,10 @@ interface WizardState {
   businessName: string;
   fein: string;
   feinSkipped: boolean;
+  monthlyVolume: string;
+  businessType: string;
+  hasHardware: string;
+  wantsHardware: string;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -850,7 +854,7 @@ function Step4({
           }}
         >
           <Shield size={11} />
-          Secure Vault — FEIN Verification
+          Secure Vault — EIN Verification
         </div>
         <h2
           className="text-2xl sm:text-3xl font-bold mb-3"
@@ -863,7 +867,7 @@ function Step4({
           Business Identity Verification
         </h2>
         <p className="text-sm" style={{ color: "rgba(232,237,248,0.45)" }}>
-          Step 4 of 4 — All fields optional. Providing your FEIN accelerates
+          Step 4 of 4 — All fields optional. Providing your EIN accelerates
           underwriting.
         </p>
       </div>
@@ -905,7 +909,7 @@ function Step4({
               className="text-xs leading-relaxed"
               style={{ color: "rgba(232,237,248,0.55)" }}
             >
-              Provide your FEIN to trigger an automated pre-check against the
+              Provide your EIN to trigger an automated pre-check against the
               2026 FinCEN database for 48-hour priority boarding.
             </p>
           </div>
@@ -954,14 +958,192 @@ function Step4({
           />
         </div>
 
-        {/* FEIN */}
+        {/* Monthly Volume */}
+        <div>
+          <label
+            htmlFor="wizard-volume"
+            className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Monthly Processing Volume{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.3)" }}
+            >
+              (optional)
+            </span>
+          </label>
+          <select
+            id="wizard-volume"
+            data-ocid="wizard.step4.volume.select"
+            value={state.monthlyVolume}
+            onChange={(e) => onChange("monthlyVolume", e.target.value)}
+            className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.03)",
+              border: "1.5px solid rgba(255, 200, 50, 0.15)",
+              color: state.monthlyVolume ? "#e8edf8" : "rgba(232,237,248,0.35)",
+              outline: "none",
+              fontFamily: "Cabinet Grotesk, sans-serif",
+              appearance: "none",
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255, 200, 50, 0.4)";
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255, 200, 50, 0.15)";
+            }}
+          >
+            <option value="">Select volume range...</option>
+            <option value="under-10k">Under $10K / month</option>
+            <option value="10k-50k">$10K – $50K / month</option>
+            <option value="50k-100k">$50K – $100K / month</option>
+            <option value="100k-500k">$100K – $500K / month</option>
+            <option value="500k-1m">$500K – $1M / month</option>
+            <option value="1m-plus">$1M+ / month</option>
+          </select>
+        </div>
+
+        {/* Business Type */}
+        <div>
+          <label
+            htmlFor="wizard-biz-type"
+            className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Business Type{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.3)" }}
+            >
+              (optional)
+            </span>
+          </label>
+          <select
+            id="wizard-biz-type"
+            data-ocid="wizard.step4.business_type.select"
+            value={state.businessType}
+            onChange={(e) => onChange("businessType", e.target.value)}
+            className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.03)",
+              border: "1.5px solid rgba(255, 200, 50, 0.15)",
+              color: state.businessType ? "#e8edf8" : "rgba(232,237,248,0.35)",
+              outline: "none",
+              fontFamily: "Cabinet Grotesk, sans-serif",
+              appearance: "none",
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255, 200, 50, 0.4)";
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255, 200, 50, 0.15)";
+            }}
+          >
+            <option value="">Select business type...</option>
+            <option value="ecommerce">E-Commerce (online only)</option>
+            <option value="retail">Retail / In-Person</option>
+            <option value="both">Both E-Commerce & Retail</option>
+            <option value="not-sure">Not Sure Yet</option>
+          </select>
+        </div>
+
+        {/* Hardware */}
+        <div>
+          <div
+            className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Do you currently have payment hardware?{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.3)" }}
+            >
+              (optional)
+            </span>
+          </div>
+          <div className="flex gap-3">
+            {["Yes", "No", "Not sure"].map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                data-ocid="wizard.step4.has_hardware.toggle"
+                onClick={() => onChange("hasHardware", opt)}
+                className="flex-1 py-2.5 rounded-xl text-sm font-medium transition-all"
+                style={{
+                  backgroundColor:
+                    state.hasHardware === opt
+                      ? "rgba(255,200,50,0.12)"
+                      : "rgba(255,255,255,0.03)",
+                  border:
+                    state.hasHardware === opt
+                      ? "1.5px solid rgba(255,200,50,0.5)"
+                      : "1.5px solid rgba(255,200,50,0.12)",
+                  color:
+                    state.hasHardware === opt
+                      ? "#ffc832"
+                      : "rgba(232,237,248,0.5)",
+                  cursor: "pointer",
+                }}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Wants Hardware */}
+        <div>
+          <div
+            className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Interested in new or upgraded hardware?{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.3)" }}
+            >
+              (optional)
+            </span>
+          </div>
+          <div className="flex gap-3">
+            {["Yes", "No"].map((opt) => (
+              <button
+                key={opt}
+                type="button"
+                data-ocid="wizard.step4.wants_hardware.toggle"
+                onClick={() => onChange("wantsHardware", opt)}
+                className="flex-1 py-2.5 rounded-xl text-sm font-medium transition-all"
+                style={{
+                  backgroundColor:
+                    state.wantsHardware === opt
+                      ? "rgba(0,212,184,0.1)"
+                      : "rgba(255,255,255,0.03)",
+                  border:
+                    state.wantsHardware === opt
+                      ? "1.5px solid rgba(0,212,184,0.4)"
+                      : "1.5px solid rgba(255,200,50,0.12)",
+                  color:
+                    state.wantsHardware === opt
+                      ? "#00d4b8"
+                      : "rgba(232,237,248,0.5)",
+                  cursor: "pointer",
+                }}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* EIN */}
         <div>
           <label
             htmlFor="wizard-fein"
             className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
             style={{ color: "rgba(232,237,248,0.6)" }}
           >
-            Federal EIN / FEIN{" "}
+            EIN (Employer Identification Number){" "}
             <span
               className="normal-case font-normal"
               style={{ color: "rgba(232,237,248,0.3)" }}
@@ -1158,6 +1340,10 @@ export default function WizardPage() {
       businessName: "",
       fein: "",
       feinSkipped: false,
+      monthlyVolume: "",
+      businessType: "",
+      hasHardware: "",
+      wantsHardware: "",
     };
   });
 
@@ -1306,6 +1492,10 @@ export default function WizardPage() {
                 businessName: "",
                 fein: "",
                 feinSkipped: false,
+                monthlyVolume: "",
+                businessType: "",
+                hasHardware: "",
+                wantsHardware: "",
               })
             }
             className="text-xs font-medium transition-colors"

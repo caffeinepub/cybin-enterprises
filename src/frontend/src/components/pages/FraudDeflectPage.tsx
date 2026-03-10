@@ -49,6 +49,20 @@ export default function FraudDeflectPage() {
     canonical: "/fraud-deflect",
   });
 
+  // Hide this page from search engines
+  useEffect(() => {
+    let tag = document.querySelector<HTMLMetaElement>('meta[name="robots"]');
+    if (!tag) {
+      tag = document.createElement("meta");
+      tag.setAttribute("name", "robots");
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute("content", "noindex,nofollow");
+    return () => {
+      tag?.setAttribute("content", "index,follow");
+    };
+  }, []);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {

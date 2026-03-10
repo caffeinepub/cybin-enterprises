@@ -90,6 +90,54 @@
   }
 }
 
+
+/* ─── Light Mode Overrides ─────────────────────────────────────────────────── */
+[data-theme="light"] {
+  --background: 0.97 0.005 265;
+  --foreground: 0.15 0.03 270;
+  --card: 0.96 0.007 265;
+  --card-foreground: 0.15 0.03 270;
+  --popover: 0.97 0.005 265;
+  --popover-foreground: 0.15 0.03 270;
+  --primary: 0.55 0.15 185;
+  --primary-foreground: 0.99 0.005 265;
+  --secondary: 0.93 0.015 265;
+  --secondary-foreground: 0.2 0.04 270;
+  --muted: 0.93 0.012 265;
+  --muted-foreground: 0.45 0.04 270;
+  --accent: 0.55 0.15 185;
+  --accent-foreground: 0.99 0.005 265;
+  --destructive: 0.55 0.22 27;
+  --destructive-foreground: 0.99 0 0;
+  --border: 0.87 0.02 265;
+  --input: 0.9 0.015 265;
+  --ring: 0.55 0.15 185;
+  --sidebar: 0.95 0.008 265;
+  --sidebar-foreground: 0.15 0.03 270;
+  --sidebar-primary: 0.55 0.15 185;
+  --sidebar-primary-foreground: 0.99 0.005 265;
+  --sidebar-accent: 0.93 0.015 265;
+  --sidebar-accent-foreground: 0.2 0.04 270;
+  --sidebar-border: 0.87 0.02 265;
+  --sidebar-ring: 0.55 0.15 185;
+  color-scheme: light;
+}
+
+[data-theme="light"] body {
+  background-color: #fafafa;
+  color: #0a1020;
+}
+
+[data-theme="light"] .cybin-glass {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(0, 168, 145, 0.15);
+}
+
+[data-theme="light"] .cybin-glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 168, 145, 0.15);
+}
+
 @layer components {
   .cybin-glass {
     background: rgba(22, 30, 58, 0.7);

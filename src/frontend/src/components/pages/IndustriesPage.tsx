@@ -76,7 +76,7 @@ export default function IndustriesPage() {
     title:
       "High-Risk Industries Payment Processing | CBD, Nutraceuticals, Telemedicine | Cybin Enterprises",
     description:
-      "Payment solutions for CBD, research peptides, telemedicine, firearms, gaming, forex, supplements, and all legal industries including MATCH list merchants.",
+      "Payment solutions for CBD, research peptides, telemedicine, firearms, online gaming, and every high-risk industry. Cybin Enterprises helps businesses that have been declined or labeled hard-to-place.",
     canonical: "/industries",
   });
 
@@ -156,7 +156,7 @@ export default function IndustriesPage() {
               name: "What industries do you support for payment processing?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "We support all legal industries including research peptides, CBD & botanicals, nutraceuticals, telemedicine, digital health, high-volume e-commerce, subscription businesses, specialty retail, firearms, adult entertainment, travel, gaming, forex, crypto, and many more.",
+                text: "We work across every category including research peptides, CBD & botanicals, nutraceuticals, telemedicine, digital health, high-volume e-commerce, subscription businesses, specialty retail, firearms, adult entertainment, travel, gaming, forex, crypto, and many more.",
               },
             },
             {
@@ -164,7 +164,7 @@ export default function IndustriesPage() {
               name: "What if my industry isn't listed on your website?",
               acceptedAnswer: {
                 "@type": "Answer",
-                text: "Cybin Enterprises supports all legal industries. If your business operates legally, we can review your situation regardless of whether your specific sector is listed. Contact us to discuss your business and explore available payment options.",
+                text: "Cybin Enterprises works with businesses across every industry. If your business operates legally, we can review your situation regardless of whether your specific sector is listed. Contact us to discuss your business and explore available payment options.",
               },
             },
           ],
@@ -204,15 +204,16 @@ export default function IndustriesPage() {
                 lineHeight: 1.15,
               }}
             >
-              Industries <span style={{ color: "#00d4b8" }}>We Support</span>
+              If They Said No,{" "}
+              <span style={{ color: "#00d4b8" }}>We Say Yes</span>
             </h1>
             <p
               className="text-lg"
               style={{ color: "rgba(232, 237, 248, 0.65)", lineHeight: 1.7 }}
             >
-              Cybin Enterprises provides payment solutions for businesses across
-              all legal industries, including those often categorized as
-              high-risk or difficult to place.
+              Cybin Enterprises works with businesses across every industry —
+              including those labeled high-risk, hard-to-place, or previously
+              declined.
             </p>
           </div>
         </div>
@@ -318,7 +319,9 @@ export default function IndustriesPage() {
               style={{ color: "rgba(232, 237, 248, 0.6)" }}
             >
               We support{" "}
-              <strong style={{ color: "#e8edf8" }}>all legal industries</strong>
+              <strong style={{ color: "#e8edf8" }}>
+                every category. Contact us and we'll find your solution
+              </strong>
               . If your business operates within the law, we can review your
               situation — even if your sector isn't shown above.
             </p>

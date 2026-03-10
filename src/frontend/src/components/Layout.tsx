@@ -1,7 +1,18 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
 import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { Link, useLocation } from "@/lib/router";
-import { ChevronRight, Cookie, Mail, Menu, Phone, X } from "lucide-react";
+import {
+  ChevronRight,
+  Cookie,
+  Mail,
+  Menu,
+  Monitor,
+  Moon,
+  Phone,
+  Sun,
+  X,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import logoImg from "/assets/cybin-logo.png";
 
@@ -19,12 +30,8 @@ const navLinks = [
     href: "/payment-solutions",
     ocid: "nav.payment_solutions.link",
   },
+  { label: "Hardware", href: "/hardware", ocid: "nav.hardware.link" },
   { label: "Industries", href: "/industries", ocid: "nav.industries.link" },
-  {
-    label: "Fraud Deflect",
-    href: "/fraud-deflect",
-    ocid: "nav.fraud_deflect.link",
-  },
   { label: "About", href: "/about", ocid: "nav.about.link" },
   { label: "Insights", href: "/insights", ocid: "nav.insights.link" },
   { label: "Contact", href: "/contact", ocid: "nav.contact.link" },
@@ -32,6 +39,52 @@ const navLinks = [
 
 interface LayoutProps {
   children: React.ReactNode;
+}
+
+function ThemeToggle() {
+  const { mode, cycle } = useTheme();
+  const icons = { auto: Monitor, light: Sun, dark: Moon };
+  const labels = {
+    auto: "Auto (system)",
+    light: "Light mode",
+    dark: "Dark mode",
+  };
+  const Icon = icons[mode];
+  return (
+    <button
+      type="button"
+      onClick={cycle}
+      aria-label={`Theme: ${labels[mode]}. Click to change.`}
+      title={labels[mode]}
+      data-ocid="nav.theme.toggle"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        width: 34,
+        height: 34,
+        borderRadius: "8px",
+        border: "1px solid rgba(255,255,255,0.1)",
+        backgroundColor: "rgba(255,255,255,0.04)",
+        color: "rgba(232,237,248,0.6)",
+        cursor: "pointer",
+        flexShrink: 0,
+        transition: "all 0.2s",
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.1)";
+        e.currentTarget.style.borderColor = "rgba(0,212,184,0.3)";
+        e.currentTarget.style.color = "#00d4b8";
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
+        e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+        e.currentTarget.style.color = "rgba(232,237,248,0.6)";
+      }}
+    >
+      <Icon size={15} />
+    </button>
+  );
 }
 
 export default function Layout({ children }: LayoutProps) {
@@ -121,14 +174,21 @@ export default function Layout({ children }: LayoutProps) {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className="flex items-center justify-between h-18"
+            className="flex items-center justify-between"
             style={{ height: "72px" }}
           >
-            {/* Logo */}
+            {/* Logo — transparent container, no box bleed */}
             <Link
               to="/"
               className="flex-shrink-0"
-              style={{ display: "flex", alignItems: "center" }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                background: "transparent",
+                border: "none",
+                boxShadow: "none",
+                outline: "none",
+              }}
             >
               <img
                 src={logoImg}
@@ -142,6 +202,9 @@ export default function Layout({ children }: LayoutProps) {
                   display: "block",
                   flexShrink: 0,
                   mixBlendMode: "screen",
+                  background: "transparent",
+                  border: "none",
+                  boxShadow: "none",
                   ...logoStyle,
                 }}
               />
@@ -184,8 +247,9 @@ export default function Layout({ children }: LayoutProps) {
               ))}
             </nav>
 
-            {/* CTA + Mobile Toggle */}
-            <div className="flex items-center gap-3">
+            {/* Theme Toggle + CTA + Mobile Toggle */}
+            <div className="flex items-center gap-2">
+              <ThemeToggle />
               <Link
                 to="/apply"
                 data-ocid="nav.cta.button"
@@ -274,18 +338,25 @@ export default function Layout({ children }: LayoutProps) {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* Brand */}
             <div>
-              <img
-                src={logoImg}
-                alt="Cybin Enterprises"
-                style={{
-                  width: `${logoCfg.containerHeight}px`,
-                  height: `${logoCfg.containerHeight}px`,
-                  display: "block",
-                  marginBottom: "12px",
-                  mixBlendMode: "screen",
-                  ...logoStyle,
-                }}
-              />
+              <div
+                style={{ background: "transparent", display: "inline-block" }}
+              >
+                <img
+                  src={logoImg}
+                  alt="Cybin Enterprises"
+                  style={{
+                    width: `${logoCfg.containerHeight}px`,
+                    height: `${logoCfg.containerHeight}px`,
+                    display: "block",
+                    marginBottom: "12px",
+                    mixBlendMode: "screen",
+                    background: "transparent",
+                    border: "none",
+                    boxShadow: "none",
+                    ...logoStyle,
+                  }}
+                />
+              </div>
               <p
                 className="text-sm leading-relaxed"
                 style={{
@@ -363,34 +434,22 @@ export default function Layout({ children }: LayoutProps) {
                   <Mail size={13} style={{ flexShrink: 0 }} />
                   {site.contact.email}
                 </a>
-                <a
-                  href={`tel:${site.contact.phone1.replace(/\D/g, "")}`}
-                  className="flex items-center gap-2 text-sm transition-colors"
-                  style={{ color: "rgba(232, 237, 248, 0.55)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#00d4b8";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
-                  }}
-                >
-                  <Phone size={13} style={{ flexShrink: 0 }} />
-                  {site.contact.phone1Label}: {site.contact.phone1}
-                </a>
-                <a
-                  href={`tel:${site.contact.phone2.replace(/\D/g, "")}`}
-                  className="flex items-center gap-2 text-sm transition-colors"
-                  style={{ color: "rgba(232, 237, 248, 0.55)" }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#00d4b8";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
-                  }}
-                >
-                  <Phone size={13} style={{ flexShrink: 0 }} />
-                  {site.contact.phone2Label}: {site.contact.phone2}
-                </a>
+                {site.contact.phone2 && (
+                  <a
+                    href={`tel:${site.contact.phone2.replace(/\D/g, "")}`}
+                    className="flex items-center gap-2 text-sm transition-colors"
+                    style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = "#00d4b8";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                    }}
+                  >
+                    <Phone size={13} style={{ flexShrink: 0 }} />
+                    {site.contact.phone2Label}: {site.contact.phone2}
+                  </a>
+                )}
               </div>
               <h4
                 className="text-sm font-semibold mb-3"
@@ -757,7 +816,7 @@ export default function Layout({ children }: LayoutProps) {
               style={{ color: "rgba(232,237,248,0.3)" }}
             >
               Notice at Collection (Cal. Civ. Code § 1798.100). Consent can be
-              withdrawn at any time via "Cookie Settings" in the footer.
+              withdrawn at any time via “Cookie Settings” in the footer.
             </p>
           </div>
         </section>

@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { usePageTracking } from "@/hooks/usePageTracking";
 import { BrowserRouter, Route, Routes, useNavigate } from "@/lib/router";
 import { useEffect } from "react";
@@ -11,8 +12,10 @@ import ContactPage from "./components/pages/ContactPage";
 import DoNotSellPage from "./components/pages/DoNotSellPage";
 import FaqPage from "./components/pages/FaqPage";
 import FraudDeflectPage from "./components/pages/FraudDeflectPage";
+import HardwarePage from "./components/pages/HardwarePage";
 import HomePage from "./components/pages/HomePage";
 import IndustriesPage from "./components/pages/IndustriesPage";
+import IndustryLandingPage from "./components/pages/IndustryLandingPage";
 import InsightsPage from "./components/pages/InsightsPage";
 import KnowledgePage from "./components/pages/KnowledgePage";
 import {
@@ -64,6 +67,22 @@ function AppRoutes() {
         element={
           <Layout>
             <IndustriesPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/industries/:slug"
+        element={
+          <Layout>
+            <IndustryLandingPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/hardware"
+        element={
+          <Layout>
+            <HardwarePage />
           </Layout>
         }
       />
@@ -186,8 +205,10 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <AppRoutes />
-    </BrowserRouter>
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }

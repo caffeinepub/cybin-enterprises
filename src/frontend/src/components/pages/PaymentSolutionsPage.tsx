@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import PaymentBadges from "@/components/PaymentBadges";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import {
@@ -227,6 +228,7 @@ export default function PaymentSolutionsPage() {
               Cybin Enterprises helps businesses access reliable payment
               infrastructure across domestic and international markets.
             </p>
+            <PaymentBadges className="mt-6" />
           </div>
         </div>
       </section>

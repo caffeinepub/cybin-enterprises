@@ -57,8 +57,8 @@ export interface SiteSettings {
 
 export const SITE_DEFAULTS: SiteSettings = {
   contact: {
-    phone1: "724-244-7111",
-    phone1Label: "M",
+    phone1: "",
+    phone1Label: "",
     phone2: "888-321-2100",
     phone2Label: "O",
     email: "Customercare@CybinEnterprises.com",
