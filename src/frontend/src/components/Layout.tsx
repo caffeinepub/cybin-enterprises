@@ -7,7 +7,6 @@ import {
   Cookie,
   Mail,
   Menu,
-  Monitor,
   Moon,
   Phone,
   Sun,
@@ -42,20 +41,15 @@ interface LayoutProps {
 }
 
 function ThemeToggle() {
-  const { mode, cycle } = useTheme();
-  const icons = { auto: Monitor, light: Sun, dark: Moon };
-  const labels = {
-    auto: "Auto (system)",
-    light: "Light mode",
-    dark: "Dark mode",
-  };
-  const Icon = icons[mode];
+  const { resolved, toggle } = useTheme();
+  const isLight = resolved === "light";
+
   return (
     <button
       type="button"
-      onClick={cycle}
-      aria-label={`Theme: ${labels[mode]}. Click to change.`}
-      title={labels[mode]}
+      onClick={toggle}
+      aria-label={isLight ? "Switch to dark mode" : "Switch to light mode"}
+      title={isLight ? "Switch to dark mode" : "Switch to light mode"}
       data-ocid="nav.theme.toggle"
       style={{
         display: "inline-flex",
@@ -64,25 +58,35 @@ function ThemeToggle() {
         width: 34,
         height: 34,
         borderRadius: "8px",
-        border: "1px solid rgba(255,255,255,0.1)",
-        backgroundColor: "rgba(255,255,255,0.04)",
-        color: "rgba(232,237,248,0.6)",
+        border: isLight
+          ? "1px solid rgba(0,0,0,0.12)"
+          : "1px solid rgba(255,255,255,0.1)",
+        backgroundColor: isLight
+          ? "rgba(0,0,0,0.06)"
+          : "rgba(255,255,255,0.04)",
+        color: isLight ? "#1a2040" : "rgba(232,237,248,0.6)",
         cursor: "pointer",
         flexShrink: 0,
         transition: "all 0.2s",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.1)";
-        e.currentTarget.style.borderColor = "rgba(0,212,184,0.3)";
-        e.currentTarget.style.color = "#00d4b8";
+        e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.12)";
+        e.currentTarget.style.borderColor = "rgba(0,212,184,0.35)";
+        e.currentTarget.style.color = isLight ? "#007a6a" : "#00d4b8";
       }}
       onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
-        e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
-        e.currentTarget.style.color = "rgba(232,237,248,0.6)";
+        e.currentTarget.style.backgroundColor = isLight
+          ? "rgba(0,0,0,0.06)"
+          : "rgba(255,255,255,0.04)";
+        e.currentTarget.style.borderColor = isLight
+          ? "rgba(0,0,0,0.12)"
+          : "rgba(255,255,255,0.1)";
+        e.currentTarget.style.color = isLight
+          ? "#1a2040"
+          : "rgba(232,237,248,0.6)";
       }}
     >
-      <Icon size={15} />
+      {isLight ? <Moon size={15} /> : <Sun size={15} />}
     </button>
   );
 }
@@ -90,6 +94,8 @@ function ThemeToggle() {
 export default function Layout({ children }: LayoutProps) {
   const { style: logoStyle, config: logoCfg } = useLiveImageSettings("logo");
   const site = useLiveSiteSettings();
+  const { resolved } = useTheme();
+  const isLight = resolved === "light";
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cookieConsent, setCookieConsent] = useState<CookieCategories | null>(
@@ -143,12 +149,45 @@ export default function Layout({ children }: LayoutProps) {
   const hostname =
     typeof window !== "undefined" ? window.location.hostname : "";
 
+  // Theme-aware color tokens
+  const headerBg = isLight
+    ? scrolled
+      ? "rgba(248,249,252,0.97)"
+      : "rgba(248,249,252,0.94)"
+    : scrolled
+      ? "rgba(10, 15, 30, 0.97)"
+      : "rgba(10, 15, 30, 0.92)";
+  const navLinkColor = isLight
+    ? "rgba(20,30,60,0.7)"
+    : "rgba(232, 237, 248, 0.75)";
+  const navLinkHover = isLight ? "#0a1020" : "#e8edf8";
+  const navLinkHoverBg = isLight
+    ? "rgba(0,0,0,0.04)"
+    : "rgba(255,255,255,0.05)";
+  const activeNavBg = isLight
+    ? "rgba(0,122,106,0.1)"
+    : "rgba(0, 212, 184, 0.08)";
+  const footerBg = isLight ? "#f0f2f7" : "#06090f";
+  const footerText = isLight
+    ? "rgba(20,30,60,0.55)"
+    : "rgba(232, 237, 248, 0.55)";
+  const footerHeading = isLight ? "#007a6a" : "#00d4b8";
+  const footerDivider = isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.06)";
+  const footerCopyright = isLight
+    ? "rgba(20,30,60,0.4)"
+    : "rgba(232, 237, 248, 0.35)";
+  const footerBorder = isLight
+    ? "rgba(0,122,106,0.15)"
+    : "rgba(0, 212, 184, 0.1)";
+  const accentTeal = isLight ? "#007a6a" : "#00d4b8";
+  const mobileIconColor = isLight ? "#1a2040" : "#e8edf8";
+  const mobileIconBg = isLight ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.05)";
+
   return (
     <div
       className="min-h-screen flex flex-col"
-      style={{ backgroundColor: "#0a0f1e" }}
+      style={{ backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e" }}
     >
-      {/* Skip to main content — accessible keyboard shortcut */}
       <a
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] cybin-btn-primary text-sm"
@@ -157,19 +196,20 @@ export default function Layout({ children }: LayoutProps) {
         Skip to main content
       </a>
 
-      {/* Header */}
       <header
         className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{
-          backgroundColor: scrolled
-            ? "rgba(10, 15, 30, 0.97)"
-            : "rgba(10, 15, 30, 0.92)",
+          backgroundColor: headerBg,
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderBottom: scrolled
-            ? "1px solid rgba(0, 212, 184, 0.12)"
+            ? `1px solid ${isLight ? "rgba(0,122,106,0.15)" : "rgba(0, 212, 184, 0.12)"}`
             : "1px solid transparent",
-          boxShadow: scrolled ? "0 4px 32px rgba(0, 0, 0, 0.5)" : "none",
+          boxShadow: scrolled
+            ? isLight
+              ? "0 4px 32px rgba(0,0,0,0.08)"
+              : "0 4px 32px rgba(0,0,0,0.5)"
+            : "none",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -177,7 +217,6 @@ export default function Layout({ children }: LayoutProps) {
             className="flex items-center justify-between"
             style={{ height: "72px" }}
           >
-            {/* Logo — transparent container, no box bleed */}
             <Link
               to="/"
               className="flex-shrink-0"
@@ -201,16 +240,15 @@ export default function Layout({ children }: LayoutProps) {
                   height: `${logoCfg.containerHeight}px`,
                   display: "block",
                   flexShrink: 0,
-                  mixBlendMode: "screen",
                   background: "transparent",
                   border: "none",
                   boxShadow: "none",
+                  objectFit: "contain",
                   ...logoStyle,
                 }}
               />
             </Link>
 
-            {/* Desktop Nav */}
             <nav className="hidden lg:flex items-center gap-1">
               {navLinks.map((link) => (
                 <Link
@@ -221,23 +259,22 @@ export default function Layout({ children }: LayoutProps) {
                   style={{
                     color:
                       location.pathname === link.href
-                        ? "#00d4b8"
-                        : "rgba(232, 237, 248, 0.75)",
+                        ? accentTeal
+                        : navLinkColor,
                     backgroundColor:
                       location.pathname === link.href
-                        ? "rgba(0, 212, 184, 0.08)"
+                        ? activeNavBg
                         : "transparent",
                   }}
                   onMouseEnter={(e) => {
                     if (location.pathname !== link.href) {
-                      e.currentTarget.style.color = "#e8edf8";
-                      e.currentTarget.style.backgroundColor =
-                        "rgba(255,255,255,0.05)";
+                      e.currentTarget.style.color = navLinkHover;
+                      e.currentTarget.style.backgroundColor = navLinkHoverBg;
                     }
                   }}
                   onMouseLeave={(e) => {
                     if (location.pathname !== link.href) {
-                      e.currentTarget.style.color = "rgba(232, 237, 248, 0.75)";
+                      e.currentTarget.style.color = navLinkColor;
                       e.currentTarget.style.backgroundColor = "transparent";
                     }
                   }}
@@ -247,7 +284,6 @@ export default function Layout({ children }: LayoutProps) {
               ))}
             </nav>
 
-            {/* Theme Toggle + CTA + Mobile Toggle */}
             <div className="flex items-center gap-2">
               <ThemeToggle />
               <Link
@@ -259,13 +295,12 @@ export default function Layout({ children }: LayoutProps) {
                 Start Your Approval Process
                 <ChevronRight size={14} />
               </Link>
-
               <button
                 type="button"
                 className="lg:hidden p-2 rounded-md"
                 style={{
-                  color: "#e8edf8",
-                  backgroundColor: "rgba(255,255,255,0.05)",
+                  color: mobileIconColor,
+                  backgroundColor: mobileIconBg,
                 }}
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-label={
@@ -281,14 +316,15 @@ export default function Layout({ children }: LayoutProps) {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {mobileOpen && (
           <div
             id="mobile-navigation"
             className="lg:hidden"
             style={{
-              backgroundColor: "rgba(10, 15, 30, 0.98)",
-              borderTop: "1px solid rgba(0, 212, 184, 0.1)",
+              backgroundColor: isLight
+                ? "rgba(248,249,252,0.99)"
+                : "rgba(10, 15, 30, 0.98)",
+              borderTop: `1px solid ${isLight ? "rgba(0,122,106,0.12)" : "rgba(0, 212, 184, 0.1)"}`,
             }}
           >
             <div className="px-4 py-4 flex flex-col gap-1">
@@ -300,10 +336,14 @@ export default function Layout({ children }: LayoutProps) {
                   className="px-4 py-3 text-sm font-medium rounded-lg transition-all"
                   style={{
                     color:
-                      location.pathname === link.href ? "#00d4b8" : "#e8edf8",
+                      location.pathname === link.href
+                        ? accentTeal
+                        : isLight
+                          ? "#1a2040"
+                          : "#e8edf8",
                     backgroundColor:
                       location.pathname === link.href
-                        ? "rgba(0, 212, 184, 0.08)"
+                        ? activeNavBg
                         : "transparent",
                   }}
                 >
@@ -322,21 +362,18 @@ export default function Layout({ children }: LayoutProps) {
         )}
       </header>
 
-      {/* Main content */}
       <main id="main-content" className="flex-1 pt-[72px]">
         {children}
       </main>
 
-      {/* Footer */}
       <footer
         style={{
-          backgroundColor: "#06090f",
-          borderTop: "1px solid rgba(0, 212, 184, 0.1)",
+          backgroundColor: footerBg,
+          borderTop: `1px solid ${footerBorder}`,
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {/* Brand */}
             <div>
               <div
                 style={{ background: "transparent", display: "inline-block" }}
@@ -349,7 +386,6 @@ export default function Layout({ children }: LayoutProps) {
                     height: `${logoCfg.containerHeight}px`,
                     display: "block",
                     marginBottom: "12px",
-                    mixBlendMode: "screen",
                     background: "transparent",
                     border: "none",
                     boxShadow: "none",
@@ -359,22 +395,18 @@ export default function Layout({ children }: LayoutProps) {
               </div>
               <p
                 className="text-sm leading-relaxed"
-                style={{
-                  color: "rgba(232, 237, 248, 0.55)",
-                  maxWidth: "260px",
-                }}
+                style={{ color: footerText, maxWidth: "260px" }}
               >
                 Trusted payment solutions for high-risk and hard-to-place
                 businesses.
               </p>
             </div>
 
-            {/* Navigation */}
             <div>
               <h4
                 className="text-sm font-semibold mb-4"
                 style={{
-                  color: "#00d4b8",
+                  color: footerHeading,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                 }}
@@ -392,13 +424,13 @@ export default function Layout({ children }: LayoutProps) {
                   <Link
                     key={link.href}
                     to={link.href}
-                    className="text-sm transition-colors hover:text-teal"
-                    style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                    className="text-sm transition-colors"
+                    style={{ color: footerText }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#00d4b8";
+                      e.currentTarget.style.color = accentTeal;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                      e.currentTarget.style.color = footerText;
                     }}
                   >
                     {link.label}
@@ -407,12 +439,11 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
 
-            {/* Contact & Legal */}
             <div>
               <h4
                 className="text-sm font-semibold mb-4"
                 style={{
-                  color: "#00d4b8",
+                  color: footerHeading,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                 }}
@@ -423,12 +454,12 @@ export default function Layout({ children }: LayoutProps) {
                 <a
                   href={`mailto:${site.contact.email}`}
                   className="flex items-center gap-2 text-sm transition-colors"
-                  style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                  style={{ color: footerText }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.color = "#00d4b8";
+                    e.currentTarget.style.color = accentTeal;
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                    e.currentTarget.style.color = footerText;
                   }}
                 >
                   <Mail size={13} style={{ flexShrink: 0 }} />
@@ -438,12 +469,12 @@ export default function Layout({ children }: LayoutProps) {
                   <a
                     href={`tel:${site.contact.phone2.replace(/\D/g, "")}`}
                     className="flex items-center gap-2 text-sm transition-colors"
-                    style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                    style={{ color: footerText }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#00d4b8";
+                      e.currentTarget.style.color = accentTeal;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                      e.currentTarget.style.color = footerText;
                     }}
                   >
                     <Phone size={13} style={{ flexShrink: 0 }} />
@@ -454,7 +485,7 @@ export default function Layout({ children }: LayoutProps) {
               <h4
                 className="text-sm font-semibold mb-3"
                 style={{
-                  color: "#00d4b8",
+                  color: footerHeading,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                 }}
@@ -476,12 +507,12 @@ export default function Layout({ children }: LayoutProps) {
                     key={link.href}
                     to={link.href}
                     className="text-sm transition-colors"
-                    style={{ color: "rgba(232, 237, 248, 0.55)" }}
+                    style={{ color: footerText }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.color = "#00d4b8";
+                      e.currentTarget.style.color = accentTeal;
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.color = "rgba(232, 237, 248, 0.55)";
+                      e.currentTarget.style.color = footerText;
                     }}
                   >
                     {link.label}
@@ -493,12 +524,12 @@ export default function Layout({ children }: LayoutProps) {
 
           <div
             className="mt-10 pt-6"
-            style={{ borderTop: "1px solid rgba(255,255,255,0.06)" }}
+            style={{ borderTop: `1px solid ${footerDivider}` }}
           >
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <p
                 className="text-xs text-center"
-                style={{ color: "rgba(232, 237, 248, 0.35)" }}
+                style={{ color: footerCopyright }}
               >
                 © {currentYear} Cybin Enterprises. All rights reserved. Built
                 with ♥ using{" "}
@@ -506,14 +537,18 @@ export default function Layout({ children }: LayoutProps) {
                   href={`https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(hostname)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ color: "#00d4b8" }}
+                  style={{ color: accentTeal }}
                 >
                   caffeine.ai
                 </a>
               </p>
               <span
                 className="hidden sm:block text-xs"
-                style={{ color: "rgba(232,237,248,0.2)" }}
+                style={{
+                  color: isLight
+                    ? "rgba(20,30,60,0.2)"
+                    : "rgba(232,237,248,0.2)",
+                }}
               >
                 ·
               </span>
@@ -523,17 +558,17 @@ export default function Layout({ children }: LayoutProps) {
                 onClick={handleCookieSettingsReset}
                 className="text-xs transition-colors"
                 style={{
-                  color: "rgba(232, 237, 248, 0.35)",
+                  color: footerCopyright,
                   background: "none",
                   border: "none",
                   cursor: "pointer",
                   padding: 0,
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "#00d4b8";
+                  e.currentTarget.style.color = accentTeal;
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "rgba(232, 237, 248, 0.35)";
+                  e.currentTarget.style.color = footerCopyright;
                 }}
               >
                 Cookie Settings
@@ -543,7 +578,6 @@ export default function Layout({ children }: LayoutProps) {
         </div>
       </footer>
 
-      {/* Granular Cookie Consent Banner — GDPR/CCPA compliant */}
       {cookieConsent === null && (
         <section
           aria-label="Cookie consent"
@@ -562,7 +596,6 @@ export default function Layout({ children }: LayoutProps) {
           }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 py-5">
-            {/* Header row */}
             <div className="flex items-start gap-3 mb-4">
               <Cookie
                 size={18}
@@ -598,8 +631,6 @@ export default function Layout({ children }: LayoutProps) {
                 </p>
               </div>
             </div>
-
-            {/* Cookie categories */}
             <div
               className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5 p-3 rounded-xl"
               style={{
@@ -607,7 +638,6 @@ export default function Layout({ children }: LayoutProps) {
                 border: "1px solid rgba(255,255,255,0.06)",
               }}
             >
-              {/* Necessary — always on */}
               <div
                 className="flex items-start gap-3 p-3 rounded-lg"
                 style={{ backgroundColor: "rgba(0,212,184,0.04)" }}
@@ -638,8 +668,6 @@ export default function Layout({ children }: LayoutProps) {
                   </p>
                 </div>
               </div>
-
-              {/* Analytics — toggleable */}
               <div
                 className="flex items-start gap-3 p-3 rounded-lg"
                 style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
@@ -695,8 +723,6 @@ export default function Layout({ children }: LayoutProps) {
                   </p>
                 </div>
               </div>
-
-              {/* Preferences — toggleable */}
               <div
                 className="flex items-start gap-3 p-3 rounded-lg"
                 style={{ backgroundColor: "rgba(255,255,255,0.02)" }}
@@ -752,8 +778,6 @@ export default function Layout({ children }: LayoutProps) {
                 </div>
               </div>
             </div>
-
-            {/* Action buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-end gap-3">
               <button
                 type="button"
@@ -809,8 +833,6 @@ export default function Layout({ children }: LayoutProps) {
                 Accept All
               </button>
             </div>
-
-            {/* Legal notice at collection */}
             <p
               className="text-xs mt-3 text-center"
               style={{ color: "rgba(232,237,248,0.3)" }}

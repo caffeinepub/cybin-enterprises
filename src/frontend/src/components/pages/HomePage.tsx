@@ -1,3 +1,4 @@
+import { useTheme } from "@/contexts/ThemeContext";
 import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
@@ -13,13 +14,6 @@ import {
   Zap,
 } from "lucide-react";
 import { useEffect, useRef } from "react";
-
-const trustBadges = [
-  { icon: Shield, label: "High-risk merchant specialists" },
-  { icon: Globe, label: "Domestic & international options" },
-  { icon: CheckCircle, label: "Structured approval process" },
-  { icon: TrendingUp, label: "Long-term payment stability" },
-];
 
 const whyCards = [
   {
@@ -177,6 +171,8 @@ function NetworkCanvas() {
 
 export default function HomePage() {
   const site = useLiveSiteSettings();
+  const { resolved } = useTheme();
+  const isLight = resolved === "light";
 
   useSeo({
     title: "High-Risk Payment Solutions | Cybin Enterprises",
@@ -212,8 +208,9 @@ export default function HomePage() {
       <section
         className="relative min-h-screen flex items-center network-bg"
         style={{
-          background:
-            "linear-gradient(135deg, #0a0f1e 0%, #120820 40%, #0d1525 70%, #0a0f1e 100%)",
+          background: isLight
+            ? "linear-gradient(135deg, #eef0f8 0%, #e8ecf5 40%, #eceff8 70%, #eef0f8 100%)"
+            : "linear-gradient(135deg, #0a0f1e 0%, #120820 40%, #0d1525 70%, #0a0f1e 100%)",
         }}
       >
         <NetworkCanvas />
@@ -328,14 +325,21 @@ export default function HomePage() {
             left: 0,
             right: 0,
             height: "120px",
-            background: "linear-gradient(to bottom, transparent, #0a0f1e)",
+            background: isLight
+              ? "linear-gradient(to bottom, transparent, #f8f9fc)"
+              : "linear-gradient(to bottom, transparent, #0a0f1e)",
             pointerEvents: "none",
           }}
         />
       </section>
 
       {/* Industries Ticker — immediately after hero */}
-      <section style={{ backgroundColor: "#0c1020", padding: "80px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#eef1f8" : "#0c1020",
+          padding: "80px 0",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
           <div className="text-center animate-fade-up">
             <span
@@ -387,7 +391,9 @@ export default function HomePage() {
               bottom: 0,
               width: "80px",
               zIndex: 2,
-              background: "linear-gradient(to right, #0c1020, transparent)",
+              background: isLight
+                ? "linear-gradient(to right, #eef1f8, transparent)"
+                : "linear-gradient(to right, #0c1020, transparent)",
               pointerEvents: "none",
             }}
           />
@@ -399,7 +405,9 @@ export default function HomePage() {
               bottom: 0,
               width: "80px",
               zIndex: 2,
-              background: "linear-gradient(to left, #0c1020, transparent)",
+              background: isLight
+                ? "linear-gradient(to left, #eef1f8, transparent)"
+                : "linear-gradient(to left, #0c1020, transparent)",
               pointerEvents: "none",
             }}
           />
@@ -423,162 +431,6 @@ export default function HomePage() {
                 {label}
               </div>
             ))}
-          </div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 text-center">
-          <Link
-            to="/industries"
-            className="cybin-btn-primary"
-            data-ocid="industries.qualify.button"
-          >
-            Explore Our Industries <ChevronRight size={16} />
-          </Link>
-          <p
-            className="text-xs mt-4 italic"
-            style={{ color: "rgba(232,237,248,0.35)", lineHeight: 1.6 }}
-          >
-            * Approval not guaranteed. Cybin Enterprises is a payment
-            intermediary only. Not investment advice. Each merchant is
-            responsible for their own regulatory compliance.
-          </p>
-        </div>
-
-        {/* Common Industries Discovery Strip */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pb-2">
-          <p
-            className="text-xs font-semibold uppercase tracking-widest text-center mb-4"
-            style={{ color: "rgba(232,237,248,0.35)" }}
-          >
-            Common Industries We Serve
-          </p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { label: "Cannabis & CBD", slug: "cannabis-cbd" },
-              { label: "Firearms & Ammo", slug: "firearms-ammunition" },
-              { label: "Online Gaming", slug: "online-gaming" },
-              { label: "Nutraceuticals", slug: "nutraceuticals-supplements" },
-              {
-                label: "Kratom & Spores",
-                slug: "kratom-spores-ethnobotanicals",
-              },
-              { label: "Telemedicine", slug: "telemedicine-healthcare" },
-              { label: "Vaping & E-Cigs", slug: "e-cigarettes-vaping" },
-              { label: "Subscriptions", slug: "subscription-businesses" },
-            ].map((ind) => (
-              <Link
-                key={ind.slug}
-                to={`/industries/${ind.slug}`}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium transition-all"
-                style={{
-                  backgroundColor: "rgba(0,212,184,0.06)",
-                  border: "1px solid rgba(0,212,184,0.18)",
-                  color: "rgba(232,237,248,0.75)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "rgba(0,212,184,0.12)";
-                  e.currentTarget.style.borderColor = "rgba(0,212,184,0.4)";
-                  e.currentTarget.style.color = "#e8edf8";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor =
-                    "rgba(0,212,184,0.06)";
-                  e.currentTarget.style.borderColor = "rgba(0,212,184,0.18)";
-                  e.currentTarget.style.color = "rgba(232,237,248,0.75)";
-                }}
-              >
-                <span style={{ color: "#00d4b8", fontSize: "8px" }}>◆</span>
-                {ind.label}
-              </Link>
-            ))}
-          </div>
-          <p
-            className="text-xs text-center mt-4"
-            style={{ color: "rgba(232,237,248,0.3)" }}
-          >
-            Don't see your industry? We likely work with it.{" "}
-            <Link
-              to="/contact"
-              style={{ color: "#00d4b8", textDecoration: "underline" }}
-            >
-              Contact us to discuss.
-            </Link>
-          </p>
-        </div>
-      </section>
-
-      <div className="cybin-section-divider" />
-
-      {/* Pain-Point Section */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "80px 0" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-up">
-              <div className="flex items-center gap-3 mb-4">
-                <AlertTriangle size={22} style={{ color: "#ff6b6b" }} />
-                <span
-                  className="text-sm font-semibold uppercase tracking-widest"
-                  style={{ color: "#ff6b6b" }}
-                >
-                  Urgent Situation?
-                </span>
-              </div>
-              <h2
-                className="text-3xl sm:text-4xl font-bold mb-6"
-                style={{
-                  fontFamily: "Sora, system-ui, sans-serif",
-                  color: "#e8edf8",
-                  lineHeight: 1.25,
-                }}
-              >
-                When Payment Processing Stops,{" "}
-                <span style={{ color: "#ff8e53" }}>Business Stops</span>
-              </h2>
-              <p
-                className="text-base mb-4"
-                style={{ color: "rgba(232, 237, 248, 0.65)", lineHeight: 1.75 }}
-              >
-                Many businesses discover us during urgent moments — when a
-                processor shuts down their account, places funds on hold, or
-                suddenly stops supporting their industry.
-              </p>
-              <p
-                className="text-base mb-8"
-                style={{ color: "rgba(232, 237, 248, 0.65)", lineHeight: 1.75 }}
-              >
-                If you're here because something changed overnight, you're not
-                alone. Cybin Enterprises helps businesses stabilize their
-                payment infrastructure quickly and move forward with clarity and
-                confidence.
-              </p>
-              <Link to="/contact" className="cybin-btn-primary">
-                Get Help Now <ChevronRight size={16} />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {trustBadges.map(({ icon: Icon, label }, i) => (
-                <div
-                  key={label}
-                  className="animate-fade-up cybin-glass-card p-5"
-                  style={{ animationDelay: `${i * 100}ms` }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center mb-3"
-                    style={{ backgroundColor: "rgba(0, 212, 184, 0.12)" }}
-                  >
-                    <Icon size={20} style={{ color: "#00d4b8" }} />
-                  </div>
-                  <p
-                    className="text-sm font-semibold"
-                    style={{ color: "#e8edf8" }}
-                  >
-                    {label}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -839,8 +691,14 @@ export default function HomePage() {
 
       <div className="cybin-section-divider" />
 
-      {/* Fraud Deflect Preview */}
-      <section style={{ backgroundColor: "#0c1020", padding: "80px 0" }}>
+      {/* Fraud Deflect Preview - hidden */}
+      <section
+        style={{
+          display: "none",
+          backgroundColor: isLight ? "#eef1f8" : "#0c1020",
+          padding: "80px 0",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="animate-fade-up cybin-glass-card p-8 sm:p-12"

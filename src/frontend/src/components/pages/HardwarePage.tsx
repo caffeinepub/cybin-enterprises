@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useSeo } from "@/hooks/useSeo";
 import { Link } from "@/lib/router";
 import {
@@ -9,120 +10,45 @@ import {
   Shield,
   Smartphone,
   Wifi,
-  Zap,
 } from "lucide-react";
 import { useEffect } from "react";
-
-const devices = [
-  {
-    name: "PAX A920",
-    category: "Countertop + Mobile",
-    desc: "Android-based touchscreen terminal combining countertop stability with portable flexibility. Supports NFC contactless, EMV chip, and magnetic stripe in a sleek handheld form factor — ideal for retail, restaurants, and high-risk merchants needing a premium device.",
-    features: [
-      "NFC / Contactless",
-      "EMV Chip",
-      "Magnetic Stripe",
-      "Android OS",
-      "WiFi + 4G",
-    ],
-    highlight: true,
-  },
-  {
-    name: "Ingenico DESK 3500",
-    category: "Countertop Terminal",
-    desc: "A high-performance countertop terminal built for high-volume retail environments. Integrated PIN pad, dual communication (Ethernet + dial), EMV and NFC capable. Trusted by merchants in nearly every high-risk vertical for its reliability.",
-    features: [
-      "Integrated PIN Pad",
-      "Dual Comm",
-      "EMV + NFC",
-      "High Volume",
-      "Retail Ready",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Ingenico MOVE 5000",
-    category: "Mobile / Handheld",
-    desc: "Wireless handheld terminal designed for tableside service, delivery, and on-the-go payment acceptance. 4G LTE and WiFi connectivity with a full-day battery, making it the go-to choice for mobile merchants and delivery-forward businesses.",
-    features: [
-      "4G LTE",
-      "WiFi",
-      "Full-Day Battery",
-      "Tableside",
-      "Delivery-Ready",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Dejavoo Z11",
-    category: "Countertop Terminal",
-    desc: "A reliable all-in-one countertop terminal with wide processor compatibility — an important factor for high-risk merchants who may transition between processors. Supports all card types and payment methods with a simple setup.",
-    features: [
-      "Wide Compatibility",
-      "EMV + NFC",
-      "Color Display",
-      "Easy Setup",
-      "All Card Types",
-    ],
-    highlight: false,
-  },
-  {
-    name: "VeriFone VX520",
-    category: "Industry Workhorse",
-    desc: "One of the most widely deployed terminals in high-risk processing. Dual communication (dial + IP), EMV, and NFC support. Merchants switching processors appreciate its near-universal compatibility across acquiring networks.",
-    features: [
-      "Dual Comm",
-      "EMV Certified",
-      "NFC Ready",
-      "Universal",
-      "Proven Reliability",
-    ],
-    highlight: false,
-  },
-  {
-    name: "Mobile Card Readers",
-    category: "Smartphone / Tablet",
-    desc: "Bluetooth and audio-jack card readers that transform any iOS or Android smartphone or tablet into a payment terminal. Ideal for mobile businesses, pop-up shops, markets, and field sales reps who need to accept payments anywhere.",
-    features: [
-      "Bluetooth",
-      "iOS + Android",
-      "No Counter Needed",
-      "Lightweight",
-      "Anywhere",
-    ],
-    highlight: false,
-  },
-];
 
 const categories = [
   {
     icon: Monitor,
-    title: "Countertop Terminals",
-    desc: "Fixed terminals for brick-and-mortar retail, dispensaries, and high-volume checkout environments. Stable, fast, and processor-compatible.",
+    title: "Point of Sale Terminals",
+    image: "/assets/generated/hardware-pos-terminal.dim_600x450.jpg",
+    desc: "We support a wide range of point-of-sale terminals from leading manufacturers. Whether you need a countertop all-in-one with a large touchscreen or a compact unit for high-volume checkout, we can likely support what you have or help you source the right fit.",
+  },
+  {
+    icon: CreditCard,
+    title: "Card Readers & Countertop Devices",
+    image: "/assets/generated/hardware-card-reader.dim_600x450.jpg",
+    desc: "From classic PIN pad terminals to modern NFC-ready countertop devices, we work with most major card readers. Dual communication, EMV chip, and contactless support are standard across the hardware we integrate with.",
   },
   {
     icon: Smartphone,
-    title: "Mobile & Handheld",
-    desc: "Wireless and smartphone-based readers for delivery, tableside, and on-the-go merchants who can't be tethered to a counter.",
-  },
-  {
-    icon: Wifi,
-    title: "Wireless POS Systems",
-    desc: "Full wireless point-of-sale setups with receipt printing, inventory basics, and multi-device support for growing businesses.",
-  },
-  {
-    icon: Zap,
-    title: "Integrated Systems",
-    desc: "Hardware + gateway bundles that connect your physical checkout to your online store, CRM, or business software.",
+    title: "Mobile & Wireless Readers",
+    image: "/assets/generated/hardware-mobile-reader.dim_600x450.jpg",
+    desc: "On-the-go merchants, delivery businesses, and tableside service operations all need reliable mobile payment hardware. We work with most wireless and handheld readers — 4G, WiFi, and Bluetooth-based devices across all major form factors.",
   },
 ];
 
+const perks = [
+  { icon: CheckCircle, label: "Most major brands supported" },
+  { icon: Wifi, label: "Wired, wireless & mobile" },
+  { icon: Shield, label: "High-risk processor compatible" },
+  { icon: CreditCard, label: "EMV, NFC & magstripe" },
+];
+
 export default function HardwarePage() {
+  const { resolved } = useTheme();
+  const isLight = resolved === "light";
+
   useSeo({
-    title:
-      "Payment Hardware & POS Terminals for High-Risk Businesses | Cybin Enterprises",
+    title: "Payment Hardware for High-Risk Businesses | Cybin Enterprises",
     description:
-      "Payment terminals and POS hardware for high-risk merchants — PAX A920, Ingenico, Dejavoo, VeriFone, and mobile readers. Countertop, handheld, and wireless options for every industry.",
+      "Payment terminals and POS hardware for high-risk merchants. We work with most major brands — countertop, handheld, and mobile readers for every industry.",
     canonical: "/hardware",
   });
 
@@ -146,21 +72,23 @@ export default function HardwarePage() {
     return () => observer.disconnect();
   }, []);
 
+  const bg1 = isLight ? "#f8f9fc" : "#0a0f1e";
+  const bg2 = isLight ? "#eef0f8" : "#0c1020";
+  const textPrimary = isLight ? "#1a2040" : "#e8edf8";
+  const textSecondary = isLight
+    ? "rgba(20,30,60,0.65)"
+    : "rgba(232,237,248,0.65)";
+  const cardBorder = isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.07)";
+
   return (
-    <div>
+    <div style={{ backgroundColor: bg1 }}>
       <JsonLd
         data={{
           "@context": "https://schema.org",
-          "@type": "ItemList",
+          "@type": "WebPage",
           name: "Payment Hardware for High-Risk Merchants",
           description:
             "Payment terminals and POS hardware for high-risk businesses",
-          itemListElement: devices.map((d, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            name: d.name,
-            description: d.desc,
-          })),
         }}
       />
 
@@ -169,22 +97,22 @@ export default function HardwarePage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: `1px solid ${isLight ? "rgba(0,0,0,0.06)" : "rgba(0,212,184,0.08)"}`,
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-2xl animate-fade-up">
             <div className="flex items-center gap-2 mb-4">
-              <Link
-                to="/"
-                className="text-sm"
-                style={{ color: "rgba(232,237,248,0.45)" }}
-              >
+              <Link to="/" className="text-sm" style={{ color: textSecondary }}>
                 Home
               </Link>
               <ChevronRight
                 size={14}
-                style={{ color: "rgba(232,237,248,0.3)" }}
+                style={{
+                  color: isLight
+                    ? "rgba(20,30,60,0.3)"
+                    : "rgba(232,237,248,0.3)",
+                }}
               />
               <span className="text-sm" style={{ color: "#00d4b8" }}>
                 Hardware
@@ -193,8 +121,8 @@ export default function HardwarePage() {
             <div
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
               style={{
-                backgroundColor: "rgba(0, 212, 184, 0.1)",
-                border: "1px solid rgba(0, 212, 184, 0.2)",
+                backgroundColor: "rgba(0,212,184,0.1)",
+                border: "1px solid rgba(0,212,184,0.2)",
                 color: "#00d4b8",
               }}
             >
@@ -205,21 +133,28 @@ export default function HardwarePage() {
               className="text-4xl sm:text-5xl font-bold mb-5"
               style={{
                 fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
+                color: textPrimary,
                 lineHeight: 1.15,
               }}
             >
-              Hardware Built for{" "}
-              <span style={{ color: "#00d4b8" }}>High-Risk Commerce</span>
+              Hardware That Works for{" "}
+              <span style={{ color: "#00d4b8" }}>Your Business</span>
             </h1>
             <p
-              className="text-lg mb-6"
-              style={{ color: "rgba(232,237,248,0.65)", lineHeight: 1.7 }}
+              className="text-lg mb-4"
+              style={{ color: textSecondary, lineHeight: 1.7 }}
             >
-              Every terminal type, every industry. Cybin works with PAX,
-              Ingenico, Dejavoo, VeriFone, and mobile readers — ensuring your
-              business gets hardware compatible with high-risk acquiring
-              networks.
+              We work with most major payment hardware. Whatever terminal or
+              reader you have or prefer, we can likely support it — no need to
+              start from scratch.
+            </p>
+            <p
+              className="text-base mb-8"
+              style={{ color: textSecondary, lineHeight: 1.7 }}
+            >
+              From countertop POS systems to mobile card readers, our acquiring
+              network is compatible with the equipment you already own or plan
+              to use.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link
@@ -242,201 +177,185 @@ export default function HardwarePage() {
         </div>
       </section>
 
-      {/* Hardware Categories */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "72px 0" }}>
+      {/* Perks row */}
+      <section
+        style={{
+          backgroundColor: bg2,
+          padding: "28px 0",
+          borderBottom: `1px solid ${cardBorder}`,
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-fade-up">
-            <span
-              className="text-xs font-bold uppercase tracking-widest"
-              style={{ color: "#00d4b8" }}
-            >
-              Form Factors
-            </span>
-            <h2
-              className="text-3xl font-bold mt-3"
-              style={{
-                fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
-              }}
-            >
-              Every Type of Payment Hardware
-            </h2>
-            <p
-              className="mt-3"
-              style={{
-                color: "rgba(232,237,248,0.55)",
-                maxWidth: 560,
-                margin: "12px auto 0",
-              }}
-            >
-              Whether you run a storefront, deliver to customers, or operate
-              fully online, there's a hardware solution for your business.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              return (
-                <div
-                  key={cat.title}
-                  className="cybin-glass-card p-6 animate-fade-up"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, rgba(0,212,184,0.05), rgba(22,30,58,0.7))",
-                    border: "1px solid rgba(0,212,184,0.12)",
-                    borderRadius: "16px",
-                  }}
-                >
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
-                    style={{ backgroundColor: "rgba(0,212,184,0.1)" }}
-                  >
-                    <Icon size={20} style={{ color: "#00d4b8" }} />
-                  </div>
-                  <h3
-                    className="text-base font-bold mb-2"
-                    style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
-                  >
-                    {cat.title}
-                  </h3>
-                  <p
-                    className="text-sm leading-relaxed"
-                    style={{ color: "rgba(232,237,248,0.55)" }}
-                  >
-                    {cat.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Device Showcase */}
-      <section style={{ backgroundColor: "#0c1020", padding: "72px 0" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 animate-fade-up">
-            <span
-              className="text-xs font-bold uppercase tracking-widest"
-              style={{ color: "#00d4b8" }}
-            >
-              Device Lineup
-            </span>
-            <h2
-              className="text-3xl font-bold mt-3"
-              style={{
-                fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
-              }}
-            >
-              Supported Terminals
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {devices.map((device, idx) => (
-              <div
-                key={device.name}
-                data-ocid={`hardware.device.item.${idx + 1}`}
-                className="animate-fade-up"
-                style={{
-                  background: device.highlight
-                    ? "linear-gradient(135deg, rgba(0,212,184,0.1), rgba(0,212,184,0.04))"
-                    : "rgba(255,255,255,0.025)",
-                  border: device.highlight
-                    ? "1px solid rgba(0,212,184,0.35)"
-                    : "1px solid rgba(255,255,255,0.07)",
-                  borderRadius: "16px",
-                  padding: "24px",
-                  position: "relative",
-                }}
-              >
-                {device.highlight && (
-                  <div
-                    className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-3"
-                    style={{
-                      backgroundColor: "rgba(0,212,184,0.12)",
-                      border: "1px solid rgba(0,212,184,0.3)",
-                      color: "#00d4b8",
-                    }}
-                  >
-                    ◆ Most Popular
-                  </div>
-                )}
-                <div className="flex items-start justify-between mb-1">
-                  <h3
-                    className="text-lg font-bold"
-                    style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
-                  >
-                    {device.name}
-                  </h3>
-                </div>
+          <div className="flex flex-wrap justify-center gap-6 sm:gap-10">
+            {perks.map(({ icon: Icon, label }) => (
+              <div key={label} className="flex items-center gap-2">
+                <Icon size={16} style={{ color: "#00d4b8", flexShrink: 0 }} />
                 <span
-                  className="text-xs font-semibold uppercase tracking-widest"
-                  style={{ color: "#00d4b8" }}
+                  className="text-sm font-medium"
+                  style={{ color: textSecondary }}
                 >
-                  {device.category}
+                  {label}
                 </span>
-                <p
-                  className="text-sm leading-relaxed mt-3 mb-4"
-                  style={{ color: "rgba(232,237,248,0.6)" }}
-                >
-                  {device.desc}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {device.features.map((f) => (
-                    <span
-                      key={f}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs"
-                      style={{
-                        backgroundColor: "rgba(0,212,184,0.06)",
-                        border: "1px solid rgba(0,212,184,0.15)",
-                        color: "rgba(232,237,248,0.7)",
-                      }}
-                    >
-                      <CheckCircle
-                        size={10}
-                        style={{ color: "#00d4b8", flexShrink: 0 }}
-                      />
-                      {f}
-                    </span>
-                  ))}
-                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Note about compatibility */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "48px 0" }}>
+      {/* Hardware Categories with Images */}
+      <section style={{ backgroundColor: bg1, padding: "72px 0" }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14 animate-fade-up">
+            <span
+              className="text-xs font-bold uppercase tracking-widest"
+              style={{ color: "#00d4b8" }}
+            >
+              What We Support
+            </span>
+            <h2
+              className="text-3xl font-bold mt-3"
+              style={{
+                fontFamily: "Sora, system-ui, sans-serif",
+                color: textPrimary,
+              }}
+            >
+              All Major Hardware Categories
+            </h2>
+            <p
+              className="mt-3 max-w-xl mx-auto"
+              style={{ color: textSecondary }}
+            >
+              We work with most major payment hardware across every category.
+              Contact us to confirm compatibility with your preferred device.
+            </p>
+          </div>
+
+          <div className="space-y-12">
+            {categories.map((cat, idx) => {
+              const Icon = cat.icon;
+              const reverse = idx % 2 === 1;
+              return (
+                <div
+                  key={cat.title}
+                  data-ocid={`hardware.category.item.${idx + 1}`}
+                  className="animate-fade-up"
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "48px",
+                    alignItems: "center",
+                    direction: reverse ? "rtl" : "ltr",
+                  }}
+                >
+                  <div
+                    style={{
+                      direction: "ltr",
+                      borderRadius: "20px",
+                      overflow: "hidden",
+                      border: `1px solid ${cardBorder}`,
+                      boxShadow: isLight
+                        ? "0 8px 32px rgba(0,0,0,0.08)"
+                        : "0 8px 32px rgba(0,0,0,0.3)",
+                      aspectRatio: "4/3",
+                    }}
+                  >
+                    <img
+                      src={cat.image}
+                      alt={cat.title}
+                      style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: "cover",
+                        display: "block",
+                      }}
+                    />
+                  </div>
+                  <div style={{ direction: "ltr" }}>
+                    <div
+                      className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
+                      style={{
+                        backgroundColor: "rgba(0,212,184,0.1)",
+                        border: "1px solid rgba(0,212,184,0.2)",
+                        color: "#00d4b8",
+                      }}
+                    >
+                      <Icon size={11} />
+                      Hardware Category
+                    </div>
+                    <h3
+                      className="text-2xl sm:text-3xl font-bold mb-4"
+                      style={{
+                        fontFamily: "Sora, system-ui, sans-serif",
+                        color: textPrimary,
+                      }}
+                    >
+                      {cat.title}
+                    </h3>
+                    <p
+                      className="text-base leading-relaxed mb-6"
+                      style={{ color: textSecondary }}
+                    >
+                      {cat.desc}
+                    </p>
+                    <Link
+                      to="/contact"
+                      className="cybin-btn-secondary"
+                      style={{ display: "inline-flex" }}
+                    >
+                      Ask About Compatibility <ChevronRight size={15} />
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mobile fallback grid */}
+          <style>
+            {
+              "@media (max-width: 768px) { .hardware-grid { grid-template-columns: 1fr !important; direction: ltr !important; } }"
+            }
+          </style>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ backgroundColor: bg2, padding: "64px 0" }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 text-center animate-fade-up">
           <Shield
             size={32}
             style={{ color: "#00d4b8", margin: "0 auto 16px" }}
           />
           <h3
-            className="text-xl font-bold mb-3"
-            style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
+            className="text-2xl font-bold mb-3"
+            style={{ fontFamily: "Sora, sans-serif", color: textPrimary }}
           >
-            Hardware That Works With Your Processor
+            Have existing hardware?
           </h3>
           <p
-            className="text-sm leading-relaxed mb-6"
-            style={{ color: "rgba(232,237,248,0.6)" }}
+            className="text-base mb-8"
+            style={{ color: textSecondary, lineHeight: 1.7 }}
           >
-            High-risk merchants often need to change processors. We help you
-            select hardware with the broadest acquiring-network compatibility so
-            you're never locked out of accepting payments if your situation
-            changes.
+            In most cases, we can reprogram or integrate with what you already
+            own. Reach out and we'll confirm compatibility — no commitment
+            required.
           </p>
-          <Link
-            to="/apply"
-            data-ocid="hardware.bottom.cta.button"
-            className="cybin-btn-primary"
-          >
-            Start Your Approval Process
-            <ChevronRight size={16} />
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-3 justify-center">
+            <Link
+              to="/apply"
+              data-ocid="hardware.bottom.primary_button"
+              className="cybin-btn-primary"
+            >
+              Start Your Application <ChevronRight size={16} />
+            </Link>
+            <Link
+              to="/contact"
+              data-ocid="hardware.bottom.secondary_button"
+              className="cybin-btn-secondary"
+            >
+              Contact Us
+            </Link>
+          </div>
         </div>
       </section>
     </div>

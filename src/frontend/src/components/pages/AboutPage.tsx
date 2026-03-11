@@ -1,4 +1,5 @@
 import { JsonLd } from "@/components/JsonLd";
+import { useTheme } from "@/contexts/ThemeContext";
 import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
 import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { useSeo } from "@/hooks/useSeo";
@@ -27,6 +28,8 @@ const shaneExpertise = [
 ];
 
 export default function AboutPage() {
+  const { resolved } = useTheme();
+  const isLight = resolved === "light";
   const { style: melStyle, config: melCfg } = useLiveImageSettings("mel");
   const { style: shaneStyle, config: shaneCfg } = useLiveImageSettings("shane");
   const site = useLiveSiteSettings();
@@ -169,7 +172,12 @@ export default function AboutPage() {
       </section>
 
       {/* Mission */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "72px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e",
+          padding: "72px 0",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="animate-fade-up p-10 rounded-2xl text-center max-w-3xl mx-auto"
@@ -211,7 +219,7 @@ export default function AboutPage() {
       <section
         data-ocid="about.founders.section"
         style={{
-          backgroundColor: "#080d1a",
+          backgroundColor: isLight ? "#f0f3fa" : "#080d1a",
           padding: "120px 0 100px",
           position: "relative",
           overflow: "hidden",
@@ -748,7 +756,12 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "72px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e",
+          padding: "72px 0",
+        }}
+      >
         <div className="max-w-3xl mx-auto px-4 text-center animate-fade-up">
           <h2
             className="text-3xl font-bold mb-5"

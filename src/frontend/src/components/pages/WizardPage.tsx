@@ -533,6 +533,27 @@ function Step3({
   actor: ReturnType<typeof useActor>["actor"];
 }) {
   const [errors, setErrors] = useState<{ name?: string; email?: string }>({});
+  const [partialSaved, setPartialSaved] = useState(false);
+
+  const handlePartialSubmit = () => {
+    const newErrors: { name?: string; email?: string } = {};
+    if (!state.name.trim()) newErrors.name = "Full name is required";
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(state.email))
+      newErrors.email = "Valid email is required";
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+    // Ghost-save partial lead
+    if (actor) {
+      actor
+        .savePartialLead(state.email, state.industry, state.hurdle)
+        .catch(() => {});
+    }
+    setPartialSaved(true);
+  };
 
   const handleEmailBlur = useCallback(async () => {
     const emailRegex =
@@ -800,16 +821,81 @@ function Step3({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={handleNext}
-        data-ocid="wizard.step3.next.button"
-        className="cybin-btn-primary w-full sm:w-auto justify-center"
-        style={{ minWidth: "200px" }}
-      >
-        Continue to Verification
-        <ChevronRight size={16} />
-      </button>
+      {partialSaved ? (
+        <div>
+          <div
+            className="p-4 rounded-xl mb-5"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(0,212,184,0.1), rgba(0,212,184,0.05))",
+              border: "1px solid rgba(0,212,184,0.25)",
+            }}
+            data-ocid="wizard.step3.success_state"
+          >
+            <p
+              className="text-sm font-semibold mb-1"
+              style={{ color: "#00d4b8" }}
+            >
+              ✓ Info received — a specialist will be in touch soon.
+            </p>
+            <p className="text-xs" style={{ color: "rgba(232,237,248,0.55)" }}>
+              Want to speed up your approval? Complete the full application
+              below.
+            </p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              type="button"
+              onClick={handleNext}
+              data-ocid="wizard.step3.next.button"
+              className="cybin-btn-primary w-full sm:w-auto justify-center"
+              style={{ minWidth: "220px" }}
+            >
+              Complete Your Application <ChevronRight size={16} />
+            </button>
+            <span
+              className="text-xs self-center"
+              style={{ color: "rgba(232,237,248,0.35)" }}
+            >
+              Optional — takes 2 min
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div className="flex flex-col sm:flex-row gap-3 items-start">
+          <button
+            type="button"
+            onClick={handlePartialSubmit}
+            data-ocid="wizard.step3.submit_button"
+            className="cybin-btn-primary w-full sm:w-auto justify-center"
+            style={{ minWidth: "180px" }}
+          >
+            Submit Basic Info <ChevronRight size={16} />
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            data-ocid="wizard.step3.next.button"
+            className="w-full sm:w-auto justify-center text-sm font-semibold px-5 py-3 rounded-xl transition-all"
+            style={{
+              border: "1px solid rgba(0,212,184,0.3)",
+              color: "#00d4b8",
+              background: "transparent",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background =
+                "rgba(0,212,184,0.08)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLButtonElement).style.background =
+                "transparent";
+            }}
+          >
+            Complete Application →
+          </button>
+        </div>
+      )}
     </div>
   );
 }
@@ -1450,20 +1536,68 @@ export default function WizardPage() {
           borderBottom: isVaultStep
             ? "1px solid rgba(255, 200, 50, 0.12)"
             : "1px solid rgba(0, 212, 184, 0.08)",
+          position: "sticky",
+          top: 0,
+          zIndex: 50,
+          backdropFilter: "blur(12px)",
+          backgroundColor: isVaultStep
+            ? "rgba(2,4,8,0.95)"
+            : "rgba(10,15,30,0.95)",
         }}
       >
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center gap-2">
           <img
             src="/assets/cybin-logo.png"
             alt="Cybin Enterprises"
             style={{
-              width: "48px",
-              height: "48px",
+              width: "40px",
+              height: "40px",
               objectFit: "contain",
-              mixBlendMode: "screen",
+              background: "transparent",
             }}
           />
+          <span
+            style={{
+              fontFamily: "Sora, system-ui, sans-serif",
+              fontWeight: 700,
+              fontSize: "0.95rem",
+              color: "rgba(232,237,248,0.9)",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            Cybin
+          </span>
         </Link>
+        <nav className="hidden md:flex items-center gap-5">
+          {[
+            ["/#solutions", "Solutions"],
+            ["/industries", "Industries"],
+            ["/about", "About"],
+            ["/contact", "Contact"],
+            ["/hardware", "Hardware"],
+          ].map(([href, label]) => (
+            <Link
+              key={href}
+              to={href}
+              style={{
+                fontSize: "0.8rem",
+                fontWeight: 500,
+                color: "rgba(232,237,248,0.55)",
+                textDecoration: "none",
+              }}
+              onMouseEnter={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color =
+                  "rgba(232,237,248,0.9)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.color =
+                  "rgba(232,237,248,0.55)";
+              }}
+            >
+              {label}
+            </Link>
+          ))}
+        </nav>
         <div className="flex items-center gap-4">
           {isVaultStep && (
             <div
