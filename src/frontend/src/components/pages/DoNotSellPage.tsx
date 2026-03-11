@@ -98,7 +98,7 @@ export default function DoNotSellPage() {
               "For questions about this page, your California privacy rights, or to submit an opt-out request:",
               "Cybin Enterprises LLC",
               "Email: Customercare@cybinenterprises.com",
-              "Office: 888-321-2100 | Mobile: 724-244-7111",
+              "888-321-2100",
               "We are available to respond to privacy inquiries Monday through Friday during normal business hours.",
             ],
           },

@@ -219,8 +219,7 @@ export default function KnowledgePage() {
               {
                 icon: Phone,
                 label: "Contact",
-                value:
-                  "O: 888-321-2100 | M: 724-244-7111 | Customercare@cybinenterprises.com",
+                value: "888-321-2100 | Customercare@cybinenterprises.com",
               },
             ].map((item) => (
               <div

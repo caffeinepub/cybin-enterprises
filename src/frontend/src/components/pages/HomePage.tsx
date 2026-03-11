@@ -438,7 +438,12 @@ export default function HomePage() {
       <div className="cybin-section-divider" />
 
       {/* Why Choose Cybin */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "80px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#f0f4f8" : "#0a0f1e",
+          padding: "80px 0",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14 animate-fade-up">
             <span
@@ -451,7 +456,7 @@ export default function HomePage() {
               className="text-3xl sm:text-4xl font-bold mt-3"
               style={{
                 fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
+                color: isLight ? "#0d1a30" : "#e8edf8",
               }}
             >
               Why Businesses Choose Cybin Enterprises
@@ -476,13 +481,20 @@ export default function HomePage() {
                 </div>
                 <h3
                   className="text-base font-bold mb-2"
-                  style={{ fontFamily: "Sora, sans-serif", color: "#e8edf8" }}
+                  style={{
+                    fontFamily: "Sora, sans-serif",
+                    color: isLight ? "#0d1a30" : "#e8edf8",
+                  }}
                 >
                   {title}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "rgba(232, 237, 248, 0.6)" }}
+                  style={{
+                    color: isLight
+                      ? "rgba(13,26,48,0.7)"
+                      : "rgba(232, 237, 248, 0.6)",
+                  }}
                 >
                   {desc}
                 </p>
@@ -503,7 +515,12 @@ export default function HomePage() {
       <div className="cybin-section-divider" />
 
       {/* MATCH / Previously Denied Section */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "80px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e",
+          padding: "80px 0",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="animate-fade-up cybin-glass-card p-8 sm:p-12"
@@ -529,7 +546,7 @@ export default function HomePage() {
                   className="text-3xl sm:text-4xl font-bold mb-5"
                   style={{
                     fontFamily: "Sora, system-ui, sans-serif",
-                    color: "#e8edf8",
+                    color: isLight ? "#0d1a30" : "#e8edf8",
                   }}
                 >
                   On the MATCH List or{" "}
@@ -538,7 +555,9 @@ export default function HomePage() {
                 <p
                   className="text-base mb-4"
                   style={{
-                    color: "rgba(232, 237, 248, 0.65)",
+                    color: isLight
+                      ? "rgba(13,26,48,0.7)"
+                      : "rgba(232, 237, 248, 0.65)",
                     lineHeight: 1.75,
                   }}
                 >
@@ -630,7 +649,12 @@ export default function HomePage() {
       <div className="cybin-section-divider" />
 
       {/* Payment Solutions Preview */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "80px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e",
+          padding: "80px 0",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 animate-fade-up">
             <span
@@ -643,12 +667,18 @@ export default function HomePage() {
               className="text-3xl sm:text-4xl font-bold mt-3 mb-4"
               style={{
                 fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
+                color: isLight ? "#0d1a30" : "#e8edf8",
               }}
             >
               Payment Solutions Preview
             </h2>
-            <p style={{ color: "rgba(232, 237, 248, 0.55)" }}>
+            <p
+              style={{
+                color: isLight
+                  ? "rgba(13,26,48,0.7)"
+                  : "rgba(232, 237, 248, 0.55)",
+              }}
+            >
               Cybin Enterprises supports businesses across multiple payment
               environments.
             </p>
@@ -669,7 +699,7 @@ export default function HomePage() {
                 </div>
                 <p
                   className="text-xs font-semibold"
-                  style={{ color: "#e8edf8" }}
+                  style={{ color: isLight ? "#0d1a30" : "#e8edf8" }}
                 >
                   {title}
                 </p>
@@ -691,138 +721,15 @@ export default function HomePage() {
 
       <div className="cybin-section-divider" />
 
-      {/* Fraud Deflect Preview - hidden */}
-      <section
-        style={{
-          display: "none",
-          backgroundColor: isLight ? "#eef1f8" : "#0c1020",
-          padding: "80px 0",
-        }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="animate-fade-up cybin-glass-card p-8 sm:p-12"
-            style={{
-              background:
-                "linear-gradient(135deg, rgba(22, 30, 58, 0.8), rgba(26, 10, 46, 0.6))",
-              border: "1px solid rgba(124, 92, 191, 0.2)",
-            }}
-          >
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <div>
-                <div
-                  className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-5"
-                  style={{
-                    backgroundColor: "rgba(124, 92, 191, 0.15)",
-                    border: "1px solid rgba(124, 92, 191, 0.3)",
-                    color: "#a87ef5",
-                  }}
-                >
-                  <Shield size={12} /> Fraud Protection
-                </div>
-                <h2
-                  className="text-3xl sm:text-4xl font-bold mb-5"
-                  style={{
-                    fontFamily: "Sora, system-ui, sans-serif",
-                    color: "#e8edf8",
-                  }}
-                >
-                  Prevent Chargebacks{" "}
-                  <span style={{ color: "#a87ef5" }}>Before They Happen</span>
-                </h2>
-                <p
-                  className="text-base mb-6"
-                  style={{
-                    color: "rgba(232, 237, 248, 0.65)",
-                    lineHeight: 1.75,
-                  }}
-                >
-                  Fraud Deflect provides early dispute alerts that allow
-                  businesses to resolve issues before they become chargebacks.
-                  Powered by two global dispute networks.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                  <div
-                    className="flex-1 p-4 rounded-xl"
-                    style={{
-                      backgroundColor: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <p
-                      className="text-sm font-bold mb-1"
-                      style={{ color: "#00d4b8" }}
-                    >
-                      Visa Network
-                    </p>
-                    <p
-                      className="text-xs"
-                      style={{ color: "rgba(232,237,248,0.55)" }}
-                    >
-                      Direct Visa dispute monitoring
-                    </p>
-                  </div>
-                  <div
-                    className="flex-1 p-4 rounded-xl"
-                    style={{
-                      backgroundColor: "rgba(255,255,255,0.04)",
-                      border: "1px solid rgba(255,255,255,0.08)",
-                    }}
-                  >
-                    <p
-                      className="text-sm font-bold mb-1"
-                      style={{ color: "#00d4b8" }}
-                    >
-                      Mastercard Network
-                    </p>
-                    <p
-                      className="text-xs"
-                      style={{ color: "rgba(232,237,248,0.55)" }}
-                    >
-                      Global Mastercard collaboration
-                    </p>
-                  </div>
-                </div>
-                <Link
-                  to="/fraud-deflect"
-                  className="cybin-btn-primary"
-                  data-ocid="fraud_deflect.cta.button"
-                >
-                  Learn About Fraud Deflect <ChevronRight size={16} />
-                </Link>
-              </div>
-
-              <div className="grid grid-cols-1 gap-3">
-                {[
-                  "Reduce Chargebacks",
-                  "Protect Payment Accounts",
-                  "Lower Fraud Risk",
-                  "Reduce Friendly Fraud",
-                  "Improve Long-Term Account Stability",
-                ].map((b) => (
-                  <div key={b} className="flex items-center gap-3">
-                    <CheckCircle
-                      size={16}
-                      style={{ color: "#00d4b8", flexShrink: 0 }}
-                    />
-                    <span
-                      className="text-sm"
-                      style={{ color: "rgba(232, 237, 248, 0.75)" }}
-                    >
-                      {b}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <div className="cybin-section-divider" />
 
       {/* About Preview */}
-      <section style={{ backgroundColor: "#0a0f1e", padding: "80px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e",
+          padding: "80px 0",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="animate-fade-up max-w-2xl mx-auto text-center">
             <span
@@ -835,14 +742,19 @@ export default function HomePage() {
               className="text-3xl sm:text-4xl font-bold mt-3 mb-5"
               style={{
                 fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
+                color: isLight ? "#0d1a30" : "#e8edf8",
               }}
             >
               Built for Businesses That Need More
             </h2>
             <p
               className="text-base mb-8"
-              style={{ color: "rgba(232, 237, 248, 0.6)", lineHeight: 1.75 }}
+              style={{
+                color: isLight
+                  ? "rgba(13,26,48,0.7)"
+                  : "rgba(232, 237, 248, 0.6)",
+                lineHeight: 1.75,
+              }}
             >
               Cybin Enterprises was created to bring clarity and stability to
               businesses that struggle to find reliable payment solutions. Led
@@ -858,7 +770,12 @@ export default function HomePage() {
       </section>
 
       {/* Featured Snippets / AI Q&A Block */}
-      <section style={{ backgroundColor: "#080d1a", padding: "80px 0" }}>
+      <section
+        style={{
+          backgroundColor: isLight ? "#f0f4f8" : "#080d1a",
+          padding: "80px 0",
+        }}
+      >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <span
@@ -871,7 +788,7 @@ export default function HomePage() {
               className="text-3xl sm:text-4xl font-bold mt-3"
               style={{
                 fontFamily: "Sora, system-ui, sans-serif",
-                color: "#e8edf8",
+                color: isLight ? "#0d1a30" : "#e8edf8",
               }}
             >
               High-Risk Payment Processing — Explained
@@ -893,7 +810,7 @@ export default function HomePage() {
               },
               {
                 q: "How do you prevent chargebacks as a high-risk merchant?",
-                a: "The most effective approach is early dispute alerts — Cybin Enterprises offers Fraud Deflect, which integrates with the Ethoca and Verifi networks to notify you the moment a cardholder opens a dispute, giving you the chance to resolve it before it becomes a chargeback.",
+                a: "The most effective approach is proactive dispute management and early alert systems that integrate with card network dispute programs. Cybin Enterprises connects merchants with processors that have built-in chargeback prevention tools, helping you resolve disputes before they escalate into formal chargebacks.",
               },
               {
                 q: "Can a business get payment processing after being denied?",
@@ -905,8 +822,10 @@ export default function HomePage() {
                 itemScope
                 itemType="https://schema.org/Question"
                 style={{
-                  background: "rgba(255,255,255,0.025)",
-                  border: "1px solid rgba(0,212,184,0.1)",
+                  background: isLight ? "#ffffff" : "rgba(255,255,255,0.025)",
+                  border: isLight
+                    ? "1px solid rgba(0,0,0,0.1)"
+                    : "1px solid rgba(0,212,184,0.1)",
                   borderRadius: 12,
                   padding: "24px 28px",
                 }}
@@ -925,7 +844,9 @@ export default function HomePage() {
                   <p
                     itemProp="text"
                     style={{
-                      color: "rgba(232,237,248,0.72)",
+                      color: isLight
+                        ? "rgba(13,26,48,0.75)"
+                        : "rgba(232,237,248,0.72)",
                       lineHeight: 1.8,
                       fontSize: "0.97rem",
                       margin: 0,
@@ -948,8 +869,9 @@ export default function HomePage() {
       {/* Final CTA */}
       <section
         style={{
-          background:
-            "linear-gradient(135deg, #0d1a30 0%, #120820 50%, #0d1a30 100%)",
+          background: isLight
+            ? "linear-gradient(135deg, #e8f4f8 0%, #f0e8f8 50%, #e8f4f8 100%)"
+            : "linear-gradient(135deg, #0d1a30 0%, #120820 50%, #0d1a30 100%)",
           padding: "80px 0",
           position: "relative",
           overflow: "hidden",
@@ -969,7 +891,7 @@ export default function HomePage() {
             className="text-3xl sm:text-4xl font-bold mb-5"
             style={{
               fontFamily: "Sora, system-ui, sans-serif",
-              color: "#e8edf8",
+              color: isLight ? "#0d1a30" : "#e8edf8",
             }}
           >
             Ready to Stabilize Your{" "}
@@ -977,7 +899,11 @@ export default function HomePage() {
           </h2>
           <p
             className="text-base mb-8"
-            style={{ color: "rgba(232, 237, 248, 0.6)" }}
+            style={{
+              color: isLight
+                ? "rgba(13,26,48,0.7)"
+                : "rgba(232, 237, 248, 0.6)",
+            }}
           >
             Start the process today and explore the payment options available
             for your business.

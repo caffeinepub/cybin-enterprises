@@ -3,6 +3,7 @@ import { useLiveImageSettings } from "@/hooks/useLiveImageSettings";
 import { useLiveSiteSettings } from "@/hooks/useLiveSiteSettings";
 import { Link, useLocation } from "@/lib/router";
 import {
+  ChevronDown,
   ChevronRight,
   Cookie,
   Mail,
@@ -34,6 +35,31 @@ const navLinks = [
   { label: "About", href: "/about", ocid: "nav.about.link" },
   { label: "Insights", href: "/insights", ocid: "nav.insights.link" },
   { label: "Contact", href: "/contact", ocid: "nav.contact.link" },
+];
+
+const industryLinks = [
+  { label: "Cannabis & CBD", href: "/industries/cannabis-cbd" },
+  { label: "Firearms & Ammunition", href: "/industries/firearms-ammunition" },
+  { label: "Online Gaming", href: "/industries/online-gaming" },
+  {
+    label: "Nutraceuticals & Supplements",
+    href: "/industries/nutraceuticals-supplements",
+  },
+  {
+    label: "Kratom & Spores",
+    href: "/industries/kratom-spores-ethnobotanicals",
+  },
+  {
+    label: "Telemedicine & Healthcare",
+    href: "/industries/telemedicine-healthcare",
+  },
+  { label: "E-Cigarettes & Vaping", href: "/industries/e-cigarettes-vaping" },
+  { label: "Debt Collection", href: "/industries/debt-collection" },
+  {
+    label: "Subscription Businesses",
+    href: "/industries/subscription-businesses",
+  },
+  { label: "Travel & Timeshare", href: "/industries/travel-timeshare" },
 ];
 
 interface LayoutProps {
@@ -97,6 +123,7 @@ export default function Layout({ children }: LayoutProps) {
   const { resolved } = useTheme();
   const isLight = resolved === "light";
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [industriesOpen, setIndustriesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [cookieConsent, setCookieConsent] = useState<CookieCategories | null>(
     () => {
@@ -250,38 +277,150 @@ export default function Layout({ children }: LayoutProps) {
             </Link>
 
             <nav className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  data-ocid={link.ocid}
-                  className="px-3 py-2 text-sm font-medium rounded-md transition-all duration-200"
-                  style={{
-                    color:
-                      location.pathname === link.href
-                        ? accentTeal
-                        : navLinkColor,
-                    backgroundColor:
-                      location.pathname === link.href
-                        ? activeNavBg
-                        : "transparent",
-                  }}
-                  onMouseEnter={(e) => {
-                    if (location.pathname !== link.href) {
-                      e.currentTarget.style.color = navLinkHover;
-                      e.currentTarget.style.backgroundColor = navLinkHoverBg;
-                    }
-                  }}
-                  onMouseLeave={(e) => {
-                    if (location.pathname !== link.href) {
-                      e.currentTarget.style.color = navLinkColor;
-                      e.currentTarget.style.backgroundColor = "transparent";
-                    }
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                if (link.label === "Industries") {
+                  return (
+                    <div key={link.href} className="relative group">
+                      <button
+                        type="button"
+                        data-ocid={link.ocid}
+                        className="px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 flex items-center gap-1"
+                        style={{
+                          color: location.pathname.startsWith("/industries")
+                            ? accentTeal
+                            : navLinkColor,
+                          backgroundColor: location.pathname.startsWith(
+                            "/industries",
+                          )
+                            ? activeNavBg
+                            : "transparent",
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!location.pathname.startsWith("/industries")) {
+                            e.currentTarget.style.color = navLinkHover;
+                            e.currentTarget.style.backgroundColor =
+                              navLinkHoverBg;
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (!location.pathname.startsWith("/industries")) {
+                            e.currentTarget.style.color = navLinkColor;
+                            e.currentTarget.style.backgroundColor =
+                              "transparent";
+                          }
+                        }}
+                      >
+                        Industries <ChevronDown size={13} />
+                      </button>
+                      {/* Dropdown */}
+                      <div
+                        className="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+                        style={{ minWidth: "220px" }}
+                      >
+                        <div
+                          className="rounded-xl py-2 shadow-2xl"
+                          style={{
+                            backgroundColor: isLight ? "#ffffff" : "#0d1525",
+                            border: isLight
+                              ? "1px solid rgba(0,0,0,0.1)"
+                              : "1px solid rgba(0,212,184,0.15)",
+                          }}
+                        >
+                          <p
+                            className="px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-1"
+                            style={{ color: accentTeal }}
+                          >
+                            Common Industries
+                          </p>
+                          {industryLinks.map((ind) => (
+                            <Link
+                              key={ind.href}
+                              to={ind.href}
+                              className="block px-4 py-2 text-sm transition-colors"
+                              style={{
+                                color: isLight
+                                  ? "#1a2040"
+                                  : "rgba(232,237,248,0.8)",
+                              }}
+                              onMouseEnter={(e) => {
+                                e.currentTarget.style.color = accentTeal;
+                                e.currentTarget.style.backgroundColor = isLight
+                                  ? "rgba(0,122,106,0.05)"
+                                  : "rgba(0,212,184,0.06)";
+                              }}
+                              onMouseLeave={(e) => {
+                                e.currentTarget.style.color = isLight
+                                  ? "#1a2040"
+                                  : "rgba(232,237,248,0.8)";
+                                e.currentTarget.style.backgroundColor =
+                                  "transparent";
+                              }}
+                            >
+                              {ind.label}
+                            </Link>
+                          ))}
+                          <div
+                            style={{
+                              borderTop: isLight
+                                ? "1px solid rgba(0,0,0,0.06)"
+                                : "1px solid rgba(255,255,255,0.06)",
+                              margin: "6px 0",
+                            }}
+                          />
+                          <Link
+                            to="/industries"
+                            className="block px-4 py-2 text-sm font-semibold transition-colors"
+                            style={{ color: accentTeal }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.backgroundColor = isLight
+                                ? "rgba(0,122,106,0.05)"
+                                : "rgba(0,212,184,0.06)";
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.backgroundColor =
+                                "transparent";
+                            }}
+                          >
+                            View All Industries →
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    data-ocid={link.ocid}
+                    className="px-3 py-2 text-sm font-medium rounded-md transition-all duration-200"
+                    style={{
+                      color:
+                        location.pathname === link.href
+                          ? accentTeal
+                          : navLinkColor,
+                      backgroundColor:
+                        location.pathname === link.href
+                          ? activeNavBg
+                          : "transparent",
+                    }}
+                    onMouseEnter={(e) => {
+                      if (location.pathname !== link.href) {
+                        e.currentTarget.style.color = navLinkHover;
+                        e.currentTarget.style.backgroundColor = navLinkHoverBg;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (location.pathname !== link.href) {
+                        e.currentTarget.style.color = navLinkColor;
+                        e.currentTarget.style.backgroundColor = "transparent";
+                      }
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
             </nav>
 
             <div className="flex items-center gap-2">
@@ -328,28 +467,98 @@ export default function Layout({ children }: LayoutProps) {
             }}
           >
             <div className="px-4 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  data-ocid={link.ocid}
-                  className="px-4 py-3 text-sm font-medium rounded-lg transition-all"
-                  style={{
-                    color:
-                      location.pathname === link.href
-                        ? accentTeal
-                        : isLight
-                          ? "#1a2040"
-                          : "#e8edf8",
-                    backgroundColor:
-                      location.pathname === link.href
-                        ? activeNavBg
-                        : "transparent",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map((link) => {
+                if (link.label === "Industries") {
+                  return (
+                    <div key={link.href}>
+                      <button
+                        type="button"
+                        data-ocid={link.ocid}
+                        onClick={() => setIndustriesOpen(!industriesOpen)}
+                        className="w-full flex items-center justify-between px-4 py-3 text-sm font-medium rounded-lg transition-all"
+                        style={{
+                          color: location.pathname.startsWith("/industries")
+                            ? accentTeal
+                            : isLight
+                              ? "#1a2040"
+                              : "#e8edf8",
+                          backgroundColor: location.pathname.startsWith(
+                            "/industries",
+                          )
+                            ? activeNavBg
+                            : "transparent",
+                        }}
+                      >
+                        Industries{" "}
+                        <ChevronDown
+                          size={14}
+                          style={{
+                            transform: industriesOpen
+                              ? "rotate(180deg)"
+                              : "rotate(0deg)",
+                            transition: "transform 0.2s",
+                          }}
+                        />
+                      </button>
+                      {industriesOpen && (
+                        <div className="ml-4 flex flex-col gap-0.5 mb-2">
+                          {industryLinks.map((ind) => (
+                            <Link
+                              key={ind.href}
+                              to={ind.href}
+                              className="px-4 py-2 text-sm rounded-lg transition-all"
+                              style={{
+                                color: isLight
+                                  ? "#1a2040"
+                                  : "rgba(232,237,248,0.7)",
+                              }}
+                              onClick={() => {
+                                setMobileOpen(false);
+                                setIndustriesOpen(false);
+                              }}
+                            >
+                              {ind.label}
+                            </Link>
+                          ))}
+                          <Link
+                            to="/industries"
+                            className="px-4 py-2 text-sm font-semibold rounded-lg transition-all"
+                            style={{ color: accentTeal }}
+                            onClick={() => {
+                              setMobileOpen(false);
+                              setIndustriesOpen(false);
+                            }}
+                          >
+                            View All →
+                          </Link>
+                        </div>
+                      )}
+                    </div>
+                  );
+                }
+                return (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    data-ocid={link.ocid}
+                    className="px-4 py-3 text-sm font-medium rounded-lg transition-all"
+                    style={{
+                      color:
+                        location.pathname === link.href
+                          ? accentTeal
+                          : isLight
+                            ? "#1a2040"
+                            : "#e8edf8",
+                      backgroundColor:
+                        location.pathname === link.href
+                          ? activeNavBg
+                          : "transparent",
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                );
+              })}
               <Link
                 to="/apply"
                 data-ocid="nav.cta.button"
@@ -373,7 +582,7 @@ export default function Layout({ children }: LayoutProps) {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
             <div>
               <div
                 style={{ background: "transparent", display: "inline-block" }}
@@ -434,6 +643,37 @@ export default function Layout({ children }: LayoutProps) {
                     }}
                   >
                     {link.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h4
+                className="text-sm font-semibold mb-4"
+                style={{
+                  color: footerHeading,
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                }}
+              >
+                Common Industries
+              </h4>
+              <div className="flex flex-col gap-2">
+                {industryLinks.map((ind) => (
+                  <Link
+                    key={ind.href}
+                    to={ind.href}
+                    className="text-sm transition-colors"
+                    style={{ color: footerText }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = accentTeal;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = footerText;
+                    }}
+                  >
+                    {ind.label}
                   </Link>
                 ))}
               </div>

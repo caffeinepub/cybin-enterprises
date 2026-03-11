@@ -7,6 +7,7 @@ import {
   Flame,
   Gamepad2,
   Globe,
+  HelpCircle,
   Leaf,
   Lock,
   Pill,
@@ -23,7 +24,7 @@ import { useActor } from "../../hooks/useActor";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-type Step = 1 | 2 | 3 | 4 | "success";
+type Step = 1 | 2 | 3 | 4 | 5 | "success";
 
 interface WizardState {
   step: Step;
@@ -40,6 +41,19 @@ interface WizardState {
   businessType: string;
   hasHardware: string;
   wantsHardware: string;
+  businessAddress: string;
+  businessCity: string;
+  businessState: string;
+  businessZip: string;
+  businessPhone: string;
+  ownerAddress: string;
+  ownerCity: string;
+  ownerState: string;
+  ownerZip: string;
+  ownerPhone: string;
+  ownerEmail: string;
+  idFileName: string;
+  processingFileName: string;
 }
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -156,11 +170,24 @@ const hurdleCards = [
     desc: "Growing business needing stable infrastructure",
     booster: false,
   },
+  {
+    id: "other",
+    label: "Other / Not Sure",
+    icon: HelpCircle,
+    desc: "Something else is holding you back — we can help",
+    booster: false,
+  },
 ];
 
 // ─── Progress Bar ─────────────────────────────────────────────────────────────
 
-const stepLabels = ["Industry", "Challenges", "Contact", "Verification"];
+const stepLabels = [
+  "Industry",
+  "Challenges",
+  "Contact",
+  "Business Info",
+  "Owner Verification",
+];
 
 function ProgressBar({ step }: { step: number }) {
   return (
@@ -819,6 +846,157 @@ function Step3({
             }}
           />
         </div>
+
+        {/* Business Location */}
+        <div>
+          <p
+            className="text-xs font-semibold uppercase tracking-wider mb-2"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Business Location{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.35)" }}
+            >
+              (optional — helps match regional processors)
+            </span>
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input
+              type="text"
+              data-ocid="wizard.step3.business_address.input"
+              value={state.businessAddress}
+              maxLength={100}
+              onChange={(e) => onChange("businessAddress", e.target.value)}
+              placeholder="Street Address"
+              autoComplete="street-address"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.04)",
+                border: "1.5px solid rgba(255,255,255,0.1)",
+                color: "#e8edf8",
+                outline: "none",
+                fontFamily: "Cabinet Grotesk, sans-serif",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(0, 212, 184, 0.5)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+              }}
+            />
+            <input
+              type="text"
+              data-ocid="wizard.step3.business_city.input"
+              value={state.businessCity}
+              maxLength={60}
+              onChange={(e) => onChange("businessCity", e.target.value)}
+              placeholder="City"
+              autoComplete="address-level2"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.04)",
+                border: "1.5px solid rgba(255,255,255,0.1)",
+                color: "#e8edf8",
+                outline: "none",
+                fontFamily: "Cabinet Grotesk, sans-serif",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(0, 212, 184, 0.5)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+              }}
+            />
+            <input
+              type="text"
+              data-ocid="wizard.step3.business_state.input"
+              value={state.businessState}
+              maxLength={30}
+              onChange={(e) => onChange("businessState", e.target.value)}
+              placeholder="State / Province"
+              autoComplete="address-level1"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.04)",
+                border: "1.5px solid rgba(255,255,255,0.1)",
+                color: "#e8edf8",
+                outline: "none",
+                fontFamily: "Cabinet Grotesk, sans-serif",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(0, 212, 184, 0.5)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+              }}
+            />
+            <input
+              type="text"
+              data-ocid="wizard.step3.business_zip.input"
+              value={state.businessZip}
+              maxLength={10}
+              onChange={(e) => onChange("businessZip", e.target.value)}
+              placeholder="ZIP / Postal Code"
+              autoComplete="postal-code"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.04)",
+                border: "1.5px solid rgba(255,255,255,0.1)",
+                color: "#e8edf8",
+                outline: "none",
+                fontFamily: "Cabinet Grotesk, sans-serif",
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = "rgba(0, 212, 184, 0.5)";
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Business Phone */}
+        <div>
+          <label
+            htmlFor="wizard-business-phone"
+            className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Business Phone{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.35)" }}
+            >
+              (optional)
+            </span>
+          </label>
+          <input
+            id="wizard-business-phone"
+            type="tel"
+            data-ocid="wizard.step3.business_phone.input"
+            value={state.businessPhone}
+            maxLength={20}
+            onChange={(e) => onChange("businessPhone", e.target.value)}
+            placeholder="+1 (555) 000-0000"
+            autoComplete="tel"
+            className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+            style={{
+              backgroundColor: "rgba(255,255,255,0.04)",
+              border: "1.5px solid rgba(255,255,255,0.1)",
+              color: "#e8edf8",
+              outline: "none",
+              fontFamily: "Cabinet Grotesk, sans-serif",
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = "rgba(0, 212, 184, 0.5)";
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
+            }}
+          />
+        </div>
       </div>
 
       {partialSaved ? (
@@ -905,13 +1083,13 @@ function Step3({
 function Step4({
   state,
   onChange,
-  onSubmit,
+  onNext,
   isSubmitting,
   submitError,
 }: {
   state: WizardState;
   onChange: (field: keyof WizardState, value: string | boolean) => void;
-  onSubmit: () => void;
+  onNext: () => void;
   isSubmitting: boolean;
   submitError: string | null;
 }) {
@@ -923,8 +1101,8 @@ function Step4({
   const handleSkip = () => {
     onChange("feinSkipped", true);
     onChange("fein", "");
-    // Immediately submit as a preliminary consultation
-    onSubmit();
+    // Move to owner verification step
+    onNext();
   };
 
   return (
@@ -1305,7 +1483,7 @@ function Step4({
       <button
         type="button"
         data-ocid="wizard.step4.submit.button"
-        onClick={onSubmit}
+        onClick={onNext}
         disabled={isSubmitting}
         className="w-full sm:w-auto justify-center px-8 py-4 rounded-xl font-bold text-sm transition-all duration-300 inline-flex items-center gap-2"
         style={{
@@ -1402,6 +1580,402 @@ function SuccessScreen() {
   );
 }
 
+// ─── Step 5 ───────────────────────────────────────────────────────────────────
+
+function Step5({
+  state,
+  onChange,
+  onSubmit,
+  isSubmitting,
+  submitError,
+}: {
+  state: WizardState;
+  onChange: (field: keyof WizardState, value: string | boolean) => void;
+  onSubmit: () => void;
+  isSubmitting: boolean;
+  submitError: string | null;
+}) {
+  const inputStyle: React.CSSProperties = {
+    backgroundColor: "rgba(255,255,255,0.04)",
+    border: "1.5px solid rgba(255,255,255,0.1)",
+    color: "#e8edf8",
+    outline: "none",
+    fontFamily: "Cabinet Grotesk, sans-serif",
+  };
+  const focusStyle = "rgba(0, 212, 184, 0.5)";
+  const blurStyle = "rgba(255,255,255,0.1)";
+
+  return (
+    <div>
+      <div className="mb-8">
+        <div
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
+          style={{
+            backgroundColor: "rgba(0, 212, 184, 0.08)",
+            border: "1px solid rgba(0, 212, 184, 0.18)",
+            color: "#00d4b8",
+          }}
+        >
+          <Shield size={11} />
+          Step 5 of 5 — Owner Verification (Optional)
+        </div>
+        <h2
+          className="text-2xl sm:text-3xl font-bold mb-3"
+          style={{
+            fontFamily: "Sora, sans-serif",
+            color: "#e8edf8",
+            lineHeight: 1.25,
+          }}
+        >
+          Owner & Identity Details
+        </h2>
+        <p className="text-sm" style={{ color: "rgba(232,237,248,0.45)" }}>
+          All fields are optional. Providing this information helps underwriters
+          process your application faster.
+        </p>
+      </div>
+
+      <div className="space-y-4 mb-6">
+        {/* Owner Personal Address */}
+        <div>
+          <p
+            className="text-xs font-semibold uppercase tracking-wider mb-2"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Owner Personal Address{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.35)" }}
+            >
+              (optional)
+            </span>
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <input
+              type="text"
+              data-ocid="wizard.step5.owner_address.input"
+              value={state.ownerAddress}
+              maxLength={100}
+              onChange={(e) => onChange("ownerAddress", e.target.value)}
+              placeholder="Street Address"
+              autoComplete="street-address"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = focusStyle;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = blurStyle;
+              }}
+            />
+            <input
+              type="text"
+              data-ocid="wizard.step5.owner_city.input"
+              value={state.ownerCity}
+              maxLength={60}
+              onChange={(e) => onChange("ownerCity", e.target.value)}
+              placeholder="City"
+              autoComplete="address-level2"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = focusStyle;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = blurStyle;
+              }}
+            />
+            <input
+              type="text"
+              data-ocid="wizard.step5.owner_state.input"
+              value={state.ownerState}
+              maxLength={30}
+              onChange={(e) => onChange("ownerState", e.target.value)}
+              placeholder="State / Province"
+              autoComplete="address-level1"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = focusStyle;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = blurStyle;
+              }}
+            />
+            <input
+              type="text"
+              data-ocid="wizard.step5.owner_zip.input"
+              value={state.ownerZip}
+              maxLength={10}
+              onChange={(e) => onChange("ownerZip", e.target.value)}
+              placeholder="ZIP / Postal Code"
+              autoComplete="postal-code"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = focusStyle;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = blurStyle;
+              }}
+            />
+          </div>
+        </div>
+
+        {/* Owner Phone & Email */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label
+              htmlFor="owner-phone"
+              className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
+              style={{ color: "rgba(232,237,248,0.6)" }}
+            >
+              Owner Phone{" "}
+              <span
+                className="normal-case font-normal"
+                style={{ color: "rgba(232,237,248,0.35)" }}
+              >
+                (optional)
+              </span>
+            </label>
+            <input
+              id="owner-phone"
+              type="tel"
+              data-ocid="wizard.step5.owner_phone.input"
+              value={state.ownerPhone}
+              maxLength={20}
+              onChange={(e) => onChange("ownerPhone", e.target.value)}
+              placeholder="+1 (555) 000-0000"
+              autoComplete="tel"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = focusStyle;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = blurStyle;
+              }}
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="owner-email"
+              className="block text-xs font-semibold uppercase tracking-wider mb-1.5"
+              style={{ color: "rgba(232,237,248,0.6)" }}
+            >
+              Owner Email{" "}
+              <span
+                className="normal-case font-normal"
+                style={{ color: "rgba(232,237,248,0.35)" }}
+              >
+                (optional)
+              </span>
+            </label>
+            <input
+              id="owner-email"
+              type="email"
+              data-ocid="wizard.step5.owner_email.input"
+              value={state.ownerEmail}
+              maxLength={254}
+              onChange={(e) => onChange("ownerEmail", e.target.value)}
+              placeholder="owner@yourbusiness.com"
+              autoComplete="email"
+              className="w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+              style={inputStyle}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = focusStyle;
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = blurStyle;
+              }}
+            />
+          </div>
+        </div>
+
+        {/* ID Upload */}
+        <div
+          className="p-5 rounded-xl"
+          style={{
+            background: "rgba(255,255,255,0.02)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <label
+            htmlFor="id-upload"
+            className="block text-xs font-semibold uppercase tracking-wider mb-2"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Government ID Upload{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.35)" }}
+            >
+              (optional)
+            </span>
+          </label>
+          <p
+            className="text-xs mb-3 leading-relaxed"
+            style={{ color: "rgba(232,237,248,0.4)" }}
+          >
+            Driver's license or passport. Your ID is used solely for identity
+            verification by our processor partners. It is encrypted, stored
+            securely, and never shared outside of the underwriting process. You
+            may request deletion at any time.
+          </p>
+          <label
+            htmlFor="id-upload"
+            data-ocid="wizard.id_upload.upload_button"
+            className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all"
+            style={{
+              border: "1.5px dashed rgba(0,212,184,0.3)",
+              color: "#00d4b8",
+              background: "rgba(0,212,184,0.04)",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.background =
+                "rgba(0,212,184,0.08)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.background =
+                "rgba(0,212,184,0.04)";
+            }}
+          >
+            <Lock size={14} />
+            {state.idFileName
+              ? `✓ ${state.idFileName}`
+              : "Choose file or drag here"}
+          </label>
+          <input
+            id="id-upload"
+            type="file"
+            accept="image/*,.pdf"
+            className="sr-only"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) onChange("idFileName", file.name);
+            }}
+          />
+        </div>
+
+        {/* Processing Records Upload */}
+        <div
+          className="p-5 rounded-xl"
+          style={{
+            background: "rgba(255,255,255,0.02)",
+            border: "1px solid rgba(255,255,255,0.08)",
+          }}
+        >
+          <label
+            htmlFor="processing-upload"
+            className="block text-xs font-semibold uppercase tracking-wider mb-2"
+            style={{ color: "rgba(232,237,248,0.6)" }}
+          >
+            Processing Records{" "}
+            <span
+              className="normal-case font-normal"
+              style={{ color: "rgba(232,237,248,0.35)" }}
+            >
+              (optional)
+            </span>
+          </label>
+          <p
+            className="text-xs mb-3 leading-relaxed"
+            style={{ color: "rgba(232,237,248,0.4)" }}
+          >
+            Recent processing statements help underwriters assess your account
+            history and offer better rates. These documents are handled with
+            bank-level security and used only for your application.
+          </p>
+          <label
+            htmlFor="processing-upload"
+            data-ocid="wizard.records_upload.upload_button"
+            className="cursor-pointer inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all"
+            style={{
+              border: "1.5px dashed rgba(0,212,184,0.3)",
+              color: "#00d4b8",
+              background: "rgba(0,212,184,0.04)",
+            }}
+            onMouseEnter={(e) => {
+              (e.currentTarget as HTMLElement).style.background =
+                "rgba(0,212,184,0.08)";
+            }}
+            onMouseLeave={(e) => {
+              (e.currentTarget as HTMLElement).style.background =
+                "rgba(0,212,184,0.04)";
+            }}
+          >
+            <Lock size={14} />
+            {state.processingFileName
+              ? `✓ ${state.processingFileName}`
+              : "Choose file or drag here"}
+          </label>
+          <input
+            id="processing-upload"
+            type="file"
+            accept=".pdf,.csv,.xls,.xlsx,image/*"
+            className="sr-only"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) onChange("processingFileName", file.name);
+            }}
+          />
+        </div>
+      </div>
+
+      {submitError && (
+        <div
+          data-ocid="wizard.error_state"
+          className="p-4 rounded-xl mb-5"
+          style={{
+            backgroundColor: "rgba(255, 107, 107, 0.08)",
+            border: "1px solid rgba(255, 107, 107, 0.2)",
+          }}
+        >
+          <p className="text-sm" style={{ color: "#ff6b6b" }}>
+            {submitError}
+          </p>
+        </div>
+      )}
+
+      <div className="flex flex-col sm:flex-row gap-3 items-start">
+        <button
+          type="button"
+          onClick={onSubmit}
+          disabled={isSubmitting}
+          data-ocid="wizard.step5.submit_button"
+          className="cybin-btn-primary w-full sm:w-auto justify-center"
+          style={{ minWidth: "180px" }}
+        >
+          {isSubmitting ? "Submitting..." : "Submit Application"}
+          {!isSubmitting && <ChevronRight size={16} />}
+        </button>
+        <button
+          type="button"
+          onClick={onSubmit}
+          disabled={isSubmitting}
+          data-ocid="wizard.step5.skip.button"
+          className="w-full sm:w-auto justify-center text-sm font-medium transition-colors px-4 py-3 rounded-xl"
+          style={{
+            color: "rgba(232,237,248,0.4)",
+            background: "transparent",
+            border: "none",
+            cursor: isSubmitting ? "not-allowed" : "pointer",
+          }}
+          onMouseEnter={(e) => {
+            if (!isSubmitting)
+              e.currentTarget.style.color = "rgba(232,237,248,0.65)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = "rgba(232,237,248,0.4)";
+          }}
+        >
+          Skip this step — submit now
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Wizard ──────────────────────────────────────────────────────────────
 
 export default function WizardPage() {
@@ -1416,7 +1990,7 @@ export default function WizardPage() {
     const stepParam = searchParams.get("step");
     const parsedStep = stepParam ? (Number(stepParam) as Step) : 1;
     return {
-      step: ([1, 2, 3, 4] as Step[]).includes(parsedStep) ? parsedStep : 1,
+      step: ([1, 2, 3, 4, 5] as Step[]).includes(parsedStep) ? parsedStep : 1,
       industry: searchParams.get("industry") ?? "",
       hurdle: searchParams.get("hurdle") ?? "",
       name: "",
@@ -1430,6 +2004,19 @@ export default function WizardPage() {
       businessType: "",
       hasHardware: "",
       wantsHardware: "",
+      businessAddress: "",
+      businessCity: "",
+      businessState: "",
+      businessZip: "",
+      businessPhone: "",
+      ownerAddress: "",
+      ownerCity: "",
+      ownerState: "",
+      ownerZip: "",
+      ownerPhone: "",
+      ownerEmail: "",
+      idFileName: "",
+      processingFileName: "",
     };
   });
 
@@ -1630,6 +2217,19 @@ export default function WizardPage() {
                 businessType: "",
                 hasHardware: "",
                 wantsHardware: "",
+                businessAddress: "",
+                businessCity: "",
+                businessState: "",
+                businessZip: "",
+                businessPhone: "",
+                ownerAddress: "",
+                ownerCity: "",
+                ownerState: "",
+                ownerZip: "",
+                ownerPhone: "",
+                ownerEmail: "",
+                idFileName: "",
+                processingFileName: "",
               })
             }
             className="text-xs font-medium transition-colors"
@@ -1719,6 +2319,15 @@ export default function WizardPage() {
               )}
               {wizState.step === 4 && (
                 <Step4
+                  state={wizState}
+                  onChange={setField}
+                  onNext={() => goToStep(5)}
+                  isSubmitting={isSubmitting}
+                  submitError={submitError}
+                />
+              )}
+              {wizState.step === 5 && (
+                <Step5
                   state={wizState}
                   onChange={setField}
                   onSubmit={handleSubmit}

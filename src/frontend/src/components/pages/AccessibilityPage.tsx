@@ -98,7 +98,7 @@ export default function AccessibilityPage() {
             content: [
               "We welcome your feedback on the accessibility of cybinenterprises.com. If you experience any accessibility barriers — or if you need information in an alternative format — please contact us:",
               "Email: Customercare@cybinenterprises.com",
-              "Phone: 888-321-2100 (Office) | 724-244-7111 (Mobile)",
+              "888-321-2100",
               'Subject line: "Accessibility Feedback"',
               "Please describe the specific barrier you encountered, the page URL where you encountered it, and the assistive technology or browser you were using (if known). We aim to acknowledge accessibility feedback within 5 business days and will work to resolve verified issues as quickly as practicable.",
               "We will not discriminate against or penalize any user who raises accessibility concerns.",

@@ -312,7 +312,7 @@ export function PrivacyPolicyPage() {
             content: [
               "Data Controller: Cybin Enterprises LLC, Pennsylvania, United States",
               "Email: Customercare@cybinenterprises.com",
-              "Office: 888-321-2100 | Mobile: 724-244-7111",
+              "888-321-2100",
               "For GDPR-related inquiries or to submit a data subject request, please use the subject line 'GDPR Data Request' in your email correspondence.",
             ],
           },
@@ -516,7 +516,7 @@ export function TermsOfServicePage() {
               "For questions about these Terms, please contact:",
               "Cybin Enterprises LLC",
               "Email: Customercare@cybinenterprises.com",
-              "Office: 888-321-2100 | Mobile: 724-244-7111",
+              "888-321-2100",
             ],
           },
         ]}
