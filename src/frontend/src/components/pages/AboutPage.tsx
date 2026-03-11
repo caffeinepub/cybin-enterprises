@@ -129,7 +129,7 @@ export default function AboutPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -174,7 +174,7 @@ export default function AboutPage() {
       {/* Mission */}
       <section
         style={{
-          backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e",
+          backgroundColor: isLight ? "#F9FAFF" : "#0a0f1e",
           padding: "72px 0",
         }}
       >
@@ -183,8 +183,8 @@ export default function AboutPage() {
             className="animate-fade-up p-10 rounded-2xl text-center max-w-3xl mx-auto"
             style={{
               background:
-                "linear-gradient(135deg, rgba(0, 212, 184, 0.06), rgba(26, 10, 46, 0.5))",
-              border: "1px solid rgba(0, 212, 184, 0.12)",
+                "linear-gradient(135deg, rgba(110,247,212, 0.06), rgba(26, 10, 46, 0.5))",
+              border: "1px solid rgba(110,247,212, 0.12)",
             }}
           >
             <Star
@@ -232,7 +232,7 @@ export default function AboutPage() {
             position: "absolute",
             inset: 0,
             backgroundImage:
-              "linear-gradient(rgba(0,212,184,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(0,212,184,0.025) 1px, transparent 1px)",
+              "linear-gradient(rgba(110,247,212,0.025) 1px, transparent 1px), linear-gradient(90deg, rgba(110,247,212,0.025) 1px, transparent 1px)",
             backgroundSize: "64px 64px",
             pointerEvents: "none",
             zIndex: 0,
@@ -248,7 +248,7 @@ export default function AboutPage() {
             width: "50%",
             height: "100%",
             background:
-              "radial-gradient(ellipse 70% 60% at 25% 45%, rgba(0,212,184,0.07) 0%, transparent 70%)",
+              "radial-gradient(ellipse 70% 60% at 25% 45%, rgba(110,247,212,0.07) 0%, transparent 70%)",
             pointerEvents: "none",
             zIndex: 0,
           }}
@@ -340,7 +340,7 @@ export default function AboutPage() {
                     position: "absolute",
                     inset: 0,
                     background:
-                      "linear-gradient(to right, rgba(0,212,184,0.18) 0%, transparent 18%, transparent 82%, rgba(0,212,184,0.14) 100%)",
+                      "linear-gradient(to right, rgba(110,247,212,0.18) 0%, transparent 18%, transparent 82%, rgba(110,247,212,0.14) 100%)",
                     pointerEvents: "none",
                     zIndex: 2,
                     mixBlendMode: "screen",
@@ -383,7 +383,7 @@ export default function AboutPage() {
                     position: "absolute",
                     inset: "-20px",
                     background:
-                      "radial-gradient(ellipse 80% 60% at 50% 110%, rgba(0,212,184,0.28) 0%, transparent 60%)",
+                      "radial-gradient(ellipse 80% 60% at 50% 110%, rgba(110,247,212,0.28) 0%, transparent 60%)",
                     pointerEvents: "none",
                     zIndex: 4,
                     mixBlendMode: "screen",
@@ -397,10 +397,10 @@ export default function AboutPage() {
                 style={{
                   background:
                     "linear-gradient(160deg, rgba(8,13,26,0.99) 0%, rgba(4,6,18,0.97) 100%)",
-                  border: "1px solid rgba(0,212,184,0.18)",
+                  border: "1px solid rgba(110,247,212,0.18)",
                   borderTop: "none",
                   boxShadow:
-                    "0 0 60px rgba(0,212,184,0.08), 0 0 120px rgba(0,212,184,0.04), inset 0 1px 0 rgba(0,212,184,0.06)",
+                    "0 0 60px rgba(110,247,212,0.08), 0 0 120px rgba(110,247,212,0.04), inset 0 1px 0 rgba(110,247,212,0.06)",
                   padding: "28px 32px 32px",
                   flex: 1,
                 }}
@@ -436,7 +436,7 @@ export default function AboutPage() {
                   <div
                     style={{
                       marginTop: "16px",
-                      borderTop: "1px solid rgba(0,212,184,0.15)",
+                      borderTop: "1px solid rgba(110,247,212,0.15)",
                     }}
                   />
                 </div>
@@ -467,8 +467,8 @@ export default function AboutPage() {
                 <div
                   className="rounded-xl"
                   style={{
-                    backgroundColor: "rgba(0,212,184,0.04)",
-                    border: "1px solid rgba(0,212,184,0.1)",
+                    backgroundColor: "rgba(110,247,212,0.04)",
+                    border: "1px solid rgba(110,247,212,0.1)",
                     padding: "20px",
                   }}
                 >
@@ -758,7 +758,7 @@ export default function AboutPage() {
       {/* CTA */}
       <section
         style={{
-          backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e",
+          backgroundColor: isLight ? "#F9FAFF" : "#0a0f1e",
           padding: "72px 0",
         }}
       >

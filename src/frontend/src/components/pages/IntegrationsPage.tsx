@@ -138,7 +138,7 @@ export default function IntegrationsPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -162,8 +162,8 @@ export default function IntegrationsPage() {
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-xs font-semibold"
               style={{
-                backgroundColor: "rgba(0,212,184,0.08)",
-                border: "1px solid rgba(0,212,184,0.2)",
+                backgroundColor: "rgba(110,247,212,0.08)",
+                border: "1px solid rgba(110,247,212,0.2)",
                 color: "#00d4b8",
               }}
             >
@@ -344,8 +344,8 @@ export default function IntegrationsPage() {
           <div
             className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-6"
             style={{
-              backgroundColor: "rgba(0,212,184,0.1)",
-              border: "1px solid rgba(0,212,184,0.2)",
+              backgroundColor: "rgba(110,247,212,0.1)",
+              border: "1px solid rgba(110,247,212,0.2)",
             }}
           >
             <Package size={24} style={{ color: "#00d4b8" }} />

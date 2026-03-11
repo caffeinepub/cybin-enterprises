@@ -130,7 +130,7 @@ function PostForm({
             onChange={(e) => set("title", e.target.value)}
             placeholder="Article title"
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = "rgba(0,212,184,0.5)";
+              e.currentTarget.style.borderColor = "rgba(110,247,212,0.5)";
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
@@ -152,7 +152,7 @@ function PostForm({
             value={form.category}
             onChange={(e) => set("category", e.target.value)}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = "rgba(0,212,184,0.5)";
+              e.currentTarget.style.borderColor = "rgba(110,247,212,0.5)";
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
@@ -179,7 +179,7 @@ function PostForm({
             onChange={(e) => set("author", e.target.value)}
             placeholder="Author name"
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = "rgba(0,212,184,0.5)";
+              e.currentTarget.style.borderColor = "rgba(110,247,212,0.5)";
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
@@ -200,7 +200,7 @@ function PostForm({
             onChange={(e) => set("readTime", e.target.value)}
             placeholder="5 min read"
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = "rgba(0,212,184,0.5)";
+              e.currentTarget.style.borderColor = "rgba(110,247,212,0.5)";
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
@@ -219,7 +219,7 @@ function PostForm({
             value={form.publishDate}
             onChange={(e) => set("publishDate", e.target.value)}
             onFocus={(e) => {
-              e.currentTarget.style.borderColor = "rgba(0,212,184,0.5)";
+              e.currentTarget.style.borderColor = "rgba(110,247,212,0.5)";
             }}
             onBlur={(e) => {
               e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
@@ -243,7 +243,7 @@ function PostForm({
           onChange={(e) => set("excerpt", e.target.value)}
           placeholder="Short description of the article (max 500 chars)"
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = "rgba(0,212,184,0.5)";
+            e.currentTarget.style.borderColor = "rgba(110,247,212,0.5)";
           }}
           onBlur={(e) => {
             e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
@@ -266,7 +266,7 @@ function PostForm({
           onChange={(e) => set("body", e.target.value)}
           placeholder="Full article body — supports plain text or Markdown"
           onFocus={(e) => {
-            e.currentTarget.style.borderColor = "rgba(0,212,184,0.5)";
+            e.currentTarget.style.borderColor = "rgba(110,247,212,0.5)";
           }}
           onBlur={(e) => {
             e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)";
@@ -465,8 +465,8 @@ export default function BlogManagerPanel() {
         <div
           className="rounded-2xl p-6"
           style={{
-            backgroundColor: "rgba(0,212,184,0.03)",
-            border: "1.5px solid rgba(0,212,184,0.2)",
+            backgroundColor: "rgba(110,247,212,0.03)",
+            border: "1.5px solid rgba(110,247,212,0.2)",
           }}
         >
           <h3
@@ -527,10 +527,10 @@ export default function BlogManagerPanel() {
               className="rounded-xl overflow-hidden"
               style={{
                 backgroundColor: post.published
-                  ? "rgba(0,212,184,0.03)"
+                  ? "rgba(110,247,212,0.03)"
                   : "rgba(255,255,255,0.02)",
                 border: post.published
-                  ? "1px solid rgba(0,212,184,0.15)"
+                  ? "1px solid rgba(110,247,212,0.15)"
                   : "1px solid rgba(255,255,255,0.07)",
               }}
             >
@@ -570,13 +570,13 @@ export default function BlogManagerPanel() {
                           className="text-xs px-2 py-0.5 rounded-full font-medium"
                           style={{
                             backgroundColor: post.published
-                              ? "rgba(0,212,184,0.12)"
+                              ? "rgba(110,247,212,0.12)"
                               : "rgba(255,255,255,0.06)",
                             color: post.published
                               ? "#00d4b8"
                               : "rgba(232,237,248,0.4)",
                             border: post.published
-                              ? "1px solid rgba(0,212,184,0.25)"
+                              ? "1px solid rgba(110,247,212,0.25)"
                               : "1px solid rgba(255,255,255,0.08)",
                           }}
                         >
@@ -677,17 +677,17 @@ export default function BlogManagerPanel() {
                             ? "#00d4b8"
                             : "rgba(232,237,248,0.4)",
                           backgroundColor: post.published
-                            ? "rgba(0,212,184,0.08)"
+                            ? "rgba(110,247,212,0.08)"
                             : "transparent",
                         }}
                         onMouseEnter={(e) => {
                           e.currentTarget.style.backgroundColor =
-                            "rgba(0,212,184,0.12)";
+                            "rgba(110,247,212,0.12)";
                           e.currentTarget.style.color = "#00d4b8";
                         }}
                         onMouseLeave={(e) => {
                           e.currentTarget.style.backgroundColor = post.published
-                            ? "rgba(0,212,184,0.08)"
+                            ? "rgba(110,247,212,0.08)"
                             : "transparent";
                           e.currentTarget.style.color = post.published
                             ? "#00d4b8"
@@ -895,17 +895,17 @@ export default function BlogManagerPanel() {
                   }}
                   className="text-xs px-3 py-1.5 rounded-lg flex-shrink-0 transition-all"
                   style={{
-                    backgroundColor: "rgba(0,212,184,0.08)",
+                    backgroundColor: "rgba(110,247,212,0.08)",
                     color: "#00d4b8",
-                    border: "1px solid rgba(0,212,184,0.2)",
+                    border: "1px solid rgba(110,247,212,0.2)",
                   }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.backgroundColor =
-                      "rgba(0,212,184,0.14)";
+                      "rgba(110,247,212,0.14)";
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.backgroundColor =
-                      "rgba(0,212,184,0.08)";
+                      "rgba(110,247,212,0.08)";
                   }}
                 >
                   Copy

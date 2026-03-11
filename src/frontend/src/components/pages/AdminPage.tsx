@@ -397,13 +397,13 @@ export default function AdminPage() {
         style={{
           backgroundColor: "rgba(8,9,15,0.97)",
           backdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(0,212,184,0.1)",
+          borderBottom: "1px solid rgba(110,247,212,0.1)",
         }}
       >
         <div className="flex items-center gap-3">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center"
-            style={{ backgroundColor: "rgba(0,212,184,0.1)" }}
+            style={{ backgroundColor: "rgba(110,247,212,0.1)" }}
           >
             <Shield size={16} style={{ color: "#00d4b8" }} />
           </div>
@@ -427,15 +427,15 @@ export default function AdminPage() {
             onClick={handleExportAll}
             className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all"
             style={{
-              backgroundColor: "rgba(0,212,184,0.08)",
-              border: "1px solid rgba(0,212,184,0.2)",
+              backgroundColor: "rgba(110,247,212,0.08)",
+              border: "1px solid rgba(110,247,212,0.2)",
               color: "#00d4b8",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.14)";
+              e.currentTarget.style.backgroundColor = "rgba(110,247,212,0.14)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.08)";
+              e.currentTarget.style.backgroundColor = "rgba(110,247,212,0.08)";
             }}
           >
             <Download size={13} />
@@ -506,8 +506,8 @@ export default function AdminPage() {
                 onClick={handleExportAll}
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl text-sm font-semibold"
                 style={{
-                  backgroundColor: "rgba(0,212,184,0.08)",
-                  border: "1px solid rgba(0,212,184,0.2)",
+                  backgroundColor: "rgba(110,247,212,0.08)",
+                  border: "1px solid rgba(110,247,212,0.2)",
                   color: "#00d4b8",
                 }}
               >
@@ -614,8 +614,8 @@ function ApplicationsTable({
           data-ocid={`admin.applications.item.${i + 1}`}
           className="rounded-xl p-5 sm:p-6"
           style={{
-            backgroundColor: "rgba(0,212,184,0.03)",
-            border: "1px solid rgba(0,212,184,0.12)",
+            backgroundColor: "rgba(110,247,212,0.03)",
+            border: "1px solid rgba(110,247,212,0.12)",
           }}
         >
           <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
@@ -631,9 +631,9 @@ function ApplicationsTable({
                   <span
                     className="px-2 py-0.5 rounded-full text-xs font-semibold"
                     style={{
-                      backgroundColor: "rgba(0,212,184,0.12)",
+                      backgroundColor: "rgba(110,247,212,0.12)",
                       color: "#00d4b8",
-                      border: "1px solid rgba(0,212,184,0.25)",
+                      border: "1px solid rgba(110,247,212,0.25)",
                     }}
                   >
                     FEIN Provided

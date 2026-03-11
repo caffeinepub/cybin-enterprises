@@ -112,7 +112,7 @@ export default function ContactPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -173,8 +173,8 @@ export default function ContactPage() {
                     data-ocid="contact.success_state"
                     className="flex items-start gap-3 p-4 rounded-xl mb-6"
                     style={{
-                      backgroundColor: "rgba(0, 212, 184, 0.1)",
-                      border: "1px solid rgba(0, 212, 184, 0.25)",
+                      backgroundColor: "rgba(110,247,212, 0.1)",
+                      border: "1px solid rgba(110,247,212, 0.25)",
                     }}
                   >
                     <CheckCircle
@@ -261,17 +261,17 @@ export default function ContactPage() {
                         className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none"
                         style={{
                           backgroundColor: "rgba(22, 30, 58, 0.8)",
-                          border: "1px solid rgba(0, 212, 184, 0.15)",
+                          border: "1px solid rgba(110,247,212, 0.15)",
                           color: "#e8edf8",
                         }}
                         onFocus={(e) => {
-                          e.target.style.borderColor = "rgba(0, 212, 184, 0.4)";
+                          e.target.style.borderColor = "rgba(110,247,212, 0.4)";
                           e.target.style.boxShadow =
-                            "0 0 0 3px rgba(0, 212, 184, 0.08)";
+                            "0 0 0 3px rgba(110,247,212, 0.08)";
                         }}
                         onBlur={(e) => {
                           e.target.style.borderColor =
-                            "rgba(0, 212, 184, 0.15)";
+                            "rgba(110,247,212, 0.15)";
                           e.target.style.boxShadow = "none";
                         }}
                       />
@@ -298,17 +298,17 @@ export default function ContactPage() {
                         className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none"
                         style={{
                           backgroundColor: "rgba(22, 30, 58, 0.8)",
-                          border: "1px solid rgba(0, 212, 184, 0.15)",
+                          border: "1px solid rgba(110,247,212, 0.15)",
                           color: "#e8edf8",
                         }}
                         onFocus={(e) => {
-                          e.target.style.borderColor = "rgba(0, 212, 184, 0.4)";
+                          e.target.style.borderColor = "rgba(110,247,212, 0.4)";
                           e.target.style.boxShadow =
-                            "0 0 0 3px rgba(0, 212, 184, 0.08)";
+                            "0 0 0 3px rgba(110,247,212, 0.08)";
                         }}
                         onBlur={(e) => {
                           e.target.style.borderColor =
-                            "rgba(0, 212, 184, 0.15)";
+                            "rgba(110,247,212, 0.15)";
                           e.target.style.boxShadow = "none";
                         }}
                       />
@@ -336,17 +336,17 @@ export default function ContactPage() {
                         className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none"
                         style={{
                           backgroundColor: "rgba(22, 30, 58, 0.8)",
-                          border: "1px solid rgba(0, 212, 184, 0.15)",
+                          border: "1px solid rgba(110,247,212, 0.15)",
                           color: "#e8edf8",
                         }}
                         onFocus={(e) => {
-                          e.target.style.borderColor = "rgba(0, 212, 184, 0.4)";
+                          e.target.style.borderColor = "rgba(110,247,212, 0.4)";
                           e.target.style.boxShadow =
-                            "0 0 0 3px rgba(0, 212, 184, 0.08)";
+                            "0 0 0 3px rgba(110,247,212, 0.08)";
                         }}
                         onBlur={(e) => {
                           e.target.style.borderColor =
-                            "rgba(0, 212, 184, 0.15)";
+                            "rgba(110,247,212, 0.15)";
                           e.target.style.boxShadow = "none";
                         }}
                       />
@@ -370,24 +370,24 @@ export default function ContactPage() {
                         className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none cursor-pointer"
                         style={{
                           backgroundColor: "rgba(22, 30, 58, 0.8)",
-                          border: "1px solid rgba(0, 212, 184, 0.15)",
+                          border: "1px solid rgba(110,247,212, 0.15)",
                           color: form.businessType
                             ? "#e8edf8"
                             : "rgba(232,237,248,0.35)",
                           appearance: "none",
                         }}
                         onFocus={(e) => {
-                          e.target.style.borderColor = "rgba(0, 212, 184, 0.4)";
+                          e.target.style.borderColor = "rgba(110,247,212, 0.4)";
                         }}
                         onBlur={(e) => {
                           e.target.style.borderColor =
-                            "rgba(0, 212, 184, 0.15)";
+                            "rgba(110,247,212, 0.15)";
                         }}
                       >
                         <option
                           value=""
                           disabled
-                          style={{ backgroundColor: "#0d1525" }}
+                          style={{ backgroundColor: "#0a0f1e" }}
                         >
                           Select your industry
                         </option>
@@ -396,7 +396,7 @@ export default function ContactPage() {
                             key={bt}
                             value={bt}
                             style={{
-                              backgroundColor: "#0d1525",
+                              backgroundColor: "#0a0f1e",
                               color: "#e8edf8",
                             }}
                           >
@@ -428,16 +428,16 @@ export default function ContactPage() {
                       className="w-full px-4 py-3 rounded-lg text-sm transition-all outline-none resize-none"
                       style={{
                         backgroundColor: "rgba(22, 30, 58, 0.8)",
-                        border: "1px solid rgba(0, 212, 184, 0.15)",
+                        border: "1px solid rgba(110,247,212, 0.15)",
                         color: "#e8edf8",
                       }}
                       onFocus={(e) => {
-                        e.target.style.borderColor = "rgba(0, 212, 184, 0.4)";
+                        e.target.style.borderColor = "rgba(110,247,212, 0.4)";
                         e.target.style.boxShadow =
-                          "0 0 0 3px rgba(0, 212, 184, 0.08)";
+                          "0 0 0 3px rgba(110,247,212, 0.08)";
                       }}
                       onBlur={(e) => {
-                        e.target.style.borderColor = "rgba(0, 212, 184, 0.15)";
+                        e.target.style.borderColor = "rgba(110,247,212, 0.15)";
                         e.target.style.boxShadow = "none";
                       }}
                     />
@@ -490,7 +490,7 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <div
                       className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: "rgba(0, 212, 184, 0.1)" }}
+                      style={{ backgroundColor: "rgba(110,247,212, 0.1)" }}
                     >
                       <Mail size={16} style={{ color: "#00d4b8" }} />
                     </div>
@@ -521,7 +521,7 @@ export default function ContactPage() {
                     <div className="flex items-start gap-3">
                       <div
                         className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                        style={{ backgroundColor: "rgba(0, 212, 184, 0.1)" }}
+                        style={{ backgroundColor: "rgba(110,247,212, 0.1)" }}
                       >
                         <Phone size={16} style={{ color: "#00d4b8" }} />
                       </div>
@@ -552,7 +552,7 @@ export default function ContactPage() {
                   <div className="flex items-start gap-3">
                     <div
                       className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: "rgba(0, 212, 184, 0.1)" }}
+                      style={{ backgroundColor: "rgba(110,247,212, 0.1)" }}
                     >
                       <Phone size={16} style={{ color: "#00d4b8" }} />
                     </div>
@@ -585,8 +585,8 @@ export default function ContactPage() {
                 className="cybin-glass-card p-6"
                 style={{
                   background:
-                    "linear-gradient(135deg, rgba(0, 212, 184, 0.06), rgba(22, 30, 58, 0.8))",
-                  border: "1px solid rgba(0, 212, 184, 0.15)",
+                    "linear-gradient(135deg, rgba(110,247,212, 0.06), rgba(22, 30, 58, 0.8))",
+                  border: "1px solid rgba(110,247,212, 0.15)",
                 }}
               >
                 <h3

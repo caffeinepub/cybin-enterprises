@@ -127,15 +127,15 @@ export default function AnalyticsPanel() {
             onClick={refresh}
             className="px-4 py-2 rounded-xl text-sm font-semibold transition-all"
             style={{
-              backgroundColor: "rgba(0,212,184,0.08)",
-              border: "1px solid rgba(0,212,184,0.2)",
+              backgroundColor: "rgba(110,247,212,0.08)",
+              border: "1px solid rgba(110,247,212,0.2)",
               color: "#00d4b8",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.14)";
+              e.currentTarget.style.backgroundColor = "rgba(110,247,212,0.14)";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.08)";
+              e.currentTarget.style.backgroundColor = "rgba(110,247,212,0.08)";
             }}
           >
             Refresh
@@ -167,8 +167,8 @@ export default function AnalyticsPanel() {
       <div
         className="rounded-xl p-4"
         style={{
-          backgroundColor: "rgba(0,212,184,0.03)",
-          border: "1px solid rgba(0,212,184,0.1)",
+          backgroundColor: "rgba(110,247,212,0.03)",
+          border: "1px solid rgba(110,247,212,0.1)",
         }}
       >
         <p
@@ -190,8 +190,8 @@ export default function AnalyticsPanel() {
           data-ocid="analytics.cleared.success_state"
           className="rounded-xl p-4 text-center"
           style={{
-            backgroundColor: "rgba(0,212,184,0.06)",
-            border: "1px solid rgba(0,212,184,0.2)",
+            backgroundColor: "rgba(110,247,212,0.06)",
+            border: "1px solid rgba(110,247,212,0.2)",
           }}
         >
           <p className="text-sm" style={{ color: "#00d4b8" }}>

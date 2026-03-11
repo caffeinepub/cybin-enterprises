@@ -191,7 +191,7 @@ export default function PartnersPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -215,8 +215,8 @@ export default function PartnersPage() {
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-xs font-semibold"
               style={{
-                backgroundColor: "rgba(0,212,184,0.08)",
-                border: "1px solid rgba(0,212,184,0.2)",
+                backgroundColor: "rgba(110,247,212,0.08)",
+                border: "1px solid rgba(110,247,212,0.2)",
                 color: "#00d4b8",
               }}
             >
@@ -407,8 +407,8 @@ export default function PartnersPage() {
                   data-ocid="partners.success_state"
                   style={{
                     background:
-                      "linear-gradient(135deg, rgba(0,212,184,0.06), rgba(0,212,184,0.02))",
-                    border: "1px solid rgba(0,212,184,0.2)",
+                      "linear-gradient(135deg, rgba(110,247,212,0.06), rgba(110,247,212,0.02))",
+                    border: "1px solid rgba(110,247,212,0.2)",
                   }}
                 >
                   <CheckCircle2
@@ -482,7 +482,7 @@ export default function PartnersPage() {
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor =
-                            "rgba(0,212,184,0.5)";
+                            "rgba(110,247,212,0.5)";
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor =
@@ -521,7 +521,7 @@ export default function PartnersPage() {
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor =
-                            "rgba(0,212,184,0.5)";
+                            "rgba(110,247,212,0.5)";
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor =
@@ -560,7 +560,7 @@ export default function PartnersPage() {
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor =
-                            "rgba(0,212,184,0.5)";
+                            "rgba(110,247,212,0.5)";
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor =
@@ -599,7 +599,7 @@ export default function PartnersPage() {
                         }}
                         onFocus={(e) => {
                           e.currentTarget.style.borderColor =
-                            "rgba(0,212,184,0.5)";
+                            "rgba(110,247,212,0.5)";
                         }}
                         onBlur={(e) => {
                           e.currentTarget.style.borderColor =
@@ -638,7 +638,7 @@ export default function PartnersPage() {
                       }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor =
-                          "rgba(0,212,184,0.5)";
+                          "rgba(110,247,212,0.5)";
                       }}
                       onBlur={(e) => {
                         e.currentTarget.style.borderColor =
@@ -698,7 +698,7 @@ export default function PartnersPage() {
                       }}
                       onFocus={(e) => {
                         e.currentTarget.style.borderColor =
-                          "rgba(0,212,184,0.5)";
+                          "rgba(110,247,212,0.5)";
                       }}
                       onBlur={(e) => {
                         e.currentTarget.style.borderColor =
@@ -728,7 +728,7 @@ export default function PartnersPage() {
                     className="mt-6 w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-sm transition-all"
                     style={{
                       background: mutation.isPending
-                        ? "rgba(0,212,184,0.3)"
+                        ? "rgba(110,247,212,0.3)"
                         : "linear-gradient(135deg, #00d4b8, #00b89a)",
                       color: mutation.isPending
                         ? "rgba(255,255,255,0.5)"

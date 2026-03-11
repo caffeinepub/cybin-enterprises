@@ -72,8 +72,8 @@ export default function HardwarePage() {
     return () => observer.disconnect();
   }, []);
 
-  const bg1 = isLight ? "#f8f9fc" : "#0a0f1e";
-  const bg2 = isLight ? "#eef0f8" : "#0c1020";
+  const bg1 = isLight ? "#F9FAFF" : "#0a0f1e";
+  const bg2 = isLight ? "#EEF0FA" : "#0c1020";
   const textPrimary = isLight ? "#1a2040" : "#e8edf8";
   const textSecondary = isLight
     ? "rgba(20,30,60,0.65)"
@@ -97,7 +97,7 @@ export default function HardwarePage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: `1px solid ${isLight ? "rgba(0,0,0,0.06)" : "rgba(0,212,184,0.08)"}`,
+          borderBottom: `1px solid ${isLight ? "rgba(0,0,0,0.06)" : "rgba(110,247,212,0.08)"}`,
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -121,8 +121,8 @@ export default function HardwarePage() {
             <div
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
               style={{
-                backgroundColor: "rgba(0,212,184,0.1)",
-                border: "1px solid rgba(0,212,184,0.2)",
+                backgroundColor: "rgba(110,247,212,0.1)",
+                border: "1px solid rgba(110,247,212,0.2)",
                 color: "#00d4b8",
               }}
             >
@@ -274,8 +274,8 @@ export default function HardwarePage() {
                     <div
                       className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest mb-4"
                       style={{
-                        backgroundColor: "rgba(0,212,184,0.1)",
-                        border: "1px solid rgba(0,212,184,0.2)",
+                        backgroundColor: "rgba(110,247,212,0.1)",
+                        border: "1px solid rgba(110,247,212,0.2)",
                         color: "#00d4b8",
                       }}
                     >

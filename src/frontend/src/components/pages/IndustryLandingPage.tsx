@@ -609,7 +609,7 @@ export default function IndustryLandingPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -730,7 +730,7 @@ export default function IndustryLandingPage() {
               >
                 <div
                   className="w-8 h-8 rounded-lg flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "rgba(0,212,184,0.1)" }}
+                  style={{ backgroundColor: "rgba(110,247,212,0.1)" }}
                 >
                   <span style={{ color: "#00d4b8", fontWeight: 700 }}>
                     {idx + 1}
@@ -858,19 +858,19 @@ export default function IndustryLandingPage() {
                 data-ocid={`industry.related.item.${idx + 1}`}
                 className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-medium transition-all"
                 style={{
-                  backgroundColor: "rgba(0,212,184,0.06)",
-                  border: "1px solid rgba(0,212,184,0.2)",
+                  backgroundColor: "rgba(110,247,212,0.06)",
+                  border: "1px solid rgba(110,247,212,0.2)",
                   color: "#e8edf8",
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.backgroundColor =
-                    "rgba(0,212,184,0.12)";
-                  e.currentTarget.style.borderColor = "rgba(0,212,184,0.4)";
+                    "rgba(110,247,212,0.12)";
+                  e.currentTarget.style.borderColor = "rgba(110,247,212,0.4)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.backgroundColor =
-                    "rgba(0,212,184,0.06)";
-                  e.currentTarget.style.borderColor = "rgba(0,212,184,0.2)";
+                    "rgba(110,247,212,0.06)";
+                  e.currentTarget.style.borderColor = "rgba(110,247,212,0.2)";
                 }}
               >
                 {r.label}

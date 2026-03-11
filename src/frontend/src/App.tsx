@@ -14,6 +14,7 @@ import FaqPage from "./components/pages/FaqPage";
 import FraudDeflectPage from "./components/pages/FraudDeflectPage";
 import HardwarePage from "./components/pages/HardwarePage";
 import HomePage from "./components/pages/HomePage";
+import HowItWorksPage from "./components/pages/HowItWorksPage";
 import IndustriesPage from "./components/pages/IndustriesPage";
 import IndustryLandingPage from "./components/pages/IndustryLandingPage";
 import InsightsPage from "./components/pages/InsightsPage";
@@ -25,6 +26,9 @@ import {
 } from "./components/pages/LegalPage";
 import PartnersPage from "./components/pages/PartnersPage";
 import PaymentSolutionsPage from "./components/pages/PaymentSolutionsPage";
+import PeptidesPage from "./components/pages/PeptidesPage";
+import SolutionsEnterprisePage from "./components/pages/SolutionsEnterprisePage";
+import SolutionsPage from "./components/pages/SolutionsPage";
 import WizardPage from "./components/pages/WizardPage";
 
 function IntegrationsRedirect() {
@@ -35,12 +39,23 @@ function IntegrationsRedirect() {
   return null;
 }
 
+function EnterpriseRedirect() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    navigate("/apply?tier=enterprise", { replace: true });
+  }, [navigate]);
+  return null;
+}
+
 function AppRoutes() {
   usePageTracking();
   return (
     <Routes>
       {/* Standalone wizard — no Layout wrapper */}
       <Route path="/apply" element={<WizardPage />} />
+
+      {/* Enterprise apply redirect */}
+      <Route path="/apply/enterprise" element={<EnterpriseRedirect />} />
 
       {/* Standalone admin — no Layout wrapper */}
       <Route path="/admin" element={<AdminPage />} />
@@ -67,6 +82,14 @@ function AppRoutes() {
         element={
           <Layout>
             <IndustriesPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/industries/peptides"
+        element={
+          <Layout>
+            <PeptidesPage />
           </Layout>
         }
       />
@@ -196,6 +219,30 @@ function AppRoutes() {
         element={
           <Layout>
             <AccessibilityPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/how-it-works"
+        element={
+          <Layout>
+            <HowItWorksPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/solutions"
+        element={
+          <Layout>
+            <SolutionsPage />
+          </Layout>
+        }
+      />
+      <Route
+        path="/solutions/enterprise"
+        element={
+          <Layout>
+            <SolutionsEnterprisePage />
           </Layout>
         }
       />

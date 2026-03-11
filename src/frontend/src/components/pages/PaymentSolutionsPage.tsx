@@ -188,7 +188,7 @@ export default function PaymentSolutionsPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -264,8 +264,8 @@ export default function PaymentSolutionsPage() {
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                   style={{
-                    backgroundColor: "rgba(0, 212, 184, 0.1)",
-                    border: "1px solid rgba(0, 212, 184, 0.2)",
+                    backgroundColor: "rgba(110,247,212, 0.1)",
+                    border: "1px solid rgba(110,247,212, 0.2)",
                   }}
                 >
                   <Icon size={22} style={{ color: "#00d4b8" }} />
@@ -341,7 +341,7 @@ export default function PaymentSolutionsPage() {
               className="animate-fade-in cybin-glass-card p-8"
               style={{
                 background:
-                  "linear-gradient(135deg, rgba(0, 212, 184, 0.05), rgba(22, 30, 58, 0.8))",
+                  "linear-gradient(135deg, rgba(110,247,212, 0.05), rgba(22, 30, 58, 0.8))",
               }}
             >
               <div className="flex items-center gap-3 mb-4">
@@ -402,7 +402,7 @@ export default function PaymentSolutionsPage() {
               className="hidden lg:block absolute top-8 left-[10%] right-[10%] h-px"
               style={{
                 background:
-                  "linear-gradient(90deg, transparent, rgba(0, 212, 184, 0.3), transparent)",
+                  "linear-gradient(90deg, transparent, rgba(110,247,212, 0.3), transparent)",
               }}
             />
             <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
@@ -415,8 +415,8 @@ export default function PaymentSolutionsPage() {
                   <div
                     className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 relative"
                     style={{
-                      backgroundColor: "rgba(0, 212, 184, 0.1)",
-                      border: "2px solid rgba(0, 212, 184, 0.4)",
+                      backgroundColor: "rgba(110,247,212, 0.1)",
+                      border: "2px solid rgba(110,247,212, 0.4)",
                     }}
                   >
                     <span
@@ -445,7 +445,7 @@ export default function PaymentSolutionsPage() {
                     <ArrowRight
                       size={16}
                       className="hidden sm:block absolute top-8 -right-3 lg:right-[-12px] transform -translate-y-1/2"
-                      style={{ color: "rgba(0, 212, 184, 0.3)" }}
+                      style={{ color: "rgba(110,247,212, 0.3)" }}
                     />
                   )}
                 </div>

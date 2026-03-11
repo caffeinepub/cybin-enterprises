@@ -165,7 +165,7 @@ export default function BlogPostPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -350,7 +350,7 @@ export default function BlogPostPage() {
                 className="mt-12 rounded-2xl p-8"
                 style={{
                   backgroundColor: "rgba(22,30,58,0.7)",
-                  border: "1px solid rgba(0,212,184,0.12)",
+                  border: "1px solid rgba(110,247,212,0.12)",
                 }}
               >
                 <h2

@@ -175,7 +175,7 @@ export default function IndustriesPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -278,8 +278,8 @@ export default function IndustriesPage() {
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                   style={{
-                    backgroundColor: "rgba(0, 212, 184, 0.1)",
-                    border: "1px solid rgba(0, 212, 184, 0.2)",
+                    backgroundColor: "rgba(110,247,212, 0.1)",
+                    border: "1px solid rgba(110,247,212, 0.2)",
                   }}
                 >
                   <Icon size={22} style={{ color: "#00d4b8" }} />
@@ -304,8 +304,8 @@ export default function IndustriesPage() {
           <div
             className="animate-fade-up text-center p-8 rounded-2xl mb-8"
             style={{
-              backgroundColor: "rgba(0, 212, 184, 0.05)",
-              border: "1px solid rgba(0, 212, 184, 0.15)",
+              backgroundColor: "rgba(110,247,212, 0.05)",
+              border: "1px solid rgba(110,247,212, 0.15)",
             }}
           >
             <h3

@@ -1412,10 +1412,10 @@ export default function SiteEditorPanel() {
               gap: "6px",
               padding: "8px 14px",
               borderRadius: "10px",
-              border: `1px solid ${savedImg ? "rgba(0,212,184,0.5)" : "rgba(0,212,184,0.25)"}`,
+              border: `1px solid ${savedImg ? "rgba(110,247,212,0.5)" : "rgba(110,247,212,0.25)"}`,
               backgroundColor: savedImg
-                ? "rgba(0,212,184,0.12)"
-                : "rgba(0,212,184,0.06)",
+                ? "rgba(110,247,212,0.12)"
+                : "rgba(110,247,212,0.06)",
               color: "#00d4b8",
               fontSize: "12px",
               fontWeight: 600,
@@ -1981,8 +1981,8 @@ export default function SiteEditorPanel() {
                 marginTop: "12px",
                 padding: "10px 12px",
                 borderRadius: "8px",
-                backgroundColor: "rgba(0,212,184,0.04)",
-                border: "1px solid rgba(0,212,184,0.15)",
+                backgroundColor: "rgba(110,247,212,0.04)",
+                border: "1px solid rgba(110,247,212,0.15)",
               }}
             >
               <p style={{ fontSize: "11px", color: "rgba(232,237,248,0.45)" }}>

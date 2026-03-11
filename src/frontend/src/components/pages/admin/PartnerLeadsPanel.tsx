@@ -95,8 +95,8 @@ export default function PartnerLeadsPanel() {
         <span
           className="text-sm px-3 py-1 rounded-full"
           style={{
-            backgroundColor: "rgba(0,212,184,0.08)",
-            border: "1px solid rgba(0,212,184,0.15)",
+            backgroundColor: "rgba(110,247,212,0.08)",
+            border: "1px solid rgba(110,247,212,0.15)",
             color: "#00d4b8",
           }}
         >

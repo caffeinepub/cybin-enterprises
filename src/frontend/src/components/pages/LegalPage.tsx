@@ -29,7 +29,7 @@ export function LegalPageTemplate({
         className="page-hero-bg"
         style={{
           padding: "60px 0 40px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -102,8 +102,8 @@ export function LegalPageTemplate({
             <div
               className="mt-10 p-5 rounded-xl text-center"
               style={{
-                backgroundColor: "rgba(0, 212, 184, 0.05)",
-                border: "1px solid rgba(0, 212, 184, 0.12)",
+                backgroundColor: "rgba(110,247,212, 0.05)",
+                border: "1px solid rgba(110,247,212, 0.12)",
               }}
             >
               <p

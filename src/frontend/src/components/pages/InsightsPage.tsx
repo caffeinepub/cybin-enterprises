@@ -114,7 +114,7 @@ export default function InsightsPage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -171,7 +171,7 @@ export default function InsightsPage() {
                 className="flex gap-2 h-auto p-1.5 rounded-xl"
                 style={{
                   backgroundColor: "rgba(22, 30, 58, 0.8)",
-                  border: "1px solid rgba(0,212,184,0.1)",
+                  border: "1px solid rgba(110,247,212,0.1)",
                   width: "max-content",
                 }}
               >
@@ -184,7 +184,7 @@ export default function InsightsPage() {
                     style={{
                       backgroundColor:
                         activeCategory === cat
-                          ? "rgba(0, 212, 184, 0.15)"
+                          ? "rgba(110,247,212, 0.15)"
                           : "transparent",
                       color:
                         activeCategory === cat
@@ -192,7 +192,7 @@ export default function InsightsPage() {
                           : "rgba(232,237,248,0.55)",
                       border:
                         activeCategory === cat
-                          ? "1px solid rgba(0,212,184,0.3)"
+                          ? "1px solid rgba(110,247,212,0.3)"
                           : "1px solid transparent",
                     }}
                   >

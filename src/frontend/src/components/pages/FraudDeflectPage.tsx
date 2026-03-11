@@ -278,15 +278,15 @@ export default function FraudDeflectPage() {
             <div
               className="text-center p-8 rounded-2xl"
               style={{
-                backgroundColor: "rgba(0, 212, 184, 0.07)",
-                border: "1px solid rgba(0, 212, 184, 0.2)",
+                backgroundColor: "rgba(110,247,212, 0.07)",
+                border: "1px solid rgba(110,247,212, 0.2)",
               }}
             >
               <div
                 className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
                 style={{
-                  backgroundColor: "rgba(0, 212, 184, 0.15)",
-                  border: "2px solid rgba(0, 212, 184, 0.4)",
+                  backgroundColor: "rgba(110,247,212, 0.15)",
+                  border: "2px solid rgba(110,247,212, 0.4)",
                 }}
               >
                 <Bell size={28} style={{ color: "#00d4b8" }} />
@@ -342,12 +342,12 @@ export default function FraudDeflectPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div
               className="animate-fade-up cybin-glass-card p-8"
-              style={{ border: "1px solid rgba(0, 212, 184, 0.2)" }}
+              style={{ border: "1px solid rgba(110,247,212, 0.2)" }}
             >
               <div className="flex items-center gap-3 mb-4">
                 <div
                   className="w-10 h-10 rounded-lg flex items-center justify-center"
-                  style={{ backgroundColor: "rgba(0, 212, 184, 0.1)" }}
+                  style={{ backgroundColor: "rgba(110,247,212, 0.1)" }}
                 >
                   <Shield size={20} style={{ color: "#00d4b8" }} />
                 </div>
@@ -537,8 +537,8 @@ export default function FraudDeflectPage() {
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                   style={{
-                    backgroundColor: "rgba(0, 212, 184, 0.1)",
-                    border: "1px solid rgba(0, 212, 184, 0.2)",
+                    backgroundColor: "rgba(110,247,212, 0.1)",
+                    border: "1px solid rgba(110,247,212, 0.2)",
                   }}
                 >
                   <Icon size={22} style={{ color: "#00d4b8" }} />
@@ -563,8 +563,8 @@ export default function FraudDeflectPage() {
           <div
             className="animate-fade-up text-center p-8 rounded-2xl"
             style={{
-              backgroundColor: "rgba(0, 212, 184, 0.05)",
-              border: "1px solid rgba(0, 212, 184, 0.15)",
+              backgroundColor: "rgba(110,247,212, 0.05)",
+              border: "1px solid rgba(110,247,212, 0.15)",
             }}
           >
             <h3

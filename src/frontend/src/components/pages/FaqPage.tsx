@@ -316,7 +316,7 @@ export default function FaqPage() {
       </section>
 
       {/* FAQ Sections */}
-      <section style={{ backgroundColor: "#0d1525", padding: "60px 0 80px" }}>
+      <section style={{ backgroundColor: "#0a0f1e", padding: "60px 0 80px" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {faqSections.map((section) => (
             <div key={section.section} className="mb-14">

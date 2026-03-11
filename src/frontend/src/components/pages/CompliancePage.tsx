@@ -211,7 +211,7 @@ export default function CompliancePage() {
         className="page-hero-bg"
         style={{
           padding: "80px 0 60px",
-          borderBottom: "1px solid rgba(0,212,184,0.08)",
+          borderBottom: "1px solid rgba(110,247,212,0.08)",
           position: "relative",
           overflow: "hidden",
         }}
@@ -250,8 +250,8 @@ export default function CompliancePage() {
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-5 text-xs font-semibold"
               style={{
-                backgroundColor: "rgba(0,212,184,0.08)",
-                border: "1px solid rgba(0,212,184,0.2)",
+                backgroundColor: "rgba(110,247,212,0.08)",
+                border: "1px solid rgba(110,247,212,0.2)",
                 color: "#00d4b8",
               }}
             >
@@ -399,10 +399,10 @@ export default function CompliancePage() {
                   className="rounded-xl overflow-hidden animate-fade-up"
                   style={{
                     backgroundColor: isOpen
-                      ? "rgba(0,212,184,0.04)"
+                      ? "rgba(110,247,212,0.04)"
                       : "rgba(255,255,255,0.02)",
                     border: isOpen
-                      ? "1px solid rgba(0,212,184,0.2)"
+                      ? "1px solid rgba(110,247,212,0.2)"
                       : "1px solid rgba(255,255,255,0.07)",
                     transitionDelay: `${i * 30}ms`,
                     transition: "border-color 0.2s, background-color 0.2s",

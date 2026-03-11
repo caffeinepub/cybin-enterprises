@@ -6,6 +6,7 @@ import {
   ChevronDown,
   ChevronRight,
   Cookie,
+  Lock,
   Mail,
   Menu,
   Moon,
@@ -15,6 +16,7 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import logoImg from "/assets/cybin-logo.png";
+import TickerBar from "./TickerBar";
 
 interface CookieCategories {
   necessary: boolean;
@@ -60,6 +62,7 @@ const industryLinks = [
     href: "/industries/subscription-businesses",
   },
   { label: "Travel & Timeshare", href: "/industries/travel-timeshare" },
+  { label: "Peptides", href: "/industries/peptides" },
 ];
 
 interface LayoutProps {
@@ -96,9 +99,9 @@ function ThemeToggle() {
         transition: "all 0.2s",
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = "rgba(0,212,184,0.12)";
-        e.currentTarget.style.borderColor = "rgba(0,212,184,0.35)";
-        e.currentTarget.style.color = isLight ? "#007a6a" : "#00d4b8";
+        e.currentTarget.style.backgroundColor = "rgba(110,247,212,0.12)";
+        e.currentTarget.style.borderColor = "rgba(110,247,212,0.35)";
+        e.currentTarget.style.color = isLight ? "#00A381" : "#6EF7D4";
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.backgroundColor = isLight
@@ -144,7 +147,7 @@ export default function Layout({ children }: LayoutProps) {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 100);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -182,8 +185,8 @@ export default function Layout({ children }: LayoutProps) {
       ? "rgba(248,249,252,0.97)"
       : "rgba(248,249,252,0.94)"
     : scrolled
-      ? "rgba(10, 15, 30, 0.97)"
-      : "rgba(10, 15, 30, 0.92)";
+      ? "rgba(13,11,26,0.97)"
+      : "rgba(13,11,26,0.92)";
   const navLinkColor = isLight
     ? "rgba(20,30,60,0.7)"
     : "rgba(232, 237, 248, 0.75)";
@@ -193,44 +196,64 @@ export default function Layout({ children }: LayoutProps) {
     : "rgba(255,255,255,0.05)";
   const activeNavBg = isLight
     ? "rgba(0,122,106,0.1)"
-    : "rgba(0, 212, 184, 0.08)";
-  const footerBg = isLight ? "#f0f2f7" : "#06090f";
+    : "rgba(110,247,212, 0.08)";
+  const footerBg = isLight ? "#EEF0FA" : "#080614";
   const footerText = isLight
     ? "rgba(20,30,60,0.55)"
     : "rgba(232, 237, 248, 0.55)";
-  const footerHeading = isLight ? "#007a6a" : "#00d4b8";
+  const footerHeading = isLight ? "#00A381" : "#6EF7D4";
   const footerDivider = isLight ? "rgba(0,0,0,0.08)" : "rgba(255,255,255,0.06)";
   const footerCopyright = isLight
     ? "rgba(20,30,60,0.4)"
     : "rgba(232, 237, 248, 0.35)";
   const footerBorder = isLight
     ? "rgba(0,122,106,0.15)"
-    : "rgba(0, 212, 184, 0.1)";
-  const accentTeal = isLight ? "#007a6a" : "#00d4b8";
+    : "rgba(110,247,212, 0.1)";
+  const accentTeal = isLight ? "#00A381" : "#6EF7D4";
   const mobileIconColor = isLight ? "#1a2040" : "#e8edf8";
   const mobileIconBg = isLight ? "rgba(0,0,0,0.05)" : "rgba(255,255,255,0.05)";
 
   return (
     <div
       className="min-h-screen flex flex-col"
-      style={{ backgroundColor: isLight ? "#f8f9fc" : "#0a0f1e" }}
+      style={{ backgroundColor: isLight ? "#f8fafc" : "#0a0f1e" }}
     >
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 60 }}>
+        <TickerBar />
+      </div>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] cybin-btn-primary text-sm"
-        style={{ padding: "0.5rem 1rem" }}
+        className="sr-only focus:not-sr-only"
+        style={{
+          position: "absolute",
+          top: "-100px",
+          left: "16px",
+          padding: "0.5rem 1rem",
+          background: "#6EF7D4",
+          color: "#0a0f1e",
+          fontWeight: 700,
+          borderRadius: "0.5rem",
+          zIndex: 100,
+          transition: "top 0.2s",
+        }}
+        onFocus={(e) => {
+          e.currentTarget.style.top = "16px";
+        }}
+        onBlur={(e) => {
+          e.currentTarget.style.top = "-100px";
+        }}
       >
         Skip to main content
       </a>
 
       <header
-        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+        className="fixed top-[38px] left-0 right-0 z-50 transition-all duration-300"
         style={{
           backgroundColor: headerBg,
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderBottom: scrolled
-            ? `1px solid ${isLight ? "rgba(0,122,106,0.15)" : "rgba(0, 212, 184, 0.12)"}`
+            ? `1px solid ${isLight ? "rgba(0,0,0,0.1)" : "rgba(99,102,241,0.2)"}`
             : "1px solid transparent",
           boxShadow: scrolled
             ? isLight
@@ -320,10 +343,10 @@ export default function Layout({ children }: LayoutProps) {
                         <div
                           className="rounded-xl py-2 shadow-2xl"
                           style={{
-                            backgroundColor: isLight ? "#ffffff" : "#0d1525",
+                            backgroundColor: isLight ? "#ffffff" : "#110F22",
                             border: isLight
                               ? "1px solid rgba(0,0,0,0.1)"
-                              : "1px solid rgba(0,212,184,0.15)",
+                              : "1px solid rgba(99,102,241,0.2)",
                           }}
                         >
                           <p
@@ -346,7 +369,7 @@ export default function Layout({ children }: LayoutProps) {
                                 e.currentTarget.style.color = accentTeal;
                                 e.currentTarget.style.backgroundColor = isLight
                                   ? "rgba(0,122,106,0.05)"
-                                  : "rgba(0,212,184,0.06)";
+                                  : "rgba(110,247,212,0.06)";
                               }}
                               onMouseLeave={(e) => {
                                 e.currentTarget.style.color = isLight
@@ -374,7 +397,7 @@ export default function Layout({ children }: LayoutProps) {
                             onMouseEnter={(e) => {
                               e.currentTarget.style.backgroundColor = isLight
                                 ? "rgba(0,122,106,0.05)"
-                                : "rgba(0,212,184,0.06)";
+                                : "rgba(110,247,212,0.06)";
                             }}
                             onMouseLeave={(e) => {
                               e.currentTarget.style.backgroundColor =
@@ -463,7 +486,7 @@ export default function Layout({ children }: LayoutProps) {
               backgroundColor: isLight
                 ? "rgba(248,249,252,0.99)"
                 : "rgba(10, 15, 30, 0.98)",
-              borderTop: `1px solid ${isLight ? "rgba(0,122,106,0.12)" : "rgba(0, 212, 184, 0.1)"}`,
+              borderTop: `1px solid ${isLight ? "rgba(0,0,0,0.08)" : "rgba(99,102,241,0.15)"}`,
             }}
           >
             <div className="px-4 py-4 flex flex-col gap-1">
@@ -571,7 +594,7 @@ export default function Layout({ children }: LayoutProps) {
         )}
       </header>
 
-      <main id="main-content" className="flex-1 pt-[72px]">
+      <main id="main-content" className="flex-1 pt-[110px]">
         {children}
       </main>
 
@@ -583,6 +606,7 @@ export default function Layout({ children }: LayoutProps) {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {/* Col 1: Logo + tagline */}
             <div>
               <div
                 style={{ background: "transparent", display: "inline-block" }}
@@ -603,14 +627,42 @@ export default function Layout({ children }: LayoutProps) {
                 />
               </div>
               <p
-                className="text-sm leading-relaxed"
-                style={{ color: footerText, maxWidth: "260px" }}
+                className="text-sm leading-relaxed mb-4"
+                style={{ color: footerText, maxWidth: "220px" }}
               >
-                Trusted payment solutions for high-risk and hard-to-place
-                businesses.
+                Trusted payment solutions for businesses across every industry —
+                including those others won't touch.
               </p>
+              <div className="flex flex-col gap-2">
+                {[
+                  { label: "Privacy Policy", href: "/privacy-policy" },
+                  { label: "Terms of Service", href: "/terms-of-service" },
+                  { label: "Cookie Policy", href: "/cookie-policy" },
+                  {
+                    label: "Do Not Sell or Share My Info",
+                    href: "/do-not-sell",
+                  },
+                  { label: "Accessibility", href: "/accessibility" },
+                ].map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="text-xs transition-colors"
+                    style={{ color: footerText }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = accentTeal;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = footerText;
+                    }}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
             </div>
 
+            {/* Col 2: Company */}
             <div>
               <h4
                 className="text-sm font-semibold mb-4"
@@ -620,15 +672,19 @@ export default function Layout({ children }: LayoutProps) {
                   textTransform: "uppercase",
                 }}
               >
-                Resources
+                Company
               </h4>
               <div className="flex flex-col gap-2">
                 {[
-                  ...navLinks,
+                  { label: "About", href: "/about" },
+                  { label: "How It Works", href: "/how-it-works" },
+                  { label: "Solutions", href: "/solutions" },
+                  { label: "Contact", href: "/contact" },
+                  { label: "Compliance", href: "/compliance" },
+                  { label: "Blog & Insights", href: "/insights" },
                   { label: "FAQ", href: "/faq" },
                   { label: "Knowledge Base", href: "/knowledge" },
                   { label: "Partners", href: "/partners" },
-                  { label: "Compliance", href: "/compliance" },
                 ].map((link) => (
                   <Link
                     key={link.href}
@@ -648,6 +704,7 @@ export default function Layout({ children }: LayoutProps) {
               </div>
             </div>
 
+            {/* Col 3: Solutions + Industries */}
             <div>
               <h4
                 className="text-sm font-semibold mb-4"
@@ -657,13 +714,22 @@ export default function Layout({ children }: LayoutProps) {
                   textTransform: "uppercase",
                 }}
               >
-                Common Industries
+                Solutions
               </h4>
-              <div className="flex flex-col gap-2">
-                {industryLinks.map((ind) => (
+              <div className="flex flex-col gap-2 mb-6">
+                {[
+                  { label: "High-Risk Accounts", href: "/payment-solutions" },
+                  { label: "Enterprise", href: "/solutions/enterprise" },
+                  {
+                    label: "International Processing",
+                    href: "/payment-solutions",
+                  },
+                  { label: "Apply Now", href: "/apply" },
+                  { label: "Enterprise Review", href: "/apply/enterprise" },
+                ].map((link) => (
                   <Link
-                    key={ind.href}
-                    to={ind.href}
+                    key={link.href}
+                    to={link.href}
                     className="text-sm transition-colors"
                     style={{ color: footerText }}
                     onMouseEnter={(e) => {
@@ -673,24 +739,11 @@ export default function Layout({ children }: LayoutProps) {
                       e.currentTarget.style.color = footerText;
                     }}
                   >
-                    {ind.label}
+                    {link.label}
                   </Link>
                 ))}
               </div>
-            </div>
-
-            <div>
-              <h4
-                className="text-sm font-semibold mb-4"
-                style={{
-                  color: footerHeading,
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Contact
-              </h4>
-              <div className="flex flex-col gap-3 mb-6">
+              <div className="flex flex-col gap-2">
                 <a
                   href={`mailto:${site.contact.email}`}
                   className="flex items-center gap-2 text-sm transition-colors"
@@ -722,30 +775,25 @@ export default function Layout({ children }: LayoutProps) {
                   </a>
                 )}
               </div>
+            </div>
+
+            {/* Col 4: Industries */}
+            <div>
               <h4
-                className="text-sm font-semibold mb-3"
+                className="text-sm font-semibold mb-4"
                 style={{
                   color: footerHeading,
                   letterSpacing: "0.1em",
                   textTransform: "uppercase",
                 }}
               >
-                Legal
+                Industries
               </h4>
               <div className="flex flex-col gap-2">
-                {[
-                  { label: "Privacy Policy", href: "/privacy-policy" },
-                  { label: "Terms of Service", href: "/terms-of-service" },
-                  { label: "Cookie Policy", href: "/cookie-policy" },
-                  {
-                    label: "Do Not Sell or Share My Info",
-                    href: "/do-not-sell",
-                  },
-                  { label: "Accessibility Statement", href: "/accessibility" },
-                ].map((link) => (
+                {industryLinks.map((ind) => (
                   <Link
-                    key={link.href}
-                    to={link.href}
+                    key={ind.href}
+                    to={ind.href}
                     className="text-sm transition-colors"
                     style={{ color: footerText }}
                     onMouseEnter={(e) => {
@@ -755,9 +803,22 @@ export default function Layout({ children }: LayoutProps) {
                       e.currentTarget.style.color = footerText;
                     }}
                   >
-                    {link.label}
+                    {ind.label}
                   </Link>
                 ))}
+                <Link
+                  to="/industries"
+                  className="text-sm font-semibold transition-colors"
+                  style={{ color: accentTeal }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = "0.8";
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = "1";
+                  }}
+                >
+                  View All Industries &rarr;
+                </Link>
               </div>
             </div>
           </div>
@@ -766,7 +827,7 @@ export default function Layout({ children }: LayoutProps) {
             className="mt-10 pt-6"
             style={{ borderTop: `1px solid ${footerDivider}` }}
           >
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
               <p
                 className="text-xs text-center"
                 style={{ color: footerCopyright }}
@@ -782,37 +843,45 @@ export default function Layout({ children }: LayoutProps) {
                   caffeine.ai
                 </a>
               </p>
-              <span
-                className="hidden sm:block text-xs"
-                style={{
-                  color: isLight
-                    ? "rgba(20,30,60,0.2)"
-                    : "rgba(232,237,248,0.2)",
-                }}
-              >
-                ·
-              </span>
-              <button
-                type="button"
-                data-ocid="footer.cookie_settings.button"
-                onClick={handleCookieSettingsReset}
-                className="text-xs transition-colors"
-                style={{
-                  color: footerCopyright,
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  padding: 0,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = accentTeal;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = footerCopyright;
-                }}
-              >
-                Cookie Settings
-              </button>
+              <div className="flex items-center gap-3">
+                <div
+                  className="flex items-center gap-1.5 text-xs"
+                  style={{ color: footerCopyright }}
+                >
+                  <Lock size={11} style={{ color: accentTeal }} />
+                  <span>Secure · Encrypted · Confidential</span>
+                </div>
+                <span
+                  style={{
+                    color: isLight
+                      ? "rgba(20,30,60,0.2)"
+                      : "rgba(232,237,248,0.2)",
+                  }}
+                >
+                  ·
+                </span>
+                <button
+                  type="button"
+                  data-ocid="footer.cookie_settings.button"
+                  onClick={handleCookieSettingsReset}
+                  className="text-xs transition-colors"
+                  style={{
+                    color: footerCopyright,
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = accentTeal;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = footerCopyright;
+                  }}
+                >
+                  Cookie Settings
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -831,7 +900,7 @@ export default function Layout({ children }: LayoutProps) {
             background: "rgba(8, 12, 24, 0.98)",
             backdropFilter: "blur(24px)",
             WebkitBackdropFilter: "blur(24px)",
-            borderTop: "1px solid rgba(0, 212, 184, 0.18)",
+            borderTop: "1px solid rgba(110,247,212,0.18)",
             boxShadow: "0 -8px 40px rgba(0, 0, 0, 0.6)",
           }}
         >
@@ -839,7 +908,7 @@ export default function Layout({ children }: LayoutProps) {
             <div className="flex items-start gap-3 mb-4">
               <Cookie
                 size={18}
-                style={{ color: "#00d4b8", flexShrink: 0, marginTop: "2px" }}
+                style={{ color: "#6EF7D4", flexShrink: 0, marginTop: "2px" }}
               />
               <div className="flex-1">
                 <p
@@ -857,14 +926,14 @@ export default function Layout({ children }: LayoutProps) {
                   manage these choices.{" "}
                   <Link
                     to="/cookie-policy"
-                    style={{ color: "#00d4b8", textDecoration: "underline" }}
+                    style={{ color: "#6EF7D4", textDecoration: "underline" }}
                   >
                     Cookie Policy
                   </Link>
                   {" · "}
                   <Link
                     to="/do-not-sell"
-                    style={{ color: "#00d4b8", textDecoration: "underline" }}
+                    style={{ color: "#6EF7D4", textDecoration: "underline" }}
                   >
                     Do Not Sell My Info
                   </Link>
@@ -880,7 +949,7 @@ export default function Layout({ children }: LayoutProps) {
             >
               <div
                 className="flex items-start gap-3 p-3 rounded-lg"
-                style={{ backgroundColor: "rgba(0,212,184,0.04)" }}
+                style={{ backgroundColor: "rgba(110,247,212,0.04)" }}
               >
                 <div className="flex-1">
                   <div className="flex items-center justify-between mb-1">
@@ -893,8 +962,8 @@ export default function Layout({ children }: LayoutProps) {
                     <span
                       className="text-xs px-2 py-0.5 rounded-full font-medium"
                       style={{
-                        backgroundColor: "rgba(0,212,184,0.15)",
-                        color: "#00d4b8",
+                        backgroundColor: "rgba(110,247,212,0.15)",
+                        color: "#6EF7D4",
                       }}
                     >
                       Always On
@@ -931,7 +1000,7 @@ export default function Layout({ children }: LayoutProps) {
                         height: "20px",
                         borderRadius: "10px",
                         backgroundColor: cookieAnalytics
-                          ? "#00d4b8"
+                          ? "#6EF7D4"
                           : "rgba(255,255,255,0.15)",
                         position: "relative",
                         border: "none",
@@ -986,7 +1055,7 @@ export default function Layout({ children }: LayoutProps) {
                         height: "20px",
                         borderRadius: "10px",
                         backgroundColor: cookiePreferences
-                          ? "#00d4b8"
+                          ? "#6EF7D4"
                           : "rgba(255,255,255,0.15)",
                         position: "relative",
                         border: "none",

@@ -123,7 +123,7 @@ export default function KnowledgePage() {
       </section>
 
       {/* What is Cybin Enterprises */}
-      <section style={{ backgroundColor: "#0d1525", padding: "64px 0" }}>
+      <section style={{ backgroundColor: "#0a0f1e", padding: "64px 0" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-3xl font-bold mb-6"
@@ -226,7 +226,7 @@ export default function KnowledgePage() {
                 key={item.label}
                 style={{
                   background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(0,212,184,0.12)",
+                  border: "1px solid rgba(110,247,212,0.12)",
                   borderRadius: 12,
                   padding: "20px 24px",
                   display: "flex",
@@ -268,7 +268,7 @@ export default function KnowledgePage() {
       </section>
 
       {/* Founders */}
-      <section style={{ backgroundColor: "#0d1525", padding: "64px 0" }}>
+      <section style={{ backgroundColor: "#0a0f1e", padding: "64px 0" }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-3xl font-bold mb-10"
@@ -283,7 +283,7 @@ export default function KnowledgePage() {
             <div
               style={{
                 background: "rgba(255,255,255,0.03)",
-                border: "1px solid rgba(0,212,184,0.15)",
+                border: "1px solid rgba(110,247,212,0.15)",
                 borderRadius: 16,
                 padding: "28px 32px",
               }}
@@ -416,7 +416,7 @@ export default function KnowledgePage() {
       </section>
 
       {/* CTA */}
-      <section style={{ backgroundColor: "#0d1525", padding: "64px 0" }}>
+      <section style={{ backgroundColor: "#0a0f1e", padding: "64px 0" }}>
         <div className="max-w-3xl mx-auto px-4 text-center">
           <h2
             className="text-3xl font-bold mb-5"

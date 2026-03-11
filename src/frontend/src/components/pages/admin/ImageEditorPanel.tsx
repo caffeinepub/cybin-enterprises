@@ -1066,7 +1066,7 @@ function ImageEditor({
                     inset: 0,
                     background:
                       meta.key === "mel"
-                        ? "linear-gradient(to right, rgba(0,212,184,0.15) 0%, transparent 20%, transparent 80%, rgba(0,212,184,0.12) 100%)"
+                        ? "linear-gradient(to right, rgba(110,247,212,0.15) 0%, transparent 20%, transparent 80%, rgba(110,247,212,0.12) 100%)"
                         : "linear-gradient(to right, rgba(124,92,191,0.17) 0%, transparent 20%, transparent 80%, rgba(124,92,191,0.14) 100%)",
                     pointerEvents: "none",
                     mixBlendMode: "screen",
@@ -1438,9 +1438,9 @@ function ImageEditor({
           className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl text-xs font-semibold transition-all mt-5"
           style={{
             backgroundColor: showCopied
-              ? "rgba(0,212,184,0.12)"
+              ? "rgba(110,247,212,0.12)"
               : "rgba(255,255,255,0.04)",
-            border: `1px solid ${showCopied ? "rgba(0,212,184,0.4)" : "rgba(255,255,255,0.08)"}`,
+            border: `1px solid ${showCopied ? "rgba(110,247,212,0.4)" : "rgba(255,255,255,0.08)"}`,
             color: showCopied ? "#00d4b8" : "rgba(232,237,248,0.45)",
           }}
         >
@@ -1535,9 +1535,9 @@ export default function ImageEditorPanel() {
             className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold transition-all"
             style={{
               backgroundColor: saved
-                ? "rgba(0,212,184,0.12)"
-                : "rgba(0,212,184,0.08)",
-              border: `1px solid ${saved ? "rgba(0,212,184,0.5)" : "rgba(0,212,184,0.25)"}`,
+                ? "rgba(110,247,212,0.12)"
+                : "rgba(110,247,212,0.08)",
+              border: `1px solid ${saved ? "rgba(110,247,212,0.5)" : "rgba(110,247,212,0.25)"}`,
               color: "#00d4b8",
             }}
           >
@@ -1713,8 +1713,8 @@ export default function ImageEditorPanel() {
                 onClick={() => handleChange("mel", { ...settings.shane })}
                 className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold"
                 style={{
-                  backgroundColor: "rgba(0,212,184,0.08)",
-                  border: "1px solid rgba(0,212,184,0.3)",
+                  backgroundColor: "rgba(110,247,212,0.08)",
+                  border: "1px solid rgba(110,247,212,0.3)",
                   color: "#00d4b8",
                 }}
                 title="Copy Shane's current settings to Mel"
